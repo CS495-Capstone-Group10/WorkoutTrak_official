@@ -45,7 +45,7 @@ function App() {
   };
 
   const newOrder = ()=>{
-    setModalDescription("New order");
+    setModalDescription("New Workout");
     setItemId(null);
     setItem("");
     setPrice(0);
@@ -128,19 +128,19 @@ function App() {
               <button type="button" className="btn-close" onClick={()=>{setShowModal(false)}} aria-label="Close"></button>
             </div>
             <div className="modal-body">
-              <label>Item name</label>
+              <label>Athlete</label>
                 <div className="form-group">
                   <input type="text" className="form-control" name="item" id="itemInput"
                          value={item} onChange={(e)=>{setItem(e.target.value)}}
                          placeholder="Item name"/>
                 </div>
-              <label style={{marginTop: "1em"}}>Price</label>
+              <label style={{marginTop: "1em"}}>Average Split</label>
                 <div className="form-group" >
                   <input type="number" className="form-control" placeholder="Price"
                          value={price} onChange={(e)=>{setPrice(e.target.value)}}
                          name="price" />
                 </div>
-              <label style={{marginTop: "1em"}}>Quantity</label>
+              <label style={{marginTop: "1em"}}>Average Rate</label>
                 <div className="form-group">
                   <input type="number" className="form-control"
                          value={quantity} onChange={(e)=>{setQuantity(e.target.value)}}
@@ -160,7 +160,7 @@ function App() {
       <div style={{maxWidth: "800px", margin: "auto", marginTop: "1em", marginBottom: "1em",
                     padding: "1em"}} className="shadow">
         <div style={{display: "flex", flexDirection: "row"}}>
-          <span>Super Orders App</span>
+          <span>University Alabama Rowing Data</span>
           <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={logout}>Logout</a>
         </div>
       </div>
@@ -188,29 +188,32 @@ function App() {
           </nav>}
           <a className="btn btn-light" style={{marginLeft: "auto"}}
              onClick={newOrder}
-          >New Sales Order</a>
+          >New Workout</a>
         </div>
         <table className="table table-hover caption-top">
           <thead className="table-light">
           <tr>
-            <th>id</th>
+            <th>Workout</th>
             <th>Date</th>
-            <th>Item</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Amount</th>
-            <th>Action</th>
+            <th>Athlete</th>
+            <th>Average Split</th>
+            <th>Average Rate</th>
           </tr>
           </thead>
           <tbody>
           { list.map((row)=>
             <tr key={row.id}>
-              <td>{row.id}</td>
+              {/* workout */}
+              <td>{row.id}</td> 
+              {/* date */}
               <td>{row.date}</td>
+              {/* athlete */}
               <td>{row.item}</td>
+              {/* average split */}
               <td>{row.price}</td>
+              {/* average rate */}
               <td>{row.quantity}</td>
-              <td>{row.amount}</td>
+              {/* <td>{row.amount}</td> */}
               <td>
                 <a className="btn btn-light" style={{marginLeft: "auto"}}
                   onClick={(e)=>{editOrder(row)}}>Edit</a>{" "}
