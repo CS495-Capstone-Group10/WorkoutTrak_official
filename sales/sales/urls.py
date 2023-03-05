@@ -16,4 +16,5 @@ urlpatterns = [
     path('api/orders/<int:order_id>/', views_orders.order),
     path('', views.index),
     path('login', views.login_view),
+    path('workouts', views.workouts_view),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
