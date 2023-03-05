@@ -168,7 +168,7 @@ function App() {
       <div style={{maxWidth: "800px", margin: "auto", marginTop: "1em", marginBottom: "1em",
                     padding: "1em"}} className="shadow">
         <div style={{display: "flex", flexDirection: "row"}}>
-          <span>University Alabama Rowing DataPPPP</span>
+          <span>University Alabama Rowing Data</span>
           <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={logout}>Logout</a>
           
           <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={athletes}>Athletes</a>
