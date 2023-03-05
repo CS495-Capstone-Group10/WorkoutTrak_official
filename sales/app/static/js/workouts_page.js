@@ -134,13 +134,18 @@ function App() {
                          value={item} onChange={(e)=>{setItem(e.target.value)}}
                          placeholder="Item name"/>
                 </div>
+
               <label style={{marginTop: "1em"}}>Average Split</label>
+
                 <div className="form-group" >
                   <input type="number" className="form-control" placeholder="Price"
                          value={price} onChange={(e)=>{setPrice(e.target.value)}}
                          name="price" />
                 </div>
+
               <label style={{marginTop: "1em"}}>Average Rate</label>
+
+
                 <div className="form-group">
                   <input type="number" className="form-control"
                          value={quantity} onChange={(e)=>{setQuantity(e.target.value)}}
@@ -193,16 +198,24 @@ function App() {
         <table className="table table-hover caption-top">
           <thead className="table-light">
           <tr>
+
             <th>Workout</th>
             <th>Athletes</th>
             <th>Following Workout</th>
             <th>Description</th>
             <th></th>
+            <th>Date</th>
+            <th>Workout</th>
+            <th>Type</th>
+            <th>Whole team?</th>
+            {/* <th>Average Rate</th> */}
+
           </tr>
           </thead>
           <tbody>
           { list.map((row)=>
             <tr key={row.id}>
+
               {/* workout */}
               <td>{row.id}</td> 
               {/* date */}
@@ -212,6 +225,16 @@ function App() {
               {/* average split */}
               <td>{row.price}</td>
               {/* average rate */}
+
+              {/* workout */}
+              {/* <td>{row.id}</td>  */}
+              
+              {/* Workout */}
+              <td>{row.item}</td>
+              {/* Type */}
+              <td>{row.price}</td>
+              {/* average split */}
+
               <td>{row.quantity}</td>
               {/* <td>{row.amount}</td> */}
               <td>
