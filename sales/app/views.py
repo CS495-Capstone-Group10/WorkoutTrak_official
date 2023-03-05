@@ -9,3 +9,7 @@ def index(request):
 def login_view(request):
     context = {}
     return render(request, "login.html", context=context)
+
+def workouts_view(request):
+    context = {}
+    return render(request, "workouts.html", context=context)
