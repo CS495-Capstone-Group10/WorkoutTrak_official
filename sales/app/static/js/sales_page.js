@@ -40,6 +40,14 @@ function App() {
     window.location = "/login";
   };
 
+
+  // added this function to be called to pull up athletes page
+  const athletes = async (e)=>{
+    await localStorage.setItem("salesToken",null);
+    window.location = "/athletes";
+  };
+
+
   const getData = ()=>{
     get_orders_api(page, success, (text)=>{console.log("Error: ", text)});
   };
@@ -162,6 +170,9 @@ function App() {
         <div style={{display: "flex", flexDirection: "row"}}>
           <span>University Alabama Rowing Data</span>
           <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={logout}>Logout</a>
+          
+          <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={athletes}>Athletes</a>
+
         </div>
       </div>
       <div style={{maxWidth: "800px", margin: "auto", marginTop: "1em", marginBottom: "1em",
@@ -234,3 +245,5 @@ ReactDOM.render(
   e(App),
   domContainer
 );
+
+//<a className="btn btn-light" style={{marginLeft: "auto"}} onClick={logout}>Logout</a>
