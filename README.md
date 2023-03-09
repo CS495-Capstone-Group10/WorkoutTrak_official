@@ -7,10 +7,10 @@ A full stack software for keeping track of workouts and provide data analytics t
 
 
 
-Testing:
-python manage.py runserver
-- may need to run "pip install requirements.txt"
-
+Testing Run:
+"python install -r requirements.txt"
+"python manage.py migrate"
+"python manage.py runserver"
 
 login:
 username - admin
