@@ -7,7 +7,7 @@ from app.models import Order
 import json
 import datetime
 
-
+# helps to create dictionary from database row
 def serialize_order(order):
     serialized = model_to_dict(order)
     serialized["date"] = str(order.date)

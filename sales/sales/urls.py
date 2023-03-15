@@ -6,7 +6,8 @@ from django.contrib import admin
 from django.urls import path
 from app import views_orders
 from app import views
-from sales import settings
+# library JWT for authentication
+from sales import settings 
 from django.conf.urls.static import static
 
 urlpatterns = [

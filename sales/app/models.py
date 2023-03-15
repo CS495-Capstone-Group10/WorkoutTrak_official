@@ -1,6 +1,7 @@
 from django.db import models
 
 
+# the model being used for a basic table on the website
 class Order(models.Model):
     date = models.DateField(blank=False)
     item = models.CharField(max_length=100, blank=False)
