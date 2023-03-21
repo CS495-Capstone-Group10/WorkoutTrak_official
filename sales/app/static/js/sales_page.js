@@ -176,11 +176,11 @@ function App() {
           <span>University Alabama Rowing Data</span>
           <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={logout}>Logout</a>
           
-          <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={athletes}>Athletes</a>
+          
           
 
           <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={upDoc}>Upload Document</a>
-          
+
         </div>
       </div>
       <div style={{maxWidth: "800px", margin: "auto", marginTop: "1em", marginBottom: "1em",
@@ -255,3 +255,5 @@ ReactDOM.render(
 );
 
 //<a className="btn btn-light" style={{marginLeft: "auto"}} onClick={logout}>Logout</a>
+
+//<a className="btn btn-light" style={{marginLeft: "auto"}} onClick={athletes}>Athletes</a>
