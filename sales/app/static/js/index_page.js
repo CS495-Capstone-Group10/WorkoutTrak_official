@@ -48,6 +48,12 @@ function App() {
     window.location = "/athletes";
   };
 
+  const workouts = async (e)=>{
+    // this await thing may be causing issues with the login popups being forced
+    //await localStorage.setItem("salesToken",null);
+    window.location = "/workouts";
+  };
+
   const upDoc = async (e)=>{
     //await localStorage.setItem("salesToken",null);
     window.location = "/upDoc";
@@ -173,9 +179,10 @@ function App() {
       <div style={{maxWidth: "800px", margin: "auto", marginTop: "1em", marginBottom: "1em",
                     padding: "1em"}} className="shadow">
         <div style={{display: "flex", flexDirection: "row"}}>
-          <span>University Alabama Rowing Data</span>
+          <span>WorkoutTrak: Home</span>
           <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={logout}>Logout</a>
           <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={upDoc}>Upload Document</a>
+          <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={workouts}>Workouts</a>
           <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={athletes}>Athletes</a>
         </div>
       </div>

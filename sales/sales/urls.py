@@ -18,6 +18,7 @@ urlpatterns = [
     # added path to athletes
     path('athletes', views.athletes),
     path('', views.index),
+    path('index', views.index),
     path('login', views.login_view),
     path('workouts', views.workouts_view),
     # added path to uploadDoc
