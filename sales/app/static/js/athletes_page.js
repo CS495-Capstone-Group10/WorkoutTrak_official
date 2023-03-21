@@ -44,12 +44,12 @@ function App() {
 
  // added upDoc
   const upDoc = async (e)=>{
-    await localStorage.setItem("salesToken",null);
+    //await localStorage.setItem("salesToken",null);
     window.location = "/upDoc";
   };
 
   const home = async (e)=>{
-    await localStorage.setItem("salesToken",null);
+    //await localStorage.setItem("salesToken",null);
     window.location = "/index";
   };
 
