@@ -1,26 +1,26 @@
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 
-# currently in testing
-# not complete yet
-from django.db import models
-
-
-
-# a document model that has "title" and "description" fields
-class Document(models.Model):
-    title = models.CharField(max_length = 255)
-    description = models.TextField()
-    
-    # handles the file upload and is currently using this destination directory 
-    # (need to confirm correct destination directory)
-    file = models.FileField(upload_to = 'documents/%Y/%m/%d')
-    
-    
-    def __str__(self):
-        return self.title
-    
+# may need to move Document into models.py
+from .models import Document 
 
 
-
-
-
-
+# an upload_document view 
+# accepts POST request 
+@csrf_exempt
+def upload_document(request):
+    if request.method == 'Post':
+        
+        # gets the title of file
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        
+        #gets the actual file
+        file = request.FILES.get('file')
+        
+        # creates new document with data and saves to database
+        document = Document(title=title, description = description, file=file)
+        document.save()
+        return JsonResponse({'status':'ok'})
+    return render(request, 'upload.html')
