@@ -1,6 +1,7 @@
 'use strict';
 const e = React.createElement;
 
+// Setting up of state variables
 function App() {
   const [list, setList] = React.useState([]);
   const [count, setCount] = React.useState(0);
@@ -14,6 +15,7 @@ function App() {
   const [price, setPrice] = React.useState(0);
   const [quantity, setQuantity] = React.useState(0);
 
+  // Called when the list of orders is brought from server
   const success = (data) => {
     setList(data.data);
     setCount(data.count);
@@ -40,6 +42,7 @@ function App() {
     window.location = "/login";
   };
 
+  // fetches current page of orders from server
   const getData = ()=>{
     get_orders_api(page, success, (text)=>{console.log("Error: ", text)});
   };
