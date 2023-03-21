@@ -48,6 +48,11 @@ function App() {
     window.location = "/upDoc";
   };
 
+  const home = async (e)=>{
+    await localStorage.setItem("salesToken",null);
+    window.location = "/index";
+  };
+
   // fetches current page of orders from server
   const getData = ()=>{
     get_orders_api(page, success, (text)=>{console.log("Error: ", text)});
@@ -172,6 +177,7 @@ function App() {
           <span>University Alabama Rowing Data</span>
           <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={logout}>Logout</a>
           <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={upDoc}>Upload Document</a>
+          <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={home}>Home</a>
         </div>
       </div>
       <div style={{maxWidth: "800px", margin: "auto", marginTop: "1em", marginBottom: "1em",

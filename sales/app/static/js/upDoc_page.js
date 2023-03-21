@@ -61,5 +61,13 @@ function UploadDocument() {
     );
 }
 
+// very experimental
+// trying to fix the issue with the page not loading
+const domContainer = document.querySelector('#reactAppContainer');
+ReactDOM.render(
+    e(UploadDocument),
+    domContainer
+);
+
 // unsure whether to keep
 //export default UploadDocument;
