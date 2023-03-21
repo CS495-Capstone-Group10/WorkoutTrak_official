@@ -1,6 +1,7 @@
 'use strict';
 const e = React.createElement;
 
+// Setting up of state variables
 function App() {
   const [list, setList] = React.useState([]);
   const [count, setCount] = React.useState(0);
@@ -14,6 +15,7 @@ function App() {
   const [price, setPrice] = React.useState(0);
   const [quantity, setQuantity] = React.useState(0);
 
+  // Called when the list of orders is brought from server
   const success = (data) => {
     setList(data.data);
     setCount(data.count);
@@ -40,6 +42,18 @@ function App() {
     window.location = "/login";
   };
 
+ // added upDoc
+  const upDoc = async (e)=>{
+    //await localStorage.setItem("salesToken",null);
+    window.location = "/upDoc";
+  };
+
+  const home = async (e)=>{
+    //await localStorage.setItem("salesToken",null);
+    window.location = "/index";
+  };
+
+  // fetches current page of orders from server
   const getData = ()=>{
     get_orders_api(page, success, (text)=>{console.log("Error: ", text)});
   };
@@ -162,6 +176,8 @@ function App() {
         <div style={{display: "flex", flexDirection: "row"}}>
           <span>University Alabama Rowing Data</span>
           <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={logout}>Logout</a>
+          <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={upDoc}>Upload Document</a>
+          <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={home}>Home</a>
         </div>
       </div>
       <div style={{maxWidth: "800px", margin: "auto", marginTop: "1em", marginBottom: "1em",

@@ -6,7 +6,8 @@ from django.contrib import admin
 from django.urls import path
 from app import views_orders
 from app import views
-from sales import settings
+# library JWT for authentication
+from sales import settings 
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -17,6 +18,9 @@ urlpatterns = [
     # added path to athletes
     path('athletes', views.athletes),
     path('', views.index),
+    path('index', views.index),
     path('login', views.login_view),
     path('workouts', views.workouts_view),
+    # added path to uploadDoc
+    path('upDoc', views.uploadDoc_view),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

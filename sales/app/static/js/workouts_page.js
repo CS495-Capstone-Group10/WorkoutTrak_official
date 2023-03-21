@@ -40,6 +40,10 @@ function App() {
     window.location = "/login";
   };
 
+  const home = async (e) => {
+    window.location = "/index";
+  };
+
   const getData = ()=>{
     get_orders_api(page, success, (text)=>{console.log("Error: ", text)});
   };
@@ -167,6 +171,8 @@ function App() {
         <div style={{display: "flex", flexDirection: "row"}}>
           <span>University Alabama Rowing Data</span>
           <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={logout}>Logout</a>
+
+          <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={home}>Home</a>
         </div>
       </div>
       <div style={{maxWidth: "800px", margin: "auto", marginTop: "1em", marginBottom: "1em",
