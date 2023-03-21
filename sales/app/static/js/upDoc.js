@@ -12,6 +12,18 @@ function UploadDocument() {
     const [file, setFile] = userState(null);
 
 
+    const handleFileChange = (event) => {
+        setFile(event.target.files[0]);
+    };
+
+    const handleTitleChange = (event) => {
+        setTitle(event.target.value);
+    };
+
+    const handleDescriptionChange = (event) => {
+        setDescription(event.target.value);
+    };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,11 +39,27 @@ function UploadDocument() {
     }
 
     return ( 
-        <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-            <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-            <input type = "file" onChange = {(e) => setFile(e.target.files[0])} />
-            <button type="submit">Upload</button>
-        </form>
+        // website upload page details 
+        <div>
+            <h1> Upload Document</h1>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor="title">Title:</label>
+                    <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+                </div>
+                <div>
+                    <label htmlFor="description"></label>
+                    <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+                </div>
+                <div>
+                    <label htmlFor="file">File:</label>
+                    <input type = "file" onChange = {(e) => setFile(e.target.files[0])} />
+                </div>
+                <button type="submit">Upload</button>
+            </form>
+        </div>
     );
 }
+
+// unsure whether to keep
+export default UploadDocument;
