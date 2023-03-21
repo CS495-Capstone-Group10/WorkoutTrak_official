@@ -43,10 +43,15 @@ function App() {
 
   // added this function to be called to pull up athletes page
   const athletes = async (e)=>{
-    await localStorage.setItem("salesToken",null);
+    // this await thing may be causing issues with the login popups being forced
+    //await localStorage.setItem("salesToken",null);
     window.location = "/athletes";
   };
 
+  const upDoc = async (e)=>{
+    //await localStorage.setItem("salesToken",null);
+    window.location = "/upDoc";
+  }
 
   const getData = ()=>{
     get_orders_api(page, success, (text)=>{console.log("Error: ", text)});
@@ -172,7 +177,10 @@ function App() {
           <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={logout}>Logout</a>
           
           <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={athletes}>Athletes</a>
+          
 
+          <a className="btn btn-light" style={{marginLeft: "auto"}} onClick={upDoc}>Upload Document</a>
+          
         </div>
       </div>
       <div style={{maxWidth: "800px", margin: "auto", marginTop: "1em", marginBottom: "1em",

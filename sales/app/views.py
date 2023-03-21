@@ -20,3 +20,8 @@ def workouts_view(request):
     context = {}
     return render(request, "workouts.html", context=context)
 
+
+# added this for uploadDoc page
+def uploadDoc_view(request):
+    context = {}
+    return render(request, "uploadDoc.html", context=context)
