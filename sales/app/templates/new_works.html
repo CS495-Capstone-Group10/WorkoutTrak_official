@@ -1,0 +1,100 @@
+<form>
+    <label for="interval_type">Select Interval Type:</label>
+    <select id="interval_type" name="interval_type">
+      <option value="single_distance">Single Distance</option>
+      <option value="single_time">Single Time</option>
+      <option value="intervals">Intervals</option>
+    </select>
+  
+    <div id="single_distance_inputs" style="display:none;">
+      <label for="distance_meters">Distance (meters):</label>
+      <input type="number" id="distance_meters" name="distance_meters"><br>
+  
+      <label for="split_length">Split Length:</label>
+      <input type="text" id="split_length" name="split_length"><br>
+    </div>
+  
+    <div id="single_time_inputs" style="display:none;">
+      <label for="time_minutes">Time (minutes):</label>
+      <input type="number" id="time_minutes" name="time_minutes">
+  
+      <label for="time_seconds">Time (seconds):</label>
+      <input type="number" id="time_seconds" name="time_seconds"><br>
+  
+      <label for="split_length_minutes">Split Length (minutes):</label>
+      <input type="number" id="split_length_minutes" name="split_length_minutes">
+  
+      <label for="split_length_seconds">Split Length (seconds):</label>
+      <input type="number" id="split_length_seconds" name="split_length_seconds"><br>
+    </div>
+  
+    <div id="intervals_inputs" style="display:none;">
+      <label for="interval_distance">Interval Distance (meters):</label>
+      <input type="number" id="interval_distance" name="interval_distance"><br>
+  
+      <label for="rest_time_minutes">Rest Time (minutes):</label>
+      <input type="number" id="rest_time_minutes" name="rest_time_minutes">
+  
+      <label for="rest_time_seconds">Rest Time (seconds):</label>
+      <input type="number" id="rest_time_seconds" name="rest_time_seconds"><br>
+  
+      <label for="num_intervals">Number of Intervals:</label>
+      <input type="number" id="num_intervals" name="num_intervals"><br>
+    </div>
+  
+    <div id="interval_variable_inputs" style="display:none;">
+      <label for="interval_variable_type">Interval Variable Type:</label>
+      <select id="interval_variable_type" name="interval_variable_type">
+        <option value="time">Time (minutes and seconds)</option>
+        <option value="distance">Distance (meters)</option>
+      </select><br>
+  
+      <label for="interval_variable">Interval Variable:</label>
+      <input type="text" id="interval_variable" name="interval_variable"><br>
+  
+      <label for="interval_rest_minutes">Rest Time (minutes):</label>
+      <input type="number" id="interval_rest_minutes" name="interval_rest_minutes">
+  
+      <label for="interval_rest_seconds">Rest Time (seconds):</label>
+      <input type="number" id="interval_rest_seconds" name="interval_rest_seconds"><br>
+    </div>
+  
+    <button type="submit">Submit</button>
+  </form>
+  
+  <script>
+    var intervalType = document.getElementById("interval_type");
+    var singleDistanceInputs = document.getElementById("single_distance_inputs");
+    var singleTimeInputs = document.getElementById("single_time_inputs");
+    var intervalsInputs =document.getElementById("interval_variable_inputs");
+  
+    intervalType.addEventListener("change", function() {
+    if (intervalType.value == "single_distance") {
+    singleDistanceInputs.style.display = "block";
+    singleTimeInputs.style.display = "none";
+    intervalsInputs.style.display = "none";
+    intervalVariableInputs.style.display = "none";
+    } else if (intervalType.value == "single_time") {
+    singleDistanceInputs.style.display = "none";
+    singleTimeInputs.style.display = "block";
+    intervalsInputs.style.display = "none";
+    intervalVariableInputs.style.display = "none";
+    } else if (intervalType.value == "intervals") {
+    singleDistanceInputs.style.display = "none";
+    singleTimeInputs.style.display = "none";
+    intervalsInputs.style.display = "block";
+  intervalVariableInputs.style.display = "none";
+  }
+  });
+  
+  var intervalVariableType = document.getElementById("interval_variable_type");
+  
+  intervalVariableType.addEventListener("change", function() {
+  if (intervalVariableType.value == "time") {
+  document.getElementById("interval_variable").type = "time";
+  } else if (intervalVariableType.value == "distance") {
+  document.getElementById("interval_variable").type = "number";
+  }
+  });
+  </script>
+  

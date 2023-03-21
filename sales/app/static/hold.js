@@ -3,17 +3,14 @@ const e = React.createElement;
 
 function App() {
   const [list, setList] = React.useState([]);
-  const [count, setCount] = React.useState(0);
   const [pages, setPages] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [showModal, setShowModal] = React.useState(false);
   const [modalDescription, setModalDescription] = React.useState("");
-  const [itemId, setItemId] = React.useState(null);
   const [error, setError] = React.useState("");
   const [item, setItem] = React.useState("");
-  const [price, setPrice] = React.useState(0);
-  const [quantity, setQuantity] = React.useState(0);
-  const [date, setDate] = React.useState(new Date());
+
+  const [date, setDate] = useState(new Date());
   const [time, setTime] = React.useState("");
   const [type, setType] = React.useState("");
   const [reps, setReps] = React.useState(0);
@@ -24,6 +21,8 @@ function App() {
   const [RestSec, setRestSec] = React.useState("");
   const [CoolMeters, setCoolMeters] = React.useState("");
   const [WarmMeters, setWarmMeters] = React.useState("");
+
+
   const success = (data) => {
     setList(data.data);
     setCount(data.count);
@@ -150,10 +149,13 @@ function App() {
               <button type="button" className="btn-close" onClick={()=>{setShowModal(false)}} aria-label="Close"></button>
             </div>
             <div className="modal-body">
-                    <label>Workout Tracker</label>
+                  <div class="container">
+                    <h1>Workout Tracker</h1>
                       <div class="form-group">
                         <label for="date">Date:</label>
-                        <input type="date" id="date" name="date" required/>
+                        <input type="date" id="date" className="form-control" name="date" required
+                          value={date} onChange={(e)=>{setItem(e.target.value)}}
+                        />
                       </div>
                       <div class="form-group">
                         <label for="time">Time:</label>
@@ -172,39 +174,57 @@ function App() {
                       </div>
                       <div class="form-group">
                         <label for="repetitions">Repetitions:</label>
-                        <input type="number" id="repetitions" name="repetitions" required/>
+                        <input type="number" id="repetitions" name="repetitions" required
+                          value={reps} onChange={(e)=>{setItem(e.target.value)}}
+                        />
                       </div>
                       <div class="form-group">
                         <label for="meters">Meters:</label>
-                        <input type="number" id="meters" name="meters"/>
+                        <input type="number" id="meters" name="meters"
+                          value={meters} onChange={(e)=>{setItem(e.target.value)}}
+                        />
                       </div>
                       <div class="form-group">
                         <label for="time-minutes">Time (Minutes):</label>
-                        <input type="number" id="time-minutes" name="time-minutes"/>
+                        <input type="number" id="time-minutes" name="time-minutes"
+                          value={TimeMin} onChange={(e)=>{setItem(e.target.value)}}
+                        />
                       </div>
                       <div class="form-group">
                         <label for="time-seconds">Time (Seconds):</label>
-                        <input type="number" id="time-seconds" name="time-seconds"/>
+                        <input type="number" id="time-seconds" name="time-seconds"
+                        value={TimeSec} onChange={(e)=>{setItem(e.target.value)}}
+                        />
                       </div>
                       <div class="form-group">
                         <label for="rest-minutes">Rest (Minutes):</label>
-                        <input type="number" id="rest-minutes" name="rest-minutes"/>
+                        <input type="number" id="rest-minutes" name="rest-minutes"
+                        value={RestMin} onChange={(e)=>{setItem(e.target.value)}}/>
                       </div>
                       <div class="form-group">
                         <label for="rest-seconds">Rest (Seconds):</label>
-                        <input type="number" id="rest-seconds" name="rest-seconds"/>
+                        <input type="number" id="rest-seconds" name="rest-seconds"
+                        value={RestSec} onChange={(e)=>{setItem(e.target.value)}}
+                        />
                       </div>
                       <div class="form-group">
                         <label for="cool-down">Cool Down (Meters):</label>
-                        <input type="number" id="cool-down" name="cool-down"/>
+                        <input type="number" id="cool-down" name="cool-down"
+                        value={CoolMeters} onChange={(e)=>{setItem(e.target.value)}}
+                        />
                       </div>
                       <div class="form-group">
                         <label for="warm-up">Warm Up (Meters):</label>
-                        <input type="number" id="warm-up" name="warm-up"/>
+                        <input type="number" id="warm-up" name="warm-up"
+                        value={WarmMeters} onChange={(e)=>{setItem(e.target.value)}}
+                        />
                       </div>
                       <div class="form-group">
                         <button type="submit">Submit</button>
                       </div>
+                  </div>
+                  <small className="form-text text-muted">{error}</small>
+              
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" onClick={()=>{setShowModal(false)}} data-bs-dismiss="modal">Close</button>
@@ -252,15 +272,15 @@ function App() {
           <thead className="table-light">
           <tr>
 
-          <th>Date</th>
+            <th>Date</th>
             <th>Time</th>
-            <th>Type</th>
+            <th>Workout Type</th>
             <th>Repetitions</th>
             <th>Meters</th>
-            <th>Time(min)</th>
-            <th>time(sec)</th>
-            <th>rest(min)</th>
-            <th>rest(sec)</th>
+            <th>Time(minutes)</th>
+            <th>time(seconds)</th>
+            <th>rest(minutes)</th>
+            <th>rest(seconds)</th>
             <th>Cooldown(meters)</th>
             <th>WarmUp(meters)</th>
             {/* <th>Average Rate</th> */}
@@ -301,5 +321,3 @@ ReactDOM.render(
   e(App),
   domContainer
 );
-
-

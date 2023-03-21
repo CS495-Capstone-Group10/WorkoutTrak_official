@@ -1,0 +1,5 @@
+Split- time it takes per 500 meters of a piece
+piece- part of the workout so 5x5minuntes has 5 5 minute pieces and 3x6k has 3 6k pieces
+SR/ rate- stroke rating for that piece
+average split= typically average time per 500 over the whole workout
+average rate/ average stroke rate- average stroke rating for the whole workout

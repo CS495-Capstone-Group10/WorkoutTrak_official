@@ -20,3 +20,10 @@ def workouts_view(request):
     context = {}
     return render(request, "workouts.html", context=context)
 
+def save_workouts(request):
+    context = {}
+    return render(request, "new_workouts.html", context=context)
+
+def new_workouts(request):
+    context = {}
+    return render(request, "new_works.html", context=context)
