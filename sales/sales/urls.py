@@ -10,6 +10,18 @@ from app import views
 from sales import settings 
 from django.conf.urls.static import static
 
+from django.urls import path, include
+from rest_framework import routers
+from app.views import WorkoutViewSet, WorkoutItemViewSet
+
+router = routers.DefaultRouter()
+router.register(r'workouts', WorkoutViewSet)
+router.register(r'workout_items', WorkoutItemViewSet)
+
+urlpatterns = [
+    path('', include(router.urls)),
+]
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -23,4 +35,6 @@ urlpatterns = [
     path('workouts', views.workouts_view),
     # added path to uploadDoc
     path('upDoc', views.uploadDoc_view),
+    path('save',views.save_workouts),
+    path('new',views.new_workouts),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

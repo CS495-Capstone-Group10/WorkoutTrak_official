@@ -1,4 +1,15 @@
 from django.shortcuts import render
+from rest_framework import viewsets
+from .models import Workout, WorkoutItem
+from .serializer import WorkoutSerializer, WorkoutItemSerializer
+
+class WorkoutViewSet(viewsets.ModelViewSet):
+    queryset = Workout.objects.all()
+    serializer_class = WorkoutSerializer
+
+class WorkoutItemViewSet(viewsets.ModelViewSet):
+    queryset = WorkoutItem.objects.all()
+    serializer_class = WorkoutItemSerializer
 
 
 def index(request):
@@ -25,3 +36,10 @@ def workouts_view(request):
 def uploadDoc_view(request):
     context = {}
     return render(request, "uploadDoc.html", context=context)
+def save_workouts(request):
+    context = {}
+    return render(request, "new_workouts.html", context=context)
+
+def new_workouts(request):
+    context = {}
+    return render(request, "new.html", context=context)
