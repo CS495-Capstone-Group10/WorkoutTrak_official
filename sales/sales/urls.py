@@ -10,6 +10,8 @@ from app import views
 from sales import settings 
 from django.conf.urls.static import static
 
+from app.views import SignUpView, LoginView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -23,4 +25,7 @@ urlpatterns = [
     path('workouts', views.workouts_view),
     # added path to uploadDoc
     path('upDoc', views.uploadDoc_view),
+    # added next two for login and signup
+    path('signup/', SignUpView.as_view(), name='register'),
+    #path('login/', LoginView.as_view(), name='login'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

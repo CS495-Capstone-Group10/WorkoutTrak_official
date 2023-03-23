@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'app',
+    #added this for signup
+    'authentication',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +139,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads/')
 MEDIA_URL = '/uploads/'
+
+
+# added this for signing up
+AUTH_USER_MODEL = 'accounts.User'
