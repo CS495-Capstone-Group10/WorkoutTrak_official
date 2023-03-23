@@ -1,14 +1,14 @@
 from django.shortcuts import render
 
 # added new imports for login and signup
-from rest_framework import generics, permissions, status
+#from rest_framework import generics, permissions, status
 #from rest_framework.permissions import AllowAny
-from rest_framework.response import Response
-from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework.views import APIView
+#from rest_framework.response import Response
+#from rest_framework_simplejwt.views import TokenObtainPairView
+#from rest_framework.views import APIView
 #from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import CustomUserSerializer, CustomTokenObtainPairSerializer
-from .models import CustomUser
+#from .serializers import CustomUserSerializer, CustomTokenObtainPairSerializer
+#from .models import CustomUser
 
 
 
@@ -39,22 +39,22 @@ def uploadDoc_view(request):
 
 
 
-# for signup and login
-class CustomUserCreate(generics.CreateAPIView):
-    permission_classes = (permissions.AllowAny,)
-    queryset = CustomUser.objects.all()
-    serializer_class = CustomUserSerializer
+# # for signup and login
+# class CustomUserCreate(generics.CreateAPIView):
+#     permission_classes = (permissions.AllowAny,)
+#     queryset = CustomUser.objects.all()
+#     serializer_class = CustomUserSerializer
     
-class CustomTokenObtainPairView(TokenObtainPairView):
-    permission_classes = (permissions.AllowAny,)
-    serializer_class = CustomTokenObtainPairSerializer
+# class CustomTokenObtainPairView(TokenObtainPairView):
+#     permission_classes = (permissions.AllowAny,)
+#     serializer_class = CustomTokenObtainPairSerializer
     
-class UserRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
-    permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = CustomUserSerializer
+# class UserRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
+#     permission_classes = (permissions.IsAuthenticated,)
+#     serializer_class = CustomUserSerializer
     
-    def get_object(self):
-        return self.request.user
+#     def get_object(self):
+#         return self.request.user
     
 
 

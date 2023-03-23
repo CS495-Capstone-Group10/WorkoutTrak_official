@@ -38,10 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #added this for signup
+    #'authentication',
     'rest_framework',
     'app',
-    #added this for signup
-    'authentication',
 ]
 
 MIDDLEWARE = [
@@ -142,4 +142,4 @@ MEDIA_URL = '/uploads/'
 
 
 # added this for signing up
-AUTH_USER_MODEL = 'accounts.User'
+#AUTH_USER_MODEL = 'accounts.User'
