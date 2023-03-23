@@ -7,8 +7,8 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.views import APIView
 #from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import UserSerializer
-from .models import User
+from .serializers import CustomUserSerializer, CustomTokenObtainPairSerializer
+from .models import CustomUser
 
 
 
@@ -38,16 +38,39 @@ def uploadDoc_view(request):
     return render(request, "uploadDoc.html", context=context)
 
 
-# added this for signup and login
-class SignUpView(generics.CreateAPIView):
-    queryset = User.objects.all()
-    permission_classes = [permissions.AllowAny]
-    serializer_class = UserSerializer
+
+# for signup and login
+class CustomUserCreate(generics.CreateAPIView):
+    permission_classes = (permissions.AllowAny,)
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
+    
+class CustomTokenObtainPairView(TokenObtainPairView):
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = CustomTokenObtainPairSerializer
+    
+class UserRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = CustomUserSerializer
+    
+    def get_object(self):
+        return self.request.user
+    
+
+
+
+
 
 # added this for signup and login
-class LoginView(APIView):
-    serializer_class = TokenObtainPairSerializer
-    permission_classes = [permissions.AllowAny]
+# class SignUpView(generics.CreateAPIView):
+#     permission_classes = (permissions.AllowAny)
+#     queryset = User.objects.all()
+#     serializer_class = CustomUserSerializer
+
+# # added this for signup and login
+# class LoginView(APIView):
+#     serializer_class = TokenObtainPairSerializer
+#     permission_classes = [permissions.AllowAny]
     
     
     # def post(self, request):

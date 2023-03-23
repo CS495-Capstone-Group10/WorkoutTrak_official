@@ -26,6 +26,6 @@ urlpatterns = [
     # added path to uploadDoc
     path('upDoc', views.uploadDoc_view),
     # added next two for login and signup
-    path('signup/', SignUpView.as_view(), name='register'),
+    path('signup/', SignUpView.as_view(), name='signup'),
     #path('login/', LoginView.as_view(), name='login'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
