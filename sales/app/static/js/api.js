@@ -1,6 +1,6 @@
 const login_api = async (username, password, success, fail) => {
   const response = await fetch(
-        `/api/token/`,
+        `/app/api/token/`,
         {
             method: 'POST',
             headers: {
