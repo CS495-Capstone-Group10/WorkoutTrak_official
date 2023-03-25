@@ -15,3 +15,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+    
+class ResetPasswordProfile(serializers.ModelSerializer):
+    model = UserProfile
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+    

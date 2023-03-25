@@ -8,10 +8,12 @@ from . import views
 from .views import RegisterUserView
 
 urlpatterns = [
-    path('a', views.login_view, name='login'),
-    path('', views.login_view, name='apiTes'),
-    path('api/register/', RegisterUserView.as_view(), name='sign_up'),
+    path('', views.login_view, name='login'),
+    #path('', views.login_view, name='apiTes'),
+    path('create-account/', views.create_account_view, name='sign_up'),
+    path('create-account/api', RegisterUserView.as_view() , name='sign_up_api'),
+    path('forgot-password', RegisterUserView.as_view(), name='reset_password'),
     path('api/token/', TokenObtainPairView.as_view(),
          name='token_obtain_pair'),
-    #path('login/', LoginView.as_view(), name='register'),
+    path('login', views.login_view),
 ]
