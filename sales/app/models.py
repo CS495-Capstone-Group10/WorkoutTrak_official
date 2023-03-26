@@ -64,22 +64,13 @@ class CustomUser(AbstractUser):
     """
     objects = UserManager() # define your own manager class for a model
     pass
-    #username = None
-    #email = models.EmailField(verbose_name='E-Mail', unique=True)
-    #birthdate = models.DateField(verbose_name='Birthdate')
-    #phone = models.CharField(verbose_name='Mobile phone number', max_length=9, unique=True)
-    #joined = models.DateField(verbose_name="Joined")
-    #image = models.ImageField(upload_to='images/')
-    #objects = UserManager()
-    #USERNAME_FIELD = 'email'
-    #REQUIRED_FIELDS = []
-
-    #def __str__(self):
-   #     return self.get_full_name()
-
     class Meta: #Names in admin Interface
         verbose_name = 'User'
         verbose_name_plural = 'Users'
 
+class Profile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    bio = models.TextField()
+    location = models.CharField(max_length=100)
 
 
