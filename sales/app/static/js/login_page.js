@@ -18,6 +18,13 @@ function App() {
     await login_api(username, password, success, (text)=>{setMessage(text)});
   };
 
+  const goToCreateAccount = () => {
+    window.location = "create-account";
+  }
+  const goToForgetPassword = () => {
+    window.location = "forgot-password";
+  }
+
   return (
       <div style={{width: "400px", margin: "auto", marginTop: "200px",
         boxShadow: "5px 5px 20px #cccccccc",
@@ -26,19 +33,23 @@ function App() {
         <form>
           <div className="mb-3">
             <label htmlFor="username" className="form-label">Username</label>
-            <input autoFocus type="text" className="form-control" id="username" placeholder="username"
+            <input autoFocus type="text" className="form-control" id="username" placeholder="Enter your username"
               onChange={(e)=>{setUsername(e.target.value)}} value={username}/>
           </div>
           <div className="mb-3">
             <label htmlFor="password" className="form-label">Password</label>
-            <input type="password" className="form-control" id="password" placeholder="password"
+            <input type="password" className="form-control" id="password" placeholder="Enter your password"
               onChange={(e)=>{setPassword(e.target.value)}} value={password}/>
           </div>
           <div style={{margin: "1em", color: "red"}}>{message}</div>
           <button type="submit" className="btn btn-primary" onClick={tryLogin}>Login</button>
         </form>
+        <button type="button" className="btn btn-thirdary" onClick={goToForgetPassword}>Forgot your password?</button>
+        <button type="button" className="btn btn-secondary" onClick={goToCreateAccount}>Create your account</button>
       </div>
   );
+  
+  
 }
 
 const domContainer = document.querySelector('#reactAppContainer');
