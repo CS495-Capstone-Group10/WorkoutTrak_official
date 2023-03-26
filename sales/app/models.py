@@ -37,7 +37,10 @@ class UserManager(BaseUserManager):
     def create_user(self, username, password=None, **extra_fields):
         if not username:
             raise ValueError('username is Required')
-        user = self.model(username=self.normalize_username(username), **extra_fields)
+        if not password:
+            raise ValueError('Password is required')
+        
+        user = self.model(username=username, **extra_fields)
         user.set_password(password)
         user.save()
         return user
@@ -54,7 +57,7 @@ class UserManager(BaseUserManager):
 
         return self.create_user(username, password, **extra_fields)
     
-class UserProfile(AbstractUser): 
+class CustomUser(AbstractUser): 
     """
     Define custom user model by inheriting from AbstractUser provided from Django auth module
     Contains common fields and methods found here

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from .serializers import UserProfileSerializer
+from .serializers import CustomUserSerializer
 from rest_framework.response import Response
 
 def index(request):
@@ -38,7 +38,7 @@ def create_account_view(request):
 class RegisterUserView(APIView):
     def post(self, request):
         if request.method == 'POST':
-            serializer = UserProfileSerializer(data=request.data)
+            serializer = CustomUserSerializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data)

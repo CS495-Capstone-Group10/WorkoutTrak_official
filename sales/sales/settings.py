@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'app',
     'django_extensions',
 ]
-AUTH_USER_MODEL = 'app.UserProfile'
+AUTH_USER_MODEL = 'app.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

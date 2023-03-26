@@ -1,14 +1,14 @@
 from rest_framework import serializers
-from .models import UserProfile
+from .models import CustomUser
 
-class UserProfileSerializer(serializers.ModelSerializer):
+class CustomUserSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = UserProfile
+        model = CustomUser
         fields = ["id", "username", "password"] # TODO Add more fields later
 
     def create(self, validated_data):
-        user = UserProfile.objects.create(
+        user = CustomUser.objects.create(
                                           username=validated_data['username']
                                          )
         
@@ -17,7 +17,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         return user
     
 class ResetPasswordProfile(serializers.ModelSerializer):
-    model = UserProfile
+    model = CustomUser
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
     
