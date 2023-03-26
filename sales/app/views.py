@@ -1,7 +1,11 @@
 from django.shortcuts import render
+
 from rest_framework.views import APIView
 from .serializers import CustomUserSerializer
 from rest_framework.response import Response
+
+
+
 
 def index(request):
     context = {}
@@ -46,4 +50,4 @@ class RegisterUserView(APIView):
         if request.method == 'GET':
             return Response({"message": "Enter Username and Password"})
         
-    
+

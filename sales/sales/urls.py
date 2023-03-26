@@ -10,6 +10,8 @@ from app import views
 from sales import settings 
 from django.conf.urls.static import static
 
+#from app.views import SignUpView, LoginView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
