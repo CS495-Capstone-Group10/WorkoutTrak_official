@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
+from .serializers import UserProfileSerializer
+from rest_framework.response import Response
 
 def index(request):
     context = {}
@@ -26,12 +28,12 @@ def uploadDoc_view(request):
     context = {}
     return render(request, "uploadDoc.html", context=context)
 
-from django.shortcuts import render
-from rest_framework.views import APIView
-from .serializers import UserProfileSerializer
-from rest_framework.response import Response
-from rest_framework.response import Response
+
 # view for registering users
+
+def create_account_view(request):
+        context = {}
+        return render(request, "createAccount.html", context=context)
 
 class RegisterUserView(APIView):
     def post(self, request):
@@ -44,6 +46,4 @@ class RegisterUserView(APIView):
         if request.method == 'GET':
             return Response({"message": "Enter Username and Password"})
         
-    def create_account_view(request):
-        context = {}
-        return render(request, "createAccount.html", context=context)
+    

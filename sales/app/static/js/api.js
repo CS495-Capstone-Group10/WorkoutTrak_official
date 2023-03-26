@@ -166,7 +166,7 @@ const delete_order_api = async (saleId, success) => {
 
 const create_account_api = async (username, password, success, fail) => {
   const response = await fetch(
-        `/app/create-account/api`,
+        `/app/api/create-account/`,
         {
             method: 'POST',
             headers: {
