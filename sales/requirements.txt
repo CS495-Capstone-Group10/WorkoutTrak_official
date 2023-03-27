@@ -5,3 +5,4 @@ djangorestframework-simplejwt
 PyJWT
 pytz
 sqlparse
+django-extensions
