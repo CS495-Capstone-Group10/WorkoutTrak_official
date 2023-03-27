@@ -1,12 +1,9 @@
 from rest_framework import serializers
-from .models import Workout, WorkoutItem
+from .models import Workout
 
 class WorkoutSerializer(serializers.ModelSerializer):
     class Meta:
         model = Workout
         fields = '__all__'
 
-class WorkoutItemSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = WorkoutItem
-        fields = '__all__'
+

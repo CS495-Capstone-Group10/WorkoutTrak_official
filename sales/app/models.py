@@ -24,6 +24,7 @@ class Workout(models.Model):
     )
     type = models.CharField(max_length=20, choices=TYPE_CHOICES)
     date = models.DateField()
+    id = models.IntegerField(blank=True, null=False, primary_key=True)
     distance_meters = models.IntegerField(blank=True, null=True)
     time_minutes = models.IntegerField(blank=True, null=True)
     time_seconds = models.IntegerField(blank=True, null=True)
@@ -36,14 +37,6 @@ class Workout(models.Model):
     rest_time_minutes = models.IntegerField(blank=True, null=True)
     rest_time_sec = models.IntegerField(blank=True, null=True)
 
-class WorkoutItem(models.Model):
-    workout = models.ForeignKey(Workout, on_delete=models.CASCADE, related_name='items')
-    item = models.CharField(max_length=100)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
-    quantity = models.IntegerField()
-
-    def __str__(self):
-        return self.item
 
 
 # a document model that has "title" and "description" fields

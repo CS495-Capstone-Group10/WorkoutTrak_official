@@ -1,15 +1,13 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Workout, WorkoutItem
-from .serializer import WorkoutSerializer, WorkoutItemSerializer
+from .models import Workout
+from .serializer import WorkoutSerializer
 
 class WorkoutViewSet(viewsets.ModelViewSet):
     queryset = Workout.objects.all()
     serializer_class = WorkoutSerializer
 
-class WorkoutItemViewSet(viewsets.ModelViewSet):
-    queryset = WorkoutItem.objects.all()
-    serializer_class = WorkoutItemSerializer
+
 
 
 def index(request):

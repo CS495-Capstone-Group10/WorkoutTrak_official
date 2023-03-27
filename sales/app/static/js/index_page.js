@@ -14,10 +14,6 @@ function App() {
   const [price, setPrice] = React.useState(0);
   const [quantity, setQuantity] = React.useState(0);
 
-  const [num_intervals, set_num_intervals] = React.useState(0);
-  const [distanceInt, setdistanceInt] = React.useState(0);
-  const [time_minutes, set_time_minutes] = React.useState(0);
-
   const success = (data) => {
     setList(data.data);
     setCount(data.count);

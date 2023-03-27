@@ -85,10 +85,6 @@ function App() {
 
   const newOrder = ()=>{
     setModalDescription("New Workout");
-    setItemId(null);
-    setItem("");
-    setPrice(0);
-    setQuantity(0);
     setError("");
     setShowModal(true);
     const itemInput = document.getElementById("itemInput");
@@ -97,10 +93,6 @@ function App() {
 
   const editOrder = (data)=>{
     setModalDescription("New order");
-    setItemId(data.id);
-    setItem(data.item);
-    setPrice(data.price);
-    setQuantity(data.quantity);
     setError("");
     setShowModal(true);
     const itemInput = document.getElementById("itemInput");
@@ -110,13 +102,13 @@ function App() {
   const saveOrder = (e)=>{
     e.preventDefault();
     setError("");
-    console.log("saving new", item, price, quantity);
+    console.log("saving new", date, workoutTime, workoutType);
     if (workoutType=== "single_distance"){
       if(split_length * distance_meters === 0){
         setError("Please enter split length and distance");
       }
       else{
-        post_order_api({split_length, distance_meters, date, workoutTime}, ()=>{getData();});
+        post_workout_api({split_length, distance_meters, date, workoutTime}, ()=>{getData();});
       }
     }
     else if ((workoutType=== "single_time")){
@@ -127,9 +119,9 @@ function App() {
     }
     else {
       if (itemId === null)
-        post_order_api({item, price, quantity}, ()=>{getData();});
+        post_workout_api({date, workoutTime, workoutType}, ()=>{getData();});
       else
-        put_order_api(itemId, {item, price, quantity}, ()=>{getData();});
+        put_workout_api(itemId, {date, workoutTime, workoutType}, ()=>{getData();});
       setShowModal(false);
     }
   };
@@ -145,7 +137,7 @@ function App() {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        delete_order_api(orderId, ()=>{
+        delete_order_api(id, ()=>{
           Swal.fire({
               title: 'Deleted!',
               text: "Your order has been deleted!",
