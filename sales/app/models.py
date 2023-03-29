@@ -18,6 +18,28 @@ class Order(models.Model):
         ordering = ["-id"]
 
 
+class Workout(models.Model):
+    TYPE_CHOICES = (
+        ('single_distance', 'Single Distance'),
+        ('single_time', 'Single Time'),
+        ('intervals', 'Intervals'),
+    )
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES)
+    date = models.DateField()
+    id = models.IntegerField(blank=True, null=False, primary_key=True)
+    distance_meters = models.IntegerField(blank=True, null=True)
+    time_minutes = models.IntegerField(blank=True, null=True)
+    time_seconds = models.IntegerField(blank=True, null=True)
+    split_length_minutes = models.IntegerField(blank=True, null=True)
+    split_length_seconds = models.IntegerField(blank=True, null=True)
+    num_intervals = models.IntegerField(blank=True, null=True)
+    distanceInt = models.IntegerField(blank=True, null=True)
+    int_time_minutes = models.IntegerField(blank=True, null=True)
+    int_time_sec = models.IntegerField(blank=True, null=True)
+    rest_time_minutes = models.IntegerField(blank=True, null=True)
+    rest_time_sec = models.IntegerField(blank=True, null=True)
+
+
 
 # a document model that has "title" and "description" fields
 class Document(models.Model):
