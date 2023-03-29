@@ -1,2 +1,13 @@
 .idea
 
+# Ignore Mac system files
+.DS_store
+
+# Ignore node_modules
+node_modules
+
+# Ignore log files
+*.log
+
+# Ignore db.sqlite3
+db.sqlite3
