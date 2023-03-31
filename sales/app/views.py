@@ -66,4 +66,6 @@ class RegisterUserView(APIView):
         if request.method == 'GET':
             return Response({"message": "Enter Username and Password"})
         
-
+def home(request): # Default homepage for after login
+    return render(request, "accounts/dashboard.html")
+    

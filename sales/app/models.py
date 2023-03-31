@@ -1,7 +1,7 @@
 #from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
-
+import uuid
 
 # the model being used for a basic table on the website
 class Order(models.Model):
@@ -18,26 +18,26 @@ class Order(models.Model):
         ordering = ["-id"]
 
 
-class Workout(models.Model):
-    TYPE_CHOICES = (
-        ('single_distance', 'Single Distance'),
-        ('single_time', 'Single Time'),
-        ('intervals', 'Intervals'),
-    )
-    type = models.CharField(max_length=20, choices=TYPE_CHOICES)
-    date = models.DateField()
-    id = models.IntegerField(blank=True, null=False, primary_key=True)
-    distance_meters = models.IntegerField(blank=True, null=True)
-    time_minutes = models.IntegerField(blank=True, null=True)
-    time_seconds = models.IntegerField(blank=True, null=True)
-    split_length_minutes = models.IntegerField(blank=True, null=True)
-    split_length_seconds = models.IntegerField(blank=True, null=True)
-    num_intervals = models.IntegerField(blank=True, null=True)
-    distanceInt = models.IntegerField(blank=True, null=True)
-    int_time_minutes = models.IntegerField(blank=True, null=True)
-    int_time_sec = models.IntegerField(blank=True, null=True)
-    rest_time_minutes = models.IntegerField(blank=True, null=True)
-    rest_time_sec = models.IntegerField(blank=True, null=True)
+# class Workout(models.Model):
+#     TYPE_CHOICES = (
+#         ('single_distance', 'Single Distance'),
+#         ('single_time', 'Single Time'),
+#         ('intervals', 'Intervals'),
+#     )
+#     type = models.CharField(max_length=20, choices=TYPE_CHOICES)
+#     date = models.DateField()
+#     id = models.IntegerField(blank=True, null=False, primary_key=True)
+#     distance_meters = models.IntegerField(blank=True, null=True)
+#     time_minutes = models.IntegerField(blank=True, null=True)
+#     time_seconds = models.IntegerField(blank=True, null=True)
+#     split_length_minutes = models.IntegerField(blank=True, null=True)
+#     split_length_seconds = models.IntegerField(blank=True, null=True)
+#     num_intervals = models.IntegerField(blank=True, null=True)
+#     distanceInt = models.IntegerField(blank=True, null=True)
+#     int_time_minutes = models.IntegerField(blank=True, null=True)
+#     int_time_sec = models.IntegerField(blank=True, null=True)
+#     rest_time_minutes = models.IntegerField(blank=True, null=True)
+#     rest_time_sec = models.IntegerField(blank=True, null=True)
 
 
 
@@ -94,14 +94,74 @@ class CustomUser(AbstractUser):
         verbose_name = 'User'
         verbose_name_plural = 'Users'
 
+
+
+
+class Group(models.Model):
+    # Relations
+    
+
+    # Data Fields
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=200, null=False)
+    description = models.CharField(max_length=200, null=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+    member_count = models.FloatField(default=1, null=True)
+    
+    def __str__(self): # Create string return type for admin panel to see Group by name
+        return self.name
+    
+class Workout(models.Model):
+    
+    group = models.ForeignKey(Group, blank=True, null=True, on_delete=models.DO_NOTHING) # One Group can have many workouts
+    
+    # Data Fields
+    name = models.CharField(max_length=200, null=False)
+    description = models.CharField(max_length=200, null=False)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+    member_count = models.FloatField(default=1, null=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    
+    TYPE_CHOICES = (
+        ('single_distance', 'Single Distance'),
+        ('single_time', 'Single Time'),
+        ('intervals', 'Intervals'),
+    )
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES)
+    #date = models.DateField()
+    # id = models.IntegerField(blank=True, null=False, primary_key=True)
+    distance_meters = models.IntegerField(blank=True, null=True)
+    time_minutes = models.IntegerField(blank=True, null=True)
+    time_seconds = models.IntegerField(blank=True, null=True)
+    split_length_minutes = models.IntegerField(blank=True, null=True)
+    split_length_seconds = models.IntegerField(blank=True, null=True)
+    num_intervals = models.IntegerField(blank=True, null=True)
+    distanceInt = models.IntegerField(blank=True, null=True)
+    int_time_minutes = models.IntegerField(blank=True, null=True)
+    int_time_sec = models.IntegerField(blank=True, null=True)
+    rest_time_minutes = models.IntegerField(blank=True, null=True)
+    rest_time_sec = models.IntegerField(blank=True, null=True)
+    
+    def __str__(self): # Create string return type for admin panel to see workout by name
+        return self.name
+
 class Profile(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    bio = models.TextField()
-    location = models.CharField(max_length=100)
+    # Relations
+    account = models.OneToOneField(CustomUser, on_delete=models.CASCADE) # Profile has 1 account
+    group_membership = models.ManyToManyField(Group, blank=True) # Profile can be a part of many groups
+    
+    # Data Fields
+    
+    name = models.CharField(max_length=200, null=True)
+    email = models.CharField(max_length=200, null=True)
+    phone = models.CharField(max_length=200, null=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+
+    def __str__(self): # Create string return type for admin panel to see accounts by email
+        return self.account.username
 
 
-
-
+    
 # Old Code from Isaac 2.2
 # class CustomUserManager(BaseUserManager):
 #     def create_user(self, email, password=None, **extra_fields):
