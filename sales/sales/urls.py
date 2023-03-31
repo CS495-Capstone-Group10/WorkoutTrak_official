@@ -14,6 +14,11 @@ from django.conf.urls.static import static
 
 #from app.views import SignUpView, LoginView
 
+# added this from the app view.py
+#from . import views
+from app.views import RegisterUserView
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -32,5 +37,8 @@ urlpatterns = [
     path('new',views.new_workouts),
     path('api/workouts/', views_workouts.workouts),
     path('api/workouts/<int:workout_id>/', views_workouts.workout),
-    path('app/', include('app.urls'))
+    path('app/', include('app.urls')),
+    path('create-account/', views.create_account_view, name='sign_up'),
+    path('api/create-account/', RegisterUserView.as_view() , name='sign_up_api'),
+    path('forgot-password', RegisterUserView.as_view(), name='reset_password'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

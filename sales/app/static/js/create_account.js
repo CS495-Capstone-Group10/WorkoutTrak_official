@@ -6,18 +6,21 @@ function App() {
   const [password, setPassword] = React.useState("");
   const [message, setMessage] = React.useState("");
 
-//   const success = async (text)=> {
-//     console.log("Yeah! Authenticated!");
-//     await localStorage.setItem("salesToken", text.access);
-//     window.location = "/";
-//   };
+  const success = async (text)=> {
+    console.log("Yeah! Authenticated!");
+    await localStorage.setItem("salesToken", text.access);
+    window.location = "/";
+  };
 
   const tryAccountCreation = async (e) => {
     //e.preventDefault();
     console.log("Created Account With", username, password);
-    await create_account_api(username, password, (text)=>{setMessage(text)});
+    await create_account_api(username, password, success, (text)=>{setMessage(text)});
   };
 
+  const goToLogin = () => {
+    window.location = "/login";
+  };
 
   return (
       <div style={{width: "400px", margin: "auto", marginTop: "200px",
@@ -37,6 +40,7 @@ function App() {
           </div>
           <div style={{margin: "1em", color: "red"}}>{message}</div>
           <button type="submit" className="btn btn-primary" onClick={tryAccountCreation}>Create Account</button>
+          <button type="button" className="btn btn-secondary" onClick={goToLogin}>Login</button>
         </form>
         
       </div>
