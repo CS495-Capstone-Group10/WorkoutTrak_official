@@ -8,8 +8,11 @@ from app import views_orders
 from app import views
 from app import views_workouts
 # library JWT for authentication
-from sales import settings 
+#from sales import settings 
 from django.conf.urls.static import static
+from django.conf import settings 
+
+
 
 
 #from app.views import SignUpView, LoginView
@@ -17,7 +20,6 @@ from django.conf.urls.static import static
 # added this from the app view.py
 #from . import views
 from app.views import RegisterUserView
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -41,4 +43,7 @@ urlpatterns = [
     path('create-account/', views.create_account_view, name='sign_up'),
     path('api/create-account/', RegisterUserView.as_view() , name='sign_up_api'),
     path('forgot-password', RegisterUserView.as_view(), name='reset_password'),
+    path('index1', views.index1),
+    #path('style.css', style.css),
+    path('style1', views.style1_view), #experimental
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

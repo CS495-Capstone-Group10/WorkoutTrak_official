@@ -7,6 +7,11 @@ from rest_framework_simplejwt.views import (
 from . import views
 from .views import RegisterUserView
 
+# added for index1 and static line below
+#from sales import settings 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('', views.login_view, name='login'),
     #path('', views.login_view, name='apiTes'),
@@ -17,4 +22,5 @@ urlpatterns = [
          name='token_obtain_pair'),
     path('login', views.login_view),
     #path('bio/<username>', views.UserProfile),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# added this static line above
