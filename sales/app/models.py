@@ -62,7 +62,7 @@ class UserManager(BaseUserManager):
 
     def create_user(self, username, password=None, **extra_fields):
         if not username:
-            raise ValueError('username is Required')
+            raise ValueError('Username is Required')
         if not password:
             raise ValueError('Password is required')
         
@@ -83,20 +83,6 @@ class UserManager(BaseUserManager):
 
         return self.create_user(username, password, **extra_fields)
     
-class CustomUser(AbstractUser): 
-    """
-    Define custom user model by inheriting from AbstractUser provided from Django auth module
-    Contains common fields and methods found here
-    """
-    objects = UserManager() # define your own manager class for a model
-    pass
-    class Meta: #Names in admin Interface
-        verbose_name = 'User'
-        verbose_name_plural = 'Users'
-
-
-
-
 class Group(models.Model):
     # Relations
     
@@ -110,6 +96,28 @@ class Group(models.Model):
     
     def __str__(self): # Create string return type for admin panel to see Group by name
         return self.name
+
+class CustomUser(AbstractUser): 
+    """
+    Define custom user model by inheriting from AbstractUser provided from Django auth module
+    Contains common fields and methods found here
+    """
+    objects = UserManager() # define your own manager class for a model
+    
+    # Relations
+    group_membership = models.ManyToManyField(Group, blank=True) # Profile can be a part of many groups
+    
+    # Data Fields
+    
+    pass
+    class Meta: #Names in admin Interface
+        verbose_name = 'User'
+        verbose_name_plural = 'Users'
+
+
+
+
+
     
 class Workout(models.Model):
     
@@ -145,20 +153,20 @@ class Workout(models.Model):
     def __str__(self): # Create string return type for admin panel to see workout by name
         return self.name
 
-class Profile(models.Model):
-    # Relations
-    account = models.OneToOneField(CustomUser, on_delete=models.CASCADE) # Profile has 1 account
-    group_membership = models.ManyToManyField(Group, blank=True) # Profile can be a part of many groups
+# class Profile(models.Model):
+#     # Relations
+#     account = models.OneToOneField(CustomUser, on_delete=models.CASCADE) # Profile has 1 account
+#     group_membership = models.ManyToManyField(Group, blank=True) # Profile can be a part of many groups
     
-    # Data Fields
-    
-    name = models.CharField(max_length=200, null=True)
-    email = models.CharField(max_length=200, null=True)
-    phone = models.CharField(max_length=200, null=True)
-    date_created = models.DateTimeField(auto_now_add=True, null=True)
+#     # Data Fields
+#     profile_name = models.CharField(max_length=200, null=False, unique=True)
+#     name = models.CharField(max_length=200, null=True, blank=True)
+#     email = models.CharField(max_length=200, null=True, blank=True)
+#     phone = models.CharField(max_length=200, null=True, blank=True)
+#     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
-    def __str__(self): # Create string return type for admin panel to see accounts by email
-        return self.account.username
+#     def __str__(self): # Create string return type for admin panel to see accounts by email
+#         return self.account.username
 
 
     
