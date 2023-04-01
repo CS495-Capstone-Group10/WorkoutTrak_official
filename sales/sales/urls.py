@@ -44,6 +44,7 @@ urlpatterns = [
     path('api/create-account/', RegisterUserView.as_view() , name='sign_up_api'),
     path('forgot-password', RegisterUserView.as_view(), name='reset_password'),
     path('index1', views.index1),
+    path('index2', views.index2),
     #path('style.css', style.css),
-    path('style1', views.style1_view), #experimental
+    #path('style1', views.style1_view), #experimental
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
