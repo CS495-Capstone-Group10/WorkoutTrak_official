@@ -19,10 +19,11 @@ function App() {
   };
 
   const goToCreateAccount = () => {
-    window.location = "create-account";
+    // window.location = "/create-account";
+    window.location = "/create-account";
   }
   const goToForgetPassword = () => {
-    window.location = "forgot-password";
+    window.location = "/forgot-password";
   }
 
   return (

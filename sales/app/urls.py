@@ -13,7 +13,7 @@ urlpatterns = [
     # Login URLs
     path('login/', views.login_view, name='login'),
     path('api/token/', TokenObtainPairView.as_view(),name='token_obtain_pair'),
-    path('create-account/', views.create_account_view, name='sign_up'),
+    path('create-account/', views.create_account_view, name='create_account'),
     path('api/create-account/', RegisterUserView.as_view() , name='sign_up_api'),
     path('forgot-password/', RegisterUserView.as_view(), name='reset_password'), # TODO implement
     

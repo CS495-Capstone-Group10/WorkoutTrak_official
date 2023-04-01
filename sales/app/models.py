@@ -106,7 +106,7 @@ class CustomUser(AbstractUser):
     
     # Relations
     group_membership = models.ManyToManyField(Group, blank=True) # Profile can be a part of many groups
-    
+    organization = models.CharField(max_length=50, null=True, blank=True)
     # Data Fields
     
     pass
