@@ -31,6 +31,10 @@ def index2(request):
     context = {}
     return render(request, "index2.html", context=context)
 
+def app2(request):
+    context = {}
+    return render(request, "app2.js", context=context)
+
 
 def login_view(request):
     context = {}
