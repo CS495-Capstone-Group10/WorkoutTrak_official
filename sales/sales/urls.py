@@ -59,6 +59,8 @@ urlpatterns = [
     path('athletesX', views.athletesX_view),
     path('profileX', views.profileX_view),
     path('socialX', views.socialX_view),
+    path('recordsX', views.recordsX_view), 
+    path('createAccountX', views.createAccountX_view),
     
     
     

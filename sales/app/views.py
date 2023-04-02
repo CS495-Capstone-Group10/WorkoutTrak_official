@@ -100,3 +100,45 @@ def home(request): # Default homepage for after login
 def profile(request, username_name_pk):
     profile = CustomUser.objects.get(username=username_name_pk)
     return render(request, "accounts/profile.html", {'profile': profile})
+
+
+
+
+# adding views for the sprint2 demo urls.py paths
+def pracX1_view(request):
+    context = {}
+    return render(request, "pracX1.html", context=context)
+
+def loginX_view(request):
+    context = {}
+    return render(request, "loginX.html", context=context)
+
+def homeX_view(request):
+    context = {}
+    return render(request, "homeX.html", context=context)
+
+def workoutsX_view(request):
+    context = {}
+    return render(request, "workoutsX.html", context=context)
+
+def athletesX_view(request):
+    context = {}
+    return render(request, "athletesX.html", context=context)
+
+def profileX_view(request):
+    context = {}
+    return render(request, "profileX.html", context=context)
+
+def socialX_view(request):
+    context = {}
+    return render(request, "socialX.html", context=context)
+
+def recordsX_view(request):
+    context = {}
+    return render(request, "recordsX.html", context=context)
+
+def createAccountX_view(request):
+    context = {}
+    return render(request, "createAccountX.html", context=context)
+
+
