@@ -109,6 +109,10 @@ def pracX1_view(request):
     context = {}
     return render(request, "pracX1.html", context=context)
 
+def pracX2_view(request):
+    context = {}
+    return render(request, "pracX2.html", context=context)
+
 def loginX_view(request):
     context = {}
     return render(request, "loginX.html", context=context)

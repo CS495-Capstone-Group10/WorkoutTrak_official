@@ -52,6 +52,7 @@ urlpatterns = [
     
     # new experimental paths for sprint2 demo (Isaac)
     path('pracX1', views.pracX1_view),
+    path('pracX2', views.pracX2_view),  
     path('', views.loginX_view),
     path('loginX', views.loginX_view),
     path('homeX', views.homeX_view),
