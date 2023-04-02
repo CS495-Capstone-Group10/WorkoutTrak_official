@@ -9,7 +9,7 @@ function App() {
   const success = async (text)=> {
     console.log("Yeah! Authenticated!");
     await localStorage.setItem("salesToken", text.access);
-    window.location = "/";
+    window.location = "/index";
   };
 
   const tryLogin = async (e) => {

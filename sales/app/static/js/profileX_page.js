@@ -58,12 +58,12 @@ function MyComponent() {
           <div className="main">
            <div className="main__container">
              <div className="main__content">
-               <h1>WorkoutTrak</h1>
-               <p>Create some workouts!</p>
-               <button className="main__btn"><a href="/workoutsX">View Workouts</a></button>
+               <h1>Profile</h1>
+               <p>Modify profile!</p>
+               <button className="main__btn"><a href="/profileX">View Profile</a></button>
              </div>
              <div className="main__img--container">
-               <img src="static/images/pic1.svg" alt="pic" id="main__img" />
+               <img src="static/images/pic2.svg" alt="pic" id="main__img" />
              </div>
            </div>
          </div>
