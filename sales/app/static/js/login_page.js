@@ -49,9 +49,31 @@ function App() {
         <button type="button" className="btn btn-secondary" onClick={goToCreateAccount}>Create your account</button>
       </div>
   );
-  
-  
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const domContainer = document.querySelector('#reactAppContainer');
 ReactDOM.render(
