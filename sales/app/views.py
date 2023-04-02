@@ -1,7 +1,5 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-<<<<<<< HEAD
-=======
 from .models import Workout, CustomUser
 from .serializer import WorkoutSerializer
 
@@ -11,7 +9,6 @@ class WorkoutViewSet(viewsets.ModelViewSet):
 
 
 
->>>>>>> 89f5375b2cacd56866ae5941296691a995ca5730
 from rest_framework.views import APIView
 from .serializers import CustomUserSerializer
 from rest_framework.response import Response

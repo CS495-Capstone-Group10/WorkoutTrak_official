@@ -18,7 +18,6 @@ class Order(models.Model):
         ordering = ["-id"]
 
 
-<<<<<<< HEAD
 class Workout(models.Model):
     TYPE_CHOICES = (
         ('single_distance', 'Single Distance'),
@@ -41,7 +40,6 @@ class Workout(models.Model):
     rest_time_sec = models.IntegerField(blank=True, null=True)
     def __str__(self):
         return f"{self.type} - {self.date}"
-=======
 # class Workout(models.Model):
 #     TYPE_CHOICES = (
 #         ('single_distance', 'Single Distance'),
@@ -62,7 +60,6 @@ class Workout(models.Model):
 #     int_time_sec = models.IntegerField(blank=True, null=True)
 #     rest_time_minutes = models.IntegerField(blank=True, null=True)
 #     rest_time_sec = models.IntegerField(blank=True, null=True)
->>>>>>> 89f5375b2cacd56866ae5941296691a995ca5730
 
 
 
