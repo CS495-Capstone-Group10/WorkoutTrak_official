@@ -9,7 +9,7 @@ function App() {
   const success = async (text)=> {
     console.log("Yeah! Authenticated!");
     await localStorage.setItem("salesToken", text.access);
-    window.location = "/";
+    window.location = "/index";
   };
 
   const tryLogin = async (e) => {
@@ -19,10 +19,11 @@ function App() {
   };
 
   const goToCreateAccount = () => {
-    window.location = "create-account";
+    // window.location = "/create-account";
+    window.location = "/create-account";
   }
   const goToForgetPassword = () => {
-    window.location = "forgot-password";
+    window.location = "/forgot-password";
   }
 
   return (
@@ -48,9 +49,31 @@ function App() {
         <button type="button" className="btn btn-secondary" onClick={goToCreateAccount}>Create your account</button>
       </div>
   );
-  
-  
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const domContainer = document.querySelector('#reactAppContainer');
 ReactDOM.render(

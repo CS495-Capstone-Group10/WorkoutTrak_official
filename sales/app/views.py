@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Workout
+from .models import Workout, CustomUser
 from .serializer import WorkoutSerializer
 
 class WorkoutViewSet(viewsets.ModelViewSet):
@@ -19,6 +19,25 @@ from rest_framework.response import Response
 def index(request):
     context = {}
     return render(request, "index.html", context=context)
+
+
+# new separate index page with design elements
+def index1(request):
+    context = {}
+    return render(request, "index1.html", context=context)
+
+# another new separate index page with design elements 
+def index2(request):
+    context = {}
+    return render(request, "index2.html", context=context)
+
+def app2(request):
+    context = {}
+    return render(request, "app2.js", context=context)
+
+def tech2(request):
+    context = {}
+    return render(request, "tech2.html", context=context)
 
 
 def login_view(request):
@@ -40,6 +59,7 @@ def workouts_view(request):
 def uploadDoc_view(request):
     context = {}
     return render(request, "uploadDoc.html", context=context)
+
 def save_workouts(request):
     context = {}
     return render(request, "new_workouts.html", context=context)
@@ -47,6 +67,12 @@ def save_workouts(request):
 def new_workouts(request):
     context = {}
     return render(request, "new.html", context=context)
+
+#def style1_view(request):
+#    context ={}
+#    return render(request, "style1.css", context=context)
+
+
 
 
 # view for registering users
@@ -66,4 +92,57 @@ class RegisterUserView(APIView):
         if request.method == 'GET':
             return Response({"message": "Enter Username and Password"})
         
+        
+def home(request): # Default homepage for after login
+    return render(request, "accounts/dashboard.html")
+
+
+def profile(request, username_name_pk):
+    profile = CustomUser.objects.get(username=username_name_pk)
+    return render(request, "accounts/profile.html", {'profile': profile})
+
+
+
+
+# adding views for the sprint2 demo urls.py paths
+def pracX1_view(request):
+    context = {}
+    return render(request, "pracX1.html", context=context)
+
+def pracX2_view(request):
+    context = {}
+    return render(request, "pracX2.html", context=context)
+
+def loginX_view(request):
+    context = {}
+    return render(request, "loginX.html", context=context)
+
+def homeX_view(request):
+    context = {}
+    return render(request, "homeX.html", context=context)
+
+def workoutsX_view(request):
+    context = {}
+    return render(request, "workoutsX.html", context=context)
+
+def athletesX_view(request):
+    context = {}
+    return render(request, "athletesX.html", context=context)
+
+def profileX_view(request):
+    context = {}
+    return render(request, "profileX.html", context=context)
+
+def socialX_view(request):
+    context = {}
+    return render(request, "socialX.html", context=context)
+
+def recordsX_view(request):
+    context = {}
+    return render(request, "recordsX.html", context=context)
+
+def createAccountX_view(request):
+    context = {}
+    return render(request, "createAccountX.html", context=context)
+
 
