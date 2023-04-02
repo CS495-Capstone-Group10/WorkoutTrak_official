@@ -1,19 +1,8 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Workout
-from .serializer import WorkoutSerializer
-
-class WorkoutViewSet(viewsets.ModelViewSet):
-    queryset = Workout.objects.all()
-    serializer_class = WorkoutSerializer
-
-
-
 from rest_framework.views import APIView
 from .serializers import CustomUserSerializer
 from rest_framework.response import Response
-
-
 
 
 def index(request):

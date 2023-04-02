@@ -7,10 +7,10 @@ from django.urls import path, include
 from app import views_orders
 from app import views
 from app import views_workouts
+
 # library JWT for authentication
 from sales import settings 
 from django.conf.urls.static import static
-
 
 #from app.views import SignUpView, LoginView
 
@@ -30,7 +30,7 @@ urlpatterns = [
     path('upDoc', views.uploadDoc_view),
     path('save',views.save_workouts),
     path('new',views.new_workouts),
-    path('api/workouts/', views_workouts.workouts),
-    path('api/workouts/<int:workout_id>/', views_workouts.workout),
+    path('api/workouts/', views_workouts.api_view()),
+    path('api/workouts/<int:pk>/', views_workouts.api_view()),
     path('app/', include('app.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,15 +1,19 @@
 from rest_framework.decorators import api_view
 from django.shortcuts import HttpResponse
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from rest_framework import status
 from django.forms.models import model_to_dict
 from django.core.exceptions import ObjectDoesNotExist
 from app.models import Workout
 import json
 import datetime
-from rest_framework import serializers
+from app.serializer import WorkoutSerializer
+from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.decorators import login_required
 
-
-def serialize_order(workout):
+def serialize_workout(workout):
     serialized = model_to_dict(workout)
     serialized["date"] = str(workout.date)
     serialized["type"] = str(workout.amount)
@@ -27,59 +31,61 @@ def serialize_order(workout):
     serialized["rest_time_sec"] = int(workout.rest_time_sec)
     return serialized
 
-@api_view(['GET', ])
-def workouts(request):
-    if request.user.is_anonymous:
-        return HttpResponse(json.dumps({"detail": "Not authorized"}), status=status.HTTP_401_UNAUTHORIZED)
 
-    if request.method == "GET":
-        Workout_data = Workout.objects.all()
+@api_view(['GET'])
+@login_required
+def get_workouts(request):
+    page_size = int(request.GET.get("page_size", "10"))
+    page_no = int(request.GET.get("page_no", "0"))
 
-        Workout_count = Workout_data.count()
-
-        page_size = int(request.GET.get("page_size", "10"))
-        page_no = int(request.GET.get("page_no", "0"))
-        Workout_data = list(Workout_data[page_no * page_size:page_no * page_size + page_size])
-
-        Workout_data = [serialize_order(order) for order in Workout_data]
-        return HttpResponse(json.dumps({"count": Workout_count, "data": Workout_data}), status=status.HTTP_200_OK)
-
-    return HttpResponse(json.dumps({"detail": "Wrong method"}), status=status.HTTP_501_NOT_IMPLEMENTED)
+    workouts = Workout.objects.all()[page_no * page_size:page_no * page_size + page_size]
+    serialized_workouts = [serialize_workout(workout) for workout in workouts]
+    return Response({"count": Workout.objects.count(), "data": serialized_workouts}, status=status.HTTP_200_OK)
 
 
+@api_view(['POST'])
+@login_required
+def create_workout(request):
+    serializer = WorkoutSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@login_required
 @api_view(['GET', 'DELETE'])
-def workout(request, Workout_id):
-    if request.user.is_anonymous:
-        return HttpResponse(json.dumps({"detail": "Not authorized"}), status=status.HTTP_401_UNAUTHORIZED)
-
+def manage_workout(request, workout_id):
     try:
-        workout = Workout.objects.get(pk=Workout_id)
+        workout = Workout.objects.get(pk=workout_id)
     except ObjectDoesNotExist:
         return HttpResponse(json.dumps({"detail": "Not found"}), status=status.HTTP_404_NOT_FOUND)
 
     if request.method == "GET":
-        return HttpResponse(json.dumps({"data": serialize_order(workout)}), status=status.HTTP_200_OK)
-    if request.method == "DELETE":
+        serialized_workout = serialize_workout(workout)
+        return Response({"data": serialized_workout}, status=status.HTTP_200_OK)
+    elif request.method == "DELETE":
         workout.delete()
-        return HttpResponse(json.dumps({"detail": "deleted"}), status=status.HTTP_410_GONE)
-    return HttpResponse(json.dumps({"detail": "Wrong method"}), status=status.HTTP_501_NOT_IMPLEMENTED)
+        return Response({"detail": "deleted"}, status=status.HTTP_410_GONE)
+    else:
+        return Response({"detail": "Wrong method"}, status=status.HTTP_501_NOT_IMPLEMENTED)
+
 
 def save_workout(request, workout, success_status):
     errors = []
     date = request.data.get("date", "")
     type = request.data.get("type", "")
-    id = datetime.datetime.now()
-    distance_meters = distance_meters.data.get("type", "")
-    time_minutes = time_minutes.data.get("date", "")
-    time_seconds = time_seconds.data.get("type", "")
-    split_length_minutes = split_length_minutes.data.get("date", "")
-    split_length_seconds = split_length_seconds.data.get("type", "")
-    num_intervals = num_intervals.data.get("id", "")
-    distanceInt = distanceInt.data.get("type", "")
-    int_time_minutes = int_time_minutes.data.get("date", "")
-    int_time_sec = int_time_sec.data.get("type", "")
-    rest_time_minutes = rest_time_minutes.data.get("date", "")
-    rest_time_sec = rest_time_sec.data.get("type", "")
+    distance_meters = request.data.get("distance_meters", "")
+    time_minutes = request.data.get("time_minutes", "")
+    time_seconds = request.data.get("time_seconds", "")
+    split_length_minutes = request.data.get("split_length_minutes", "")
+    split_length_seconds = request.data.get("split_length_seconds", "")
+    num_intervals = request.data.get("num_intervals", "")
+    distanceInt = request.data.get("distanceInt", "")
+    int_time_minutes = request.data.get("int_time_minutes", "")
+    int_time_sec = request.data.get("int_time_sec", "")
+    rest_time_minutes = request.data.get("rest_time_minutes", "")
+    rest_time_sec = request.data.get("rest_time_sec", "")
     if date == "":
         date = datetime.datetime.now()
 
@@ -111,50 +117,33 @@ def save_workout(request, workout, success_status):
                 "errors": {"Order": str(e)}
             }), status=status.HTTP_400_BAD_REQUEST)
 
-    return HttpResponse(json.dumps({"data": serialize_order(workout)}), status=success_status)
+    return HttpResponse(json.dumps({"data": serialize_workout(workout)}), status=success_status)
 
-@api_view(['GET', 'POST'])
-def orders(request):
-    if request.user.is_anonymous:
-        return HttpResponse(json.dumps({"detail": "Not authorized"}), status=status.HTTP_401_UNAUTHORIZED)
+class Workouts(APIView):
+    def get(self, request):
+        workouts = Workout.objects.all()
+        serializer = WorkoutSerializer(workouts, many=True)
+        return Response(serializer.data)
 
-    if request.method == "GET":
-        orders_data = Workout.objects.all()
+    def post(self, request):
+        serializer = WorkoutSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        orders_count = orders_data.count()
+    def put(self, request, pk):
+        workout = Workout.objects.get(pk=pk)
+        serializer = WorkoutSerializer(workout, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        page_size = int(request.GET.get("page_size", "10"))
-        page_no = int(request.GET.get("page_no", "0"))
-        orders_data = list(orders_data[page_no * page_size:page_no * page_size + page_size])
-
-        orders_data = [serialize_order(order) for order in orders_data]
-        return HttpResponse(json.dumps({"count": orders_count, "data": orders_data}), status=status.HTTP_200_OK)
-
-    if request.method == "POST":
-        order = Workout()
-        return save_workout(request, order, status.HTTP_201_CREATED)
-
-    return HttpResponse(json.dumps({"detail": "Wrong method"}), status=status.HTTP_501_NOT_IMPLEMENTED)
-
-
-@api_view(['GET', 'PUT', 'DELETE'])
-def order(request, workout_id):
-    if request.user.is_anonymous:
-        return HttpResponse(json.dumps({"detail": "Not authorized"}), status=status.HTTP_401_UNAUTHORIZED)
-
-    try:
-        workout = Workout.objects.get(pk=workout_id)
-    except ObjectDoesNotExist:
-        return HttpResponse(json.dumps({"detail": "Not found"}), status=status.HTTP_404_NOT_FOUND)
-
-    if request.method == "GET":
-        return HttpResponse(json.dumps({"data": serialize_order(workout)}), status=status.HTTP_200_OK)
-
-    if request.method == "PUT":
-        return save_workout(request, workout, status.HTTP_200_OK)
-
-    if request.method == "DELETE":
+    def delete(self, request, pk):
+        workout = Workout.objects.get(pk=pk)
         workout.delete()
-        return HttpResponse(json.dumps({"detail": "deleted"}), status=status.HTTP_410_GONE)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
-    return HttpResponse(json.dumps({"detail": "Wrong method"}), status=status.HTTP_501_NOT_IMPLEMENTED)
