@@ -1,7 +1,7 @@
 #from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
-
+import uuid
 
 # the model being used for a basic table on the website
 class Order(models.Model):
@@ -18,6 +18,7 @@ class Order(models.Model):
         ordering = ["-id"]
 
 
+<<<<<<< HEAD
 class Workout(models.Model):
     TYPE_CHOICES = (
         ('single_distance', 'Single Distance'),
@@ -40,6 +41,28 @@ class Workout(models.Model):
     rest_time_sec = models.IntegerField(blank=True, null=True)
     def __str__(self):
         return f"{self.type} - {self.date}"
+=======
+# class Workout(models.Model):
+#     TYPE_CHOICES = (
+#         ('single_distance', 'Single Distance'),
+#         ('single_time', 'Single Time'),
+#         ('intervals', 'Intervals'),
+#     )
+#     type = models.CharField(max_length=20, choices=TYPE_CHOICES)
+#     date = models.DateField()
+#     id = models.IntegerField(blank=True, null=False, primary_key=True)
+#     distance_meters = models.IntegerField(blank=True, null=True)
+#     time_minutes = models.IntegerField(blank=True, null=True)
+#     time_seconds = models.IntegerField(blank=True, null=True)
+#     split_length_minutes = models.IntegerField(blank=True, null=True)
+#     split_length_seconds = models.IntegerField(blank=True, null=True)
+#     num_intervals = models.IntegerField(blank=True, null=True)
+#     distanceInt = models.IntegerField(blank=True, null=True)
+#     int_time_minutes = models.IntegerField(blank=True, null=True)
+#     int_time_sec = models.IntegerField(blank=True, null=True)
+#     rest_time_minutes = models.IntegerField(blank=True, null=True)
+#     rest_time_sec = models.IntegerField(blank=True, null=True)
+>>>>>>> 89f5375b2cacd56866ae5941296691a995ca5730
 
 
 
@@ -64,7 +87,7 @@ class UserManager(BaseUserManager):
 
     def create_user(self, username, password=None, **extra_fields):
         if not username:
-            raise ValueError('username is Required')
+            raise ValueError('Username is Required')
         if not password:
             raise ValueError('Password is required')
         
@@ -85,25 +108,93 @@ class UserManager(BaseUserManager):
 
         return self.create_user(username, password, **extra_fields)
     
+class Group(models.Model):
+    # Relations
+    
+
+    # Data Fields
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=200, null=False)
+    description = models.CharField(max_length=200, null=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+    member_count = models.FloatField(default=1, null=True)
+    
+    def __str__(self): # Create string return type for admin panel to see Group by name
+        return self.name
+
 class CustomUser(AbstractUser): 
     """
     Define custom user model by inheriting from AbstractUser provided from Django auth module
     Contains common fields and methods found here
     """
     objects = UserManager() # define your own manager class for a model
+    
+    # Relations
+    group_membership = models.ManyToManyField(Group, blank=True) # Profile can be a part of many groups
+    organization = models.CharField(max_length=50, null=True, blank=True)
+    # Data Fields
+    
     pass
     class Meta: #Names in admin Interface
         verbose_name = 'User'
         verbose_name_plural = 'Users'
 
-class Profile(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    bio = models.TextField()
-    location = models.CharField(max_length=100)
 
 
 
 
+    
+class Workout(models.Model):
+    
+    group = models.ForeignKey(Group, blank=True, null=True, on_delete=models.DO_NOTHING) # One Group can have many workouts
+    
+    # Data Fields
+    name = models.CharField(max_length=200, null=True) # changed to true (Isaac)
+    description = models.CharField(max_length=200, null=True) # making null=true to bypass error in makemigrations
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+    member_count = models.FloatField(default=1, null=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False) # changed to true (Isaac)
+    
+    TYPE_CHOICES = (
+        ('single_distance', 'Single Distance'),
+        ('single_time', 'Single Time'),
+        ('intervals', 'Intervals'),
+    )
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES)
+    #date = models.DateField()
+    # id = models.IntegerField(blank=True, null=False, primary_key=True)
+    distance_meters = models.IntegerField(blank=True, null=True)
+    time_minutes = models.IntegerField(blank=True, null=True)
+    time_seconds = models.IntegerField(blank=True, null=True)
+    split_length_minutes = models.IntegerField(blank=True, null=True)
+    split_length_seconds = models.IntegerField(blank=True, null=True)
+    num_intervals = models.IntegerField(blank=True, null=True)
+    distanceInt = models.IntegerField(blank=True, null=True)
+    int_time_minutes = models.IntegerField(blank=True, null=True)
+    int_time_sec = models.IntegerField(blank=True, null=True)
+    rest_time_minutes = models.IntegerField(blank=True, null=True)
+    rest_time_sec = models.IntegerField(blank=True, null=True)
+    
+    def __str__(self): # Create string return type for admin panel to see workout by name
+        return self.name
+
+# class Profile(models.Model):
+#     # Relations
+#     account = models.OneToOneField(CustomUser, on_delete=models.CASCADE) # Profile has 1 account
+#     group_membership = models.ManyToManyField(Group, blank=True) # Profile can be a part of many groups
+    
+#     # Data Fields
+#     profile_name = models.CharField(max_length=200, null=False, unique=True)
+#     name = models.CharField(max_length=200, null=True, blank=True)
+#     email = models.CharField(max_length=200, null=True, blank=True)
+#     phone = models.CharField(max_length=200, null=True, blank=True)
+#     date_created = models.DateTimeField(auto_now_add=True, null=True)
+
+#     def __str__(self): # Create string return type for admin panel to see accounts by email
+#         return self.account.username
+
+
+    
 # Old Code from Isaac 2.2
 # class CustomUserManager(BaseUserManager):
 #     def create_user(self, email, password=None, **extra_fields):
