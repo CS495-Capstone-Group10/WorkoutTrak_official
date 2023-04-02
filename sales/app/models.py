@@ -124,11 +124,11 @@ class Workout(models.Model):
     group = models.ForeignKey(Group, blank=True, null=True, on_delete=models.DO_NOTHING) # One Group can have many workouts
     
     # Data Fields
-    name = models.CharField(max_length=200, null=False)
-    description = models.CharField(max_length=200, null=False)
+    name = models.CharField(max_length=200, null=True) # changed to true (Isaac)
+    description = models.CharField(max_length=200, null=True) # making null=true to bypass error in makemigrations
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     member_count = models.FloatField(default=1, null=True)
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False) # changed to true (Isaac)
     
     TYPE_CHOICES = (
         ('single_distance', 'Single Distance'),
