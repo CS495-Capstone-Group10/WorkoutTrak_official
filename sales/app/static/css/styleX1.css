@@ -7,7 +7,9 @@
 
 .navbar {
     /*background: #837979;*/
-    background: linear-gradient(to bottom, #d88b16 0%, #141414 100%);
+    /*background: linear-gradient(to bottom, #bccad6 0%, #667292 100%);*/
+    background-color: #bccad6;
+    background-image: linear-gradient(to bottom, #667292 0%, #667292 100%);
     height: 80px;
     display: flex;
     justify-content: center;
@@ -31,7 +33,7 @@
 
 #navbar__logo {
     background-color: #2533ad;
-    background-image: linear-gradient(to top, #082938 0%, #44e6f1 100%);
+    background-image: linear-gradient(to top, #bccad6 0%, #f1e3dd 100%);
     background-size: 100%;
     -webkit-background-clip: text;
     -moz-background-clip: text;
@@ -60,7 +62,7 @@
 }
 
 .navbar__links {
-    color: #fff;
+    color: #f1e3dd;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -88,17 +90,17 @@
     border: none;
     outline: none;
     border-radius: 4px;
-    background: #f77062;
+    background: #667292;
     color: #fff;
 }
 
 .button:hover {
-    background: #4837ff;
+    background: #8d9db6;
     transition: all 0.3s ease;
 }
 
 .navbar__links:hover {
-    color: #f77062;
+    color: #8d9db6;
     transition: all 0.3s ease;
 }
 
@@ -124,11 +126,11 @@
         transition: all 0.5s ease;
         height: 50vh;
         z-index: -1;
-        background: #131313;
+        background: #667292;
     }
 
     .navbar__menu.active {
-        background: #131313;
+        background: #667292;
         top: 100%;
         opacity: 1;
         transition: all 0.5s ease;
@@ -146,7 +148,7 @@
         height: 3px;
         margin: 5px auto;
         transition: all 0.3s ease-in-out;
-        background: #fff;
+        background: #f1e3dd;
     }
 
     .navbar__item {
@@ -205,7 +207,9 @@
 
 /* Hero Section CSS */
 .main {
-    background-color: #141414;
+    /*background-color: #667292;*/
+    background-color: #667292;
+    background-image: linear-gradient(to top, #667292 0%, #8d9db6 100%);
 
 }
 
@@ -216,7 +220,9 @@
     justify-self: center;
     margin: 0 auto;
     height: 90vh;
-    background-color: #141414;
+    /*background-color: linear-gradient(to top, #667292 50%, #f1e3dd 50%);*/
+    background-color: #667292;
+    background-image: linear-gradient(to top, #667292 0%, #8d9db6 100%);
     z-index: 1;
     width: 100%;
     max-width: 1300px;
@@ -226,7 +232,7 @@
 .main__content h1 {
     font-size: 4rem;
     background-color: #ff8177;
-    background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%);
+    background-image: linear-gradient(to top, #9d9db6 0%, #f1e3dd 100%);
     background-size: 100%;
     -webkit-background-clip: text;
     -moz-background-clip: text;
@@ -249,17 +255,17 @@
     margin-top: 1rem;
     font-size: 2rem;
     font-weight: 700;
-    color: #fff;
+    color: #f1e3dd;
 }
 
 
 .main__btn {
     font-size: 1rem;
-    background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
+    background-image: linear-gradient(to top, #bccad6 0%, #8d9db6 100%);
     padding: 14px 32px;
     border: none;
     border-radius: 4px;
-    color: #fff;
+    color: #f1e3dd;
     margin-top: 2rem;
     cursor: pointer;
     position: relative;
@@ -270,7 +276,7 @@
 .main__btn a {
     position: relative;
     z-index: 2;
-    color: #fff;
+    color: #f1e3dd;
     text-decoration: none;
 }
 
@@ -281,7 +287,7 @@
     left: 0;
     width: 0;
     height: 100%;
-    background: #4837ff;
+    background: #667292;
     transition: all 0.35s;
     border-radius: 4px;
 }
@@ -360,7 +366,9 @@
 
 /* Services Section CSS */
 .services {
-    background: #141414;
+    /*background: linear-gradient(to bottom, #8d9db6 100%, #667292 0%);*/
+    background-color: #8d9db6;
+    background-image: linear-gradient(to bottom, #667292 0%, #bccad6 100%);
     display: flx;
     flex-direction: column;
     align-items: center;
@@ -368,14 +376,14 @@
 }
 
 .services h1 {
-    background-color: #ff8177;
+    background-color: #8d9db6;
     background-image: linear-gradient(to right, 
-    #ff8177 0%,
-    #ff867a 0%, 
-    #ff8c7f 21%,
-    #f99185 52%,
-    #cf556c 78%,
-    #b12a5b 100%
+    #8d9db6 0%,
+    #8d9db6 0%, 
+    #bccad6 21%,
+    #bccad6 52%,
+    #667292 78%,
+    #667292 100%
     );
     background-size: 100%;
     margin-bottom: 5rem;
@@ -420,12 +428,12 @@
 }
 
 .services__card button {
-    color: #fff;
+    color: #f1e3dd;
     padding: 10px 20px;
     border: none;
     outline: none;
     border-radius: 4px;
-    background: #f77062;
+    background: #667292;
     position: absolute;
     top: 440px;
     left: 30px;
