@@ -1,4 +1,5 @@
-
+'use strict';
+const e = React.createElement;
 
 
 const menu = document.querySelecter('#mobile-menu');

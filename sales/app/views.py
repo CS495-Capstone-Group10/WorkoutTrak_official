@@ -35,6 +35,10 @@ def app2(request):
     context = {}
     return render(request, "app2.js", context=context)
 
+def tech2(request):
+    context = {}
+    return render(request, "tech2.html", context=context)
+
 
 def login_view(request):
     context = {}

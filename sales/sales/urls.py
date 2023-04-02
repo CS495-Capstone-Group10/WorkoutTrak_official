@@ -46,6 +46,7 @@ urlpatterns = [
     path('index1', views.index1),
     path('index2', views.index2),
     path('app2', views.app2),
+    path('tech2', views.tech2),
     #path('style.css', style.css),
     #path('style1', views.style1_view), #experimental
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
