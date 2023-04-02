@@ -20,7 +20,7 @@ function MyComponent() {
         <nav className="navbar">
           <div className="navbar__container">
             <a href="/homeX" id="navbar__logo">
-              <i className="fas fa-gem"></i>WorkoutTrak : Home
+              <i className="fas fa-gem"></i>WorkoutTrak : Profile
             </a>
             <div className="navbar__toggle" id="mobile-menu">
               <span className="bar"></span>
