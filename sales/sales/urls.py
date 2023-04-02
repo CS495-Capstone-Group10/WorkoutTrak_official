@@ -23,15 +23,16 @@ from app.views import RegisterUserView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    # TODO Remove JWT token and use urls.py from apps to improve modularity
+    
+    
+    #path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/orders/', views_orders.orders),
     path('api/orders/<int:order_id>/', views_orders.order),
     # added path to athletes
     path('athletes', views.athletes),
-    path('', views.index),
+    #path('', views.index),
     path('index', views.index),
-    path('login', views.login_view),
+    #path('login', views.login_view),
     path('workouts', views.workouts_view),
     # added path to uploadDoc
     path('upDoc', views.uploadDoc_view),
@@ -39,6 +40,7 @@ urlpatterns = [
     path('new',views.new_workouts),
     path('api/workouts/', views_workouts.workouts),
     path('api/workouts/<int:workout_id>/', views_workouts.workout),
+#<<<<<<< IsaacWork2.5
     path('app/', include('app.urls')),
     path('create-account/', views.create_account_view, name='sign_up'),
     path('api/create-account/', RegisterUserView.as_view() , name='sign_up_api'),
@@ -49,4 +51,6 @@ urlpatterns = [
     path('tech2', views.tech2),
     #path('style.css', style.css),
     #path('style1', views.style1_view), #experimental
+#=======
+    path('', include('app.urls')), # This means any url path not specified here will be checked in urls.py from app
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

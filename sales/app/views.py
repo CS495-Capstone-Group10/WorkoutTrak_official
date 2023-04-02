@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Workout
+from .models import Workout, CustomUser
 from .serializer import WorkoutSerializer
 
 class WorkoutViewSet(viewsets.ModelViewSet):
@@ -93,5 +93,10 @@ class RegisterUserView(APIView):
             return Response({"message": "Enter Username and Password"})
         
         
+def home(request): # Default homepage for after login
+    return render(request, "accounts/dashboard.html")
 
 
+def profile(request, username_name_pk):
+    profile = CustomUser.objects.get(username=username_name_pk)
+    return render(request, "accounts/profile.html", {'profile': profile})
