@@ -58,12 +58,18 @@ function MyComponent() {
           <div className="main">
            <div className="main__container">
              <div className="main__content">
-               <h1>WorkoutTrak</h1>
-               <p>Create some workouts!</p>
-               <button className="main__btn"><a href="/workoutsX">View Workouts</a></button>
+               <h1>Statistics</h1>
+               <button className="main__btn"><a href="/recordsX">Modify Records</a></button>
              </div>
              <div className="main__img--container">
-               <img src="static/images/pic1.svg" alt="pic" id="main__img" />
+               <img src="static/images/DataATemp1.png" alt="pic" id="main__img" />
+             </div>
+             <div className = "main__content">
+             <h1>History</h1>
+             <button className="main__btn"><a href="/recordsX">View History</a></button>
+             </div>
+             <div className="main__img--container">
+               <img src="static/images/DataATemp2.png" alt="pic" id="main__img" />
              </div>
            </div>
          </div>
@@ -71,16 +77,7 @@ function MyComponent() {
          
         
           <div className="services">
-           <h1>More Features</h1>
            <div className="services__container">
-             <div className="services__card">
-               <h2>Form a Group</h2>
-               <button className="main__content"><a href="/socialX">Social</a></button>
-             </div>
-             <div className="services__card">
-               <h2>View Statistics</h2>
-               <button className="main__content"><a href="/recordsX">Records</a></button>
-             </div>
            </div>
          </div> 
   
