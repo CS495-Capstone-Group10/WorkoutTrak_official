@@ -7,4 +7,3 @@ admin.site.register(CustomUser)
 #admin.site.register(Profile)
 admin.site.register(Group)
 admin.site.register(Workout)
-

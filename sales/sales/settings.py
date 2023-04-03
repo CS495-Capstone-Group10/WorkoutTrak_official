@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'app',
     'django_extensions',
+    "api",
 ]
 AUTH_USER_MODEL = 'app.CustomUser'
 
