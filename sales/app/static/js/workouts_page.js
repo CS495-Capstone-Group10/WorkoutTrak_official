@@ -173,13 +173,10 @@ function App() {
           <thead className="table-light">
           <tr>
             <th>Date</th>
+            <th>Workout Time</th>
             <th>Workout Type</th>
-            <th>Distance (m)</th>
-            <th>Time (mm:ss)</th>
-            <th>Split Time (mm:ss)</th>
             <th>Intervals</th>
-            <th>Interval Distance (m)</th>
-            <th>Interval Time (mm:ss)</th>
+            <th>Distance (m)</th>
             <th>Rest Time (mm:ss)</th>
           </tr>
         </thead>
@@ -187,14 +184,11 @@ function App() {
           {props.workouts.map((workout) => (
             <tr key={workout.id}>
               <td>{workout.date}</td>
+              <td>{workout.workoutTime}</td>
               <td>{workout.workoutType}</td>
-              <td>{workout.distance_meters}</td>
-              <td>{`${workout.time_minutes}:${workout.time_seconds}`}</td>
-              <td>{`${workout.split_length_minutes}:${workout.split_length_seconds}`}</td>
               <td>{workout.num_intervals}</td>
-              <td>{workout.distanceInt}</td>
-              <td>{`${workout.Int_time_minutes}:${workout.Int_time_sec}`}</td>
-              <td>{`${workout.Rest_time_minutes}:${workout.rest_time_sec}`}</td>
+              <td>{workout.distance_meters}</td>
+              <td>{`${workout.rest_time_minutes}:${workout.rest_time_sec}`}</td>
               <td>
                 <a className="btn btn-light" style={{marginLeft: "auto"}}
                   onClick={(e)=>{editOrder(row)}}>Edit</a>{" "}
