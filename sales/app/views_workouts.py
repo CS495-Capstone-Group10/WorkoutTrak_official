@@ -25,6 +25,10 @@ def serialize_order(workout):
     serialized["int_time_sec"] = int(workout.int_time_sec)
     serialized["rest_time_minutes"] = int(workout.rest_time_minutes)
     serialized["rest_time_sec"] = int(workout.rest_time_sec)
+    serialized["split_length"] = str(workout.split_length)
+    serialized["workoutType"] = str(workout.workoutType)
+    serialized["intervalVariableType"] = str(workout.intervalVariableType)
+    serialized["workoutTime"] = str(workout.workoutTime)
     return serialized
 
 @api_view(['GET', ])
