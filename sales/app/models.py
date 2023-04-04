@@ -89,7 +89,7 @@ class Group(models.Model):
 
     # Data Fields
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=200, null=False)
+    name = models.CharField(max_length=200, null=False, unique=True)
     description = models.CharField(max_length=200, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     member_count = models.FloatField(default=1, null=True)

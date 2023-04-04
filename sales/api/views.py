@@ -43,11 +43,7 @@ def userDetail(request,pk):
     serializer = CustomUserSerializer(user, many=False)
     return Response(serializer.data)
 
-@api_view(['GET'])
-def groupDetail(request,pk):
-    group = Group.objects.get(id=pk)
-    serializer = GroupSerializer(group, many=False)
-    return Response(serializer.data)
+
 
 @api_view(['GET'])
 def workoutDetail(request,pk):
@@ -55,6 +51,13 @@ def workoutDetail(request,pk):
     serializer = WorkoutSerializer(workout, many=False)
     return Response(serializer.data)
 
+# GROUP CRUD
+@api_view(['GET'])
+def groupDetail(request,pk):
+    group = Group.objects.get(id=pk)
+    serializer = GroupSerializer(group, many=False)
+    return Response(serializer.data)
+        
 @api_view(['POST'])
 def createGroup(request):
     serializer = GroupSerializer(data=request.data)
@@ -79,3 +82,5 @@ def deleteGroup(request,pk):
     group = Group.objects.get(id=pk)
     group.delete()
     return Response("Item successfully deleted")
+
+# Workouts CRUD
