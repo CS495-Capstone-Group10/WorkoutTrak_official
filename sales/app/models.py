@@ -88,11 +88,12 @@ class Group(models.Model):
     
 
     # Data Fields
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     name = models.CharField(max_length=200, null=False, unique=True)
     description = models.CharField(max_length=200, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     member_count = models.FloatField(default=1, null=True)
+    
     
     def __str__(self): # Create string return type for admin panel to see Group by name
         return self.name
@@ -102,13 +103,13 @@ class CustomUser(AbstractUser):
     Define custom user model by inheriting from AbstractUser provided from Django auth module
     Contains common fields and methods found here
     """
+    #class CustomUserGroups(): Returns all to users that are in a group to avoid code in the views......
     objects = UserManager() # define your own manager class for a model
-    
     # Relations
     group_membership = models.ManyToManyField(Group, blank=True) # Profile can be a part of many groups
-    organization = models.CharField(max_length=50, null=True, blank=True)
+    #organization = models.CharField(max_length=50, null=True, blank=True)
     # Data Fields
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     pass
     class Meta: #Names in admin Interface
         verbose_name = 'User'
@@ -128,7 +129,7 @@ class Workout(models.Model):
     description = models.CharField(max_length=200, null=True) # making null=true to bypass error in makemigrations
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     member_count = models.FloatField(default=1, null=True)
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False) # changed to true (Isaac)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True) # changed to true (Isaac)
     
     TYPE_CHOICES = (
         ('single_distance', 'Single Distance'),

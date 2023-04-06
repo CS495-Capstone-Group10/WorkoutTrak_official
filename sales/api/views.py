@@ -1,10 +1,12 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 
 from rest_framework.decorators import api_view # For function based view decorater
 from rest_framework.response import Response
 from .serializers import CustomUserSerializer, GroupSerializer, WorkoutSerializer
 from app.models import CustomUser, Group, Workout
+from rest_framework.views import APIView
+from rest_framework import status
 # Create your views here.
 
 @api_view(['GET'])
@@ -18,10 +20,69 @@ def apiOverview(request):
     }
     return Response(api_urls)
 
+class UserInfo(APIView):
+    """Retrieve, update, or delete a customUser
+        id(Static), username, and group_membership for user
+    """
+    
+    def get_object(self, username): # Gets object
+        try:
+            return CustomUser.objects.get(username=username)
+        except CustomUser.DoesNotExist:
+            raise Http404
+        
+    def get(self, request, username, format=None): #Retrieve 
+        user = self.get_object(username)
+        serializer = CustomUserSerializer(user, many=False)
+        return Response(serializer.data) 
+
+    def post(self, request, username, format=None): # Update
+        user = self.get_object(username)
+        serializer = CustomUserSerializer(user, data=request.data, partial=True) 
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, username, format=None): # Delete
+        user = self.get_object(username)
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+class GroupInfo(APIView):
+    """Retrieve, update, or delete a customUser
+        id(Static), username, and group_membership for user
+    """
+    
+    def get_object(self, name): # Gets object
+        try:
+            return Group.objects.get(name=name)
+        except Group.DoesNotExist:
+            raise Http404
+        
+    def get(self, request, name, format=None): #Retrieve 
+        user = self.get_object(name)
+        serializer = GroupSerializer(user, many=False)
+        return Response(serializer.data) 
+
+    def post(self, request, name, format=None): # Update
+        user = self.get_object(name)
+        serializer = GroupSerializer(user, data=request.data, partial=True) 
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, name, format=None): # Delete
+        user = self.get_object(name)
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 @api_view(['GET'])
 def userList(request):
     users = CustomUser.objects.all()
     serializer = CustomUserSerializer(users, many=True)
+    #print(serializer.data, "\n\n", type(serializer.data))
     return Response(serializer.data)
 
 @api_view(['GET'])
@@ -83,4 +144,12 @@ def deleteGroup(request,pk):
     group.delete()
     return Response("Item successfully deleted")
 
+@api_view(['POST'])
+def joinGroup(request,pk): # pk = CustomUser.id
+    user_group_membership = CustomUser.objects.get(id=pk) # Update group in Customuser
+    serializer = CustomUserSerializer(instance=user_group_membership, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        
+    return Response("Group successfully joined")
 # Workouts CRUD

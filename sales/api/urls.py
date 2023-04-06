@@ -3,6 +3,9 @@ from . import views
 
 urlpatterns = [
     path('', views.apiOverview, name="api-overview"),
+    path('users/<str:username>/', views.UserInfo.as_view()),
+    path('groups/<str:name>/', views.GroupInfo.as_view()),
+    
     path('user-list/', views.userList, name="user-list"),
     path('group-list/', views.groupList, name="group-list"),
     #path('workout-list/', views.workoutList, name="workout-list"),
@@ -15,6 +18,8 @@ urlpatterns = [
     path('create-group/', views.createGroup, name="create-group"),
     path('update-group/<str:pk>/', views.updateGroup, name="update-group"),
     path('delete-group/<str:pk>/', views.deleteGroup, name="delete-group"),
+    
+    path('join-group/<str:pk>/', views.joinGroup, name="join-group"),
     
     
 ]
