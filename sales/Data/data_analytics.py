@@ -27,8 +27,11 @@ df_all_2023_spring = pd.concat(dfs_list_2023_spring, ignore_index=True)
 
 # Name to be found and made a file of
 name = 'Markel'
-df_filtered = df_all_2023_spring[df_all_2023_spring['name'] == name]
+df_filtered_2022_fall = df_all_2022_fall[df_all_2022_fall['name'] == name]
+df_filtered_2023_spring = df_all_2022_fall[df_all_2022_fall['name'] == name]
 
+output_filename = f'./{name}_output.xlsx'
 # generating output file
-with pd.ExcelWriter('./output.xlsx') as writer:
-    df_filtered.to_excel(writer, index=False, sheet_name='Filtered Data')
+with pd.ExcelWriter(output_filename) as writer:
+    df_filtered_2022_fall.to_excel(writer, index=False, sheet_name='Filtered Data')
+    df_filtered_2023_spring.to_excel(writer, index=False, sheet_name='Filtered Data')
