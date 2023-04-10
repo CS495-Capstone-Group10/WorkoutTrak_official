@@ -26,15 +26,15 @@ df_all_2022_fall = pd.concat(dfs_list_2022_fall)
 df_all_2023_spring = pd.concat(dfs_list_2023_spring)
 
 # Name to be found and made a file of
-name = 'Markel'
+name = 'Kellogg'
 df_filtered_2022_fall = df_all_2022_fall[df_all_2022_fall['name'] == name]
 df_filtered_2023_spring = df_all_2022_fall[df_all_2022_fall['name'] == name]
 
 output_filename = f'./{name}_output.xlsx'
 # generating output file
 with pd.ExcelWriter(output_filename) as writer:
-    df_filtered_2022_fall.to_excel(writer, index=False, sheet_name='Filtered Data')
-    df_filtered_2023_spring.to_excel(writer, index=False, sheet_name='Filtered Data')
+    df_filtered_2022_fall.to_excel(writer, index=False, sheet_name='Fall Data')
+    df_filtered_2023_spring.to_excel(writer, index=False, sheet_name='Spring Data')
 
 # File to do analytics
 df_analytic_file = pd.read_excel(output_filename)
@@ -44,8 +44,13 @@ print(df_analytic_file.info())
 print(df_analytic_file.head())
 print(df_analytic_file.describe())
 
+df = df_analytic_file.describe()
+
+with pd.ExcelWriter('./describe.xlsx') as writer:
+    df.to_excel(writer, index=False, sheet_name='Describe Data')
+
 # collecting desired data
-desired_data = ['PR', '4x10', '6x6.40', '5x8', '4x10', '3x13.20', '6k']
+desired_data = ['4x10', '6x6.40', '5x8', '3x13.20', '6k']
 
 df_desired_data = {}
 for data in desired_data:
@@ -63,3 +68,5 @@ with pd.ExcelWriter(filtered_filename) as writer:
 max_vals = {}
 for key, value in df_desired_data.items():
     max_vals[key] = value.max()
+
+print(max_vals)
