@@ -42,12 +42,12 @@ df_analytic_file = pd.read_excel(output_filename)
 # Info about the file
 print(df_analytic_file.info())
 print(df_analytic_file.head())
-print(df_analytic_file.describe())
 
-df = df_analytic_file.describe()
+# save describe results
+describe_filename = f'./{name}_describe.xlsx'
+df_describe = df_analytic_file.describe()
 
-with pd.ExcelWriter('./describe.xlsx') as writer:
-    df.to_excel(writer, index=False, sheet_name='Describe Data')
+df_describe.to_excel(describe_filename)
 
 # collecting desired data
 desired_data = ['4x10', '6x6.40', '5x8', '3x13.20', '6k']
