@@ -33,8 +33,8 @@ df_filtered_2023_spring = df_all_2022_fall[df_all_2022_fall['name'] == name]
 output_filename = f'./{name}_output.xlsx'
 # generating output file
 with pd.ExcelWriter(output_filename) as writer:
-    df_filtered_2022_fall.to_excel(writer, index=False, sheet_name='Fall Data')
-    df_filtered_2023_spring.to_excel(writer, index=False, sheet_name='Spring Data')
+    df_filtered_2022_fall.to_excel(writer, sheet_name='Fall Data', index=False)
+    df_filtered_2023_spring.to_excel(writer, sheet_name='Spring Data', index=False)
 
 # File to do analytics
 df_analytic_file = pd.read_excel(output_filename)
