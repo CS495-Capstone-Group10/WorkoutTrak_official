@@ -15,8 +15,7 @@ Testing Run:
 "python manage.py createsuperuser" (setup username: admin, and password: admin)
 "python manage.py runserver"  
 
-To run data stuff:
-Run the folliwing command from the Data folder:
+To run data stuff run the folliwing command from the Data folder:
 "python data_analytics.py"
 
 login:
