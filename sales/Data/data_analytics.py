@@ -1,8 +1,5 @@
-import numpy as np 
 import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches  
-import seaborn as sns
+
 # Reading in Files
 file_2022_fall = pd.ExcelFile('2022_fall_workouts.xlsx')
 file_2023_spring = pd.ExcelFile('2023_spring_workouts.xlsx')
@@ -56,13 +53,13 @@ for data in desired_data:
 
 desired_data_list = pd.concat(list(df_desired_data.values()))
 
+# Writing desired data into a file
 filtered_filename = f'./{name}_filtered.xlsx'
 
 with pd.ExcelWriter(filtered_filename) as writer:
     desired_data_list.to_excel(writer, index=False, sheet_name='Filtered Data')
 
+# Calculate max vals
 max_vals = {}
 for key, value in df_desired_data.items():
     max_vals[key] = value.max()
-    
-print(max_vals)
