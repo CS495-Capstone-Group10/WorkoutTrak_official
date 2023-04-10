@@ -61,3 +61,8 @@ filtered_filename = f'./{name}_filtered.xlsx'
 with pd.ExcelWriter(filtered_filename) as writer:
     desired_data_list.to_excel(writer, index=False, sheet_name='Filtered Data')
 
+max_vals = {}
+for key, value in df_desired_data.items():
+    max_vals[key] = value.max()
+    
+print(max_vals)
