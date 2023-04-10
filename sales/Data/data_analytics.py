@@ -47,6 +47,7 @@ print(df_analytic_file.info())
 print(df_analytic_file.head())
 print(df_analytic_file.describe())
 
+# collecting desired data
 desired_data = ['PR', '4x10', '6x6.40', '5x8', '4x10', '3x13.20', '6k']
 
 df_desired_data = {}
@@ -55,14 +56,8 @@ for data in desired_data:
 
 desired_data_list = pd.concat(list(df_desired_data.values()))
 
-print(df_desired_data)
 filtered_filename = f'./{name}_filtered.xlsx'
-# generating output file
+
 with pd.ExcelWriter(filtered_filename) as writer:
     desired_data_list.to_excel(writer, index=False, sheet_name='Filtered Data')
 
-# max_val = {}
-# for data in desired_data:
-#     max_val[data] = max(df_desired_data[data])
-    
-# print(max_val)
