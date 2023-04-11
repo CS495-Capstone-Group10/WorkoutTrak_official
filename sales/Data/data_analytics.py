@@ -26,7 +26,7 @@ df_all_2022_fall = pd.concat(dfs_list_2022_fall)
 df_all_2023_spring = pd.concat(dfs_list_2023_spring)
 
 # Name to be found and made a file of
-name = 'Kellogg'
+name = 'Vanderhorn'
 df_filtered_2022_fall = df_all_2022_fall[df_all_2022_fall['name'] == name]
 df_filtered_2023_spring = df_all_2022_fall[df_all_2022_fall['name'] == name]
 
