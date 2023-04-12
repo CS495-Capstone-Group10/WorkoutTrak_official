@@ -97,6 +97,9 @@ class Group(models.Model):
     
     def __str__(self): # Create string return type for admin panel to see Group by name
         return self.name
+    class Meta: # Names in admin Interface
+        verbose_name = 'Group'
+        verbose_name_plural = 'Groups'
 
 class CustomUser(AbstractUser): 
     """
@@ -111,9 +114,9 @@ class CustomUser(AbstractUser):
     # Data Fields
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     pass
-    class Meta: #Names in admin Interface
+    class Meta: # Names in admin Interface
         verbose_name = 'User'
-        verbose_name_plural = 'Users'
+        verbose_name_plural = 'User Accounts'
 
 
 

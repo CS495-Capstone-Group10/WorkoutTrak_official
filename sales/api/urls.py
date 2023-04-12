@@ -3,11 +3,14 @@ from . import views
 
 urlpatterns = [
     path('', views.apiOverview, name="api-overview"),
-    path('users/<str:username>/', views.UserInfo.as_view()),
-    path('groups/<str:name>/', views.GroupInfo.as_view()),
+    #path('users/<str:username>/', views.UserInfo.as_view()),
+    path('user-list/', views.UserList.as_view(), name="user-list"),
+    path('group-list/', views.GroupList.as_view(), name="group-list"),
+   # path('users/', views.UserInfo.as_view()),
+    path('group/<str:pk>/', views.GroupEdit.as_view(), name="group-edit"),
     
-    path('user-list/', views.userList, name="user-list"),
-    path('group-list/', views.groupList, name="group-list"),
+    #path('user-list/', views.userList, name="user-list"),
+    
     #path('workout-list/', views.workoutList, name="workout-list"),
     
     path('user-detail/<str:pk>/', views.userDetail, name="user-detail"),
