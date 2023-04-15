@@ -12,7 +12,7 @@ from rest_framework import serializers
 def serialize_order(workout):
     serialized = model_to_dict(workout)
     serialized["date"] = str(workout.date)
-    serialized["type"] = str(workout.amount)
+    serialized["type"] = str(workout.type)
     serialized["id"] = int(workout.id)
     serialized["distance_meters"] = int(workout.distance_meters)
     serialized["time_minutes"] = int(workout.time_minutes)
@@ -25,6 +25,10 @@ def serialize_order(workout):
     serialized["int_time_sec"] = int(workout.int_time_sec)
     serialized["rest_time_minutes"] = int(workout.rest_time_minutes)
     serialized["rest_time_sec"] = int(workout.rest_time_sec)
+    serialized["split_length"] = str(workout.split_length)
+    serialized["workoutType"] = str(workout.workoutType)
+    serialized["intervalVariableType"] = str(workout.intervalVariableType)
+    serialized["workoutTime"] = str(workout.workoutTime)
     return serialized
 
 @api_view(['GET', ])
