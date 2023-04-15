@@ -8,7 +8,8 @@ A full stack software for keeping track of workouts and provide data analytics t
 
 
 Testing Run:
-"python install -r requirements.txt"  
+"python install -r requirements.txt" (windows)
+"pip install -r requirements.txt" (macOS)
 "python manage.py makemigrations"
 "python manage.py migrate app"
 "python manage.py migrate"  
