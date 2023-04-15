@@ -172,7 +172,7 @@ const post_workout_api = async (data, success) => {
     return [];
   }
   const response = await fetch(
-        `/api/orders/`,
+        `/api/workouts/`,
         {
             method: 'POST',
             headers: {
@@ -207,7 +207,7 @@ const put_workout_api = async (saleId, data, success) => {
     return [];
   }
   const response = await fetch(
-        `/api/workout/${saleId}/`,
+        `/api/workouts/${saleId}/`,
         {
             method: 'PUT',
             headers: {

@@ -90,50 +90,81 @@ function App() {
     setTimeout(()=>{itemInput && itemInput.focus()}, 1);
   };
 
-  const saveOrder = (e)=>{
+  const saveOrder = (e) => {
     e.preventDefault();
     setError("");
-    console.log("saving new", date, workoutTime, workoutType);
-    if (workoutType=== "single_distance"){
-      if(split_length * distance_meters === 0){
+  
+    if (workoutType === "single_distance") {
+      if (split_length * distance_meters === 0) {
         setError("Please enter split length and distance");
         return;
-      }
-      else{
-        post_workout_api({split_length, distance_meters, date, workoutTime}, ()=>{getData();});
+      } else {
+        post_workout_api(
+          { split_length, distance_meters, date, workoutTime },
+          () => {
+            getData();
+          }
+        );
         setShowModal(false);
       }
-    }
-    else if ((workoutType=== "single_time")){
-      if((time_minutes+time_seconds)*(split_length_minutes+split_length_seconds)===0) {
+    } else if (workoutType === "single_time") {
+      if (
+        (time_minutes + time_seconds) * (split_length_minutes + split_length_seconds) ===
+        0
+      ) {
         setError("Please enter split length and time");
         return;
-      }
-      else{
-        post_workout_api({time_minutes, time_seconds, split_length_minutes, split_length_seconds, date, workoutTime}, ()=>{getData();});
+      } else {
+        post_workout_api(
+          {
+            time_minutes,
+            time_seconds,
+            split_length_minutes,
+            split_length_seconds,
+            date,
+            workoutTime,
+          },
+          () => {
+            getData();
+          }
+        );
         setShowModal(false);
       }
-    }
-    else if((workoutType=== "intervals")){
-      if((distanceInt + Int_time_minutes + Int_time_sec + Rest_time_minutes + rest_time_sec) === 0) {
+    } else if (workoutType === "intervals") {
+      if (distanceInt + Int_time_minutes + Int_time_sec +Rest_time_minutes + rest_time_sec === 0) {
         setError("Please fill out all fields");
         return;
-      }
-      else{
-        post_workout_api({distanceInt, Int_time_minutes, Int_time_sec, Rest_time_minutes, rest_time_sec, num_intervals, date, workoutTime}, ()=>{getData();});
+      } else {
+        post_workout_api(
+          {
+            distanceInt,
+            Int_time_minutes,
+            Int_time_sec,
+            Rest_time_minutes,
+            rest_time_sec,
+            num_intervals,
+            date,
+            workoutTime,
+          },
+          () => {
+            getData();
+          }
+        );
         setShowModal(false);
       }
-    }
-    else {
+    } else {
       if (Id === null)
-        post_workout_api({date, workoutTime, workoutType}, ()=>{getData();});
+        post_workout_api({ date, workoutTime, workoutType }, () => {
+          getData();
+        });
       else
-        put_workout_api(Id, {date, workoutTime, workoutType}, ()=>{getData();});
+        put_workout_api(Id, { date, workoutTime, workoutType }, () => {
+          getData();
+        });
       setShowModal(false);
     }
   };
   
-
   const deleteOrder = (orderId)=>{
     Swal.fire({
       title: 'Are you sure?',
@@ -191,9 +222,9 @@ function App() {
               <td>{`${workout.rest_time_minutes}:${workout.rest_time_sec}`}</td>
               <td>
                 <a className="btn btn-light" style={{marginLeft: "auto"}}
-                  onClick={(e)=>{editOrder(row)}}>Edit</a>{" "}
+                  onClick={()=>{editOrder(workout)}}>Edit</a>{" "}
                 <a className="btn btn-light" style={{marginLeft: "auto"}}
-                  onClick={(e)=>{deleteOrder(row.id)}}>Delete</a>
+                  onClick={()=>{deleteOrder(workout.id)}}>Delete</a>
               </td>
             </tr>
             
