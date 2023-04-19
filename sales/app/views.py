@@ -145,4 +145,7 @@ def createAccountX_view(request):
     context = {}
     return render(request, "createAccountX.html", context=context)
 
+def upDocX_view(request):
+    context = {}
+    return render(request, "upDocX.html", context=context)
 
