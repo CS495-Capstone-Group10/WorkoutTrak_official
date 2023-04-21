@@ -140,7 +140,7 @@ class Workout(models.Model):
         ('intervals', 'Intervals'),
     )
     type = models.CharField(max_length=20, choices=TYPE_CHOICES)
-    #date = models.DateField()
+    date = models.DateField(null=True)
     # id = models.IntegerField(blank=True, null=False, primary_key=True)
     distance_meters = models.IntegerField(blank=True, null=True)
     time_minutes = models.IntegerField(blank=True, null=True)
@@ -153,9 +153,28 @@ class Workout(models.Model):
     int_time_sec = models.IntegerField(blank=True, null=True)
     rest_time_minutes = models.IntegerField(blank=True, null=True)
     rest_time_sec = models.IntegerField(blank=True, null=True)
+    split_length= models.IntegerField(blank=True, null=True)
+    TYPE_CHOICES1 = (
+        ('AT', 'AT'),
+        ('SS', 'SS'),
+        ('Race_pace', 'Race pace'),
+    )
+    workoutType = models.CharField(max_length=20, choices=TYPE_CHOICES1, blank=True, null=True)
+    TYPE_CHOICES2 = (
+        ('Int_distance', 'Interval Distance'),
+        ('Int_time', 'Interval Time'),
+        ('Int_var', 'Intervals variable'),
+    )
+    intervalVariableType = models.CharField(max_length=20, choices=TYPE_CHOICES2, blank=True, null=True)
+    TYPE_CHOICES3 = (
+        ('AM', 'AM'),
+        ('PM', 'PM'),
+    )
+    workoutTime = models.CharField(max_length=20, choices=TYPE_CHOICES3, blank=True, null=True)
+
     
     def __str__(self): # Create string return type for admin panel to see workout by name
-        return self.name
+        return str(self.id)
 
 # class Profile(models.Model):
 #     # Relations
