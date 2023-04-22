@@ -250,25 +250,25 @@ function App() {
           <thead className="table-light">
           <tr>
             <th>Athlete</th>
-            <th>5km PR</th>
-            <th>Last Workout</th>
-            <th>Average Split</th>
-            <th>Average Rate</th>
+            <th>6km PR</th>
+            <th>Last Team Workout</th>
+            <th>Goal Splits</th>
+            <th>Injured?</th>
           </tr>
           </thead>
           <tbody>
           { list.map((row)=>
             <tr key={row.id}>
               {/* workout */}
-              <td>{row.id}</td> 
+              <td>{row.name}</td> 
               {/* date */}
-              <td>{row.date}</td>
+              <td>{row.pr}</td>
               {/* athlete */}
-              <td>{row.item}</td>
+              <td>{row.lastWorkout}</td>
               {/* average split */}
-              <td>{row.price}</td>
+              <td>{row.goal}</td>
               {/* average rate */}
-              <td>{row.quantity}</td>
+              <td>{row.injured}</td>
               {/* <td>{row.amount}</td> */}
               <td>
                 <a className="btn btn-light" style={{marginLeft: "auto"}}

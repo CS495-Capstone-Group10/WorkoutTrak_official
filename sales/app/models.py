@@ -124,7 +124,19 @@ class CustomUser(AbstractUser):
         verbose_name = 'User'
         verbose_name_plural = 'User Accounts'
 
-
+class Athlete(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True) # changed to true (Isaac)
+    name = models.CharField(max_length=200, null=True, blank=True, default='0') # changed to true (Isaac)
+    pr_length_minutes = models.IntegerField(blank=True, null=True, default=1)
+    pr_length_sec = models.IntegerField(blank=True, null=True, default=1)
+    lastWorkout = models.CharField(max_length=200, null=True, blank=True, default='0') # changed to true (Isaac)
+    goal_length_minutes = models.IntegerField(blank=True, null=True, default=1)
+    goal_length_sec = models.IntegerField(blank=True, null=True, default=1)
+    TYPE_CHOICES3 = (
+        ('Yes', 'Yes'),
+        ('No', 'No'),
+    )
+    injured = models.CharField(max_length=20, choices=TYPE_CHOICES3, blank=True, null=True, default='AM')
 
 
 
@@ -134,10 +146,10 @@ class Workout(models.Model):
     group = models.ForeignKey(Group, blank=True, null=True, on_delete=models.DO_NOTHING) # One Group can have many workouts
     
     # Data Fields
-    name = models.CharField(max_length=200, null=True) # changed to true (Isaac)
-    description = models.CharField(max_length=200, null=True) # making null=true to bypass error in makemigrations
+    name = models.CharField(max_length=200, null=True, blank=True, default='0') # changed to true (Isaac)
+    description = models.CharField(max_length=200, null=True, blank=True) # making null=true to bypass error in makemigrations
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    member_count = models.FloatField(default=1, null=True)
+    member_count = models.FloatField(default=1, null=True, blank=True)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True) # changed to true (Isaac)
     
     TYPE_CHOICES = (
@@ -148,27 +160,27 @@ class Workout(models.Model):
         ('Int_time', 'Interval Time'),
         ('Int_var', 'Intervals variable'),
     )
-    rowingType = models.CharField(max_length=20, choices=TYPE_CHOICES,blank=True, null=True)
+    rowingType = models.CharField(max_length=20, choices=TYPE_CHOICES,blank=True, null=True, default='single_distance')
     date = models.DateField(null=True, blank=True)
     # id = models.IntegerField(blank=True, null=False, primary_key=True)
-    distance_meters = models.IntegerField(blank=True, null=True)
-    time_minutes = models.IntegerField(blank=True, null=True)
-    time_seconds = models.IntegerField(blank=True, null=True)
-    split_length_minutes = models.IntegerField(blank=True, null=True)
-    split_length_seconds = models.IntegerField(blank=True, null=True)
-    num_intervals = models.IntegerField(blank=True, null=True)
-    distanceInt = models.IntegerField(blank=True, null=True)
-    int_time_minutes = models.IntegerField(blank=True, null=True)
-    int_time_sec = models.IntegerField(blank=True, null=True)
-    rest_time_minutes = models.IntegerField(blank=True, null=True)
-    rest_time_sec = models.IntegerField(blank=True, null=True)
-    split_length= models.IntegerField(blank=True, null=True)
+    distance_meters = models.IntegerField(blank=True, null=True, default=1)
+    time_minutes = models.IntegerField(blank=True, null=True, default=1)
+    time_seconds = models.IntegerField(blank=True, null=True, default=1)
+    split_length_minutes = models.IntegerField(blank=True, null=True, default=1)
+    split_length_seconds = models.IntegerField(blank=True, null=True, default=1)
+    num_intervals = models.IntegerField(blank=True, null=True, default=1)
+    distanceInt = models.IntegerField(blank=True, null=True, default=1)
+    int_time_minutes = models.IntegerField(blank=True, null=True, default=1)
+    int_time_sec = models.IntegerField(blank=True, null=True, default=1)
+    rest_time_minutes = models.IntegerField(blank=True, null=True, default=1)
+    rest_time_sec = models.IntegerField(blank=True, null=True, default=1)
+    split_length= models.IntegerField(blank=True, null=True, default=1)
     TYPE_CHOICES1 = (
         ('AT', 'AT'),
         ('SS', 'SS'),
         ('Race_pace', 'Race pace'),
     )
-    workoutType = models.CharField(max_length=20, choices=TYPE_CHOICES1, blank=True, null=True)
+    workoutType = models.CharField(max_length=20, choices=TYPE_CHOICES1, blank=True, null=True, default='SS')
     # TYPE_CHOICES2 = (
     #     ('Int_distance', 'Interval Distance'),
     #     ('Int_time', 'Interval Time'),
@@ -179,7 +191,7 @@ class Workout(models.Model):
         ('AM', 'AM'),
         ('PM', 'PM'),
     )
-    workoutTime = models.CharField(max_length=20, choices=TYPE_CHOICES3, blank=True, null=True)
+    workoutTime = models.CharField(max_length=20, choices=TYPE_CHOICES3, blank=True, null=True, default='AM')
 
     
     def __str__(self): # Create string return type for admin panel to see workout by name
