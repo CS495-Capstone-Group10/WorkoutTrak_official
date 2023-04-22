@@ -25,6 +25,13 @@ class GroupEdit(generics.RetrieveUpdateDestroyAPIView): # List and Create Groups
     lookup_field='pk'
     pass
 
+# class WorkoutListCreate(generics.ListCreateAPIView):
+#     queryset = Workout.objects.all()
+#     serializer_class = WorkoutSerializer
+
+class WorkoutCreate(generics.CreateAPIView):
+    serializer_class = WorkoutSerializer
+    
 @api_view(['GET'])
 def apiOverview(request):
     api_urls = {

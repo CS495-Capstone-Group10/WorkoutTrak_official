@@ -12,7 +12,7 @@ from rest_framework import serializers
 def serialize_order(workout):
     serialized = model_to_dict(workout)
     serialized["date"] = str(workout.date)
-    serialized["type"] = str(workout.type)
+    serialized["rowingType"] = str(workout.rowingType)
     serialized["id"] = int(workout.id)
     serialized["distance_meters"] = int(workout.distance_meters)
     serialized["time_minutes"] = int(workout.time_minutes)
@@ -27,14 +27,14 @@ def serialize_order(workout):
     serialized["rest_time_sec"] = int(workout.rest_time_sec)
     serialized["split_length"] = str(workout.split_length)
     serialized["workoutType"] = str(workout.workoutType)
-    serialized["intervalVariableType"] = str(workout.intervalVariableType)
+    # serialized["intervalVariableType"] = str(workout.intervalVariableType)
     serialized["workoutTime"] = str(workout.workoutTime)
     return serialized
 
 @api_view(['GET', ])
 def workouts(request):
-    if request.user.is_anonymous:
-        return HttpResponse(json.dumps({"detail": "Not authorized"}), status=status.HTTP_401_UNAUTHORIZED)
+    # if request.user.is_anonymous:
+    #     return HttpResponse(json.dumps({"detail": "Not authorized"}), status=status.HTTP_401_UNAUTHORIZED)
 
     if request.method == "GET":
         Workout_data = Workout.objects.all()

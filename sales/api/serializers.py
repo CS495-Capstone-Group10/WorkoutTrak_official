@@ -18,6 +18,7 @@ class GroupSerializer(serializers.ModelSerializer):
 class WorkoutSerializer(serializers.ModelSerializer): # TODO limit fields
     class Meta:
         model = Workout
+        #fields = ['distance_meters']
         fields = '__all__'
         
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):

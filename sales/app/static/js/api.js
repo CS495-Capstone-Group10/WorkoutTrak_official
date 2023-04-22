@@ -172,7 +172,7 @@ const post_workout_api = async (data, success) => {
     return [];
   }
   const response = await fetch(
-        `/api/workouts/`,
+        `/api/workout/create/`,
         {
             method: 'POST',
             headers: {

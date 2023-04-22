@@ -8,7 +8,7 @@ urlpatterns = [
     path('group-list/', views.GroupList.as_view(), name="group-list"),
    # path('users/', views.UserInfo.as_view()),
     path('group/<str:pk>/', views.GroupEdit.as_view(), name="group-edit"),
-    
+    path('workout/create/', views.WorkoutCreate.as_view(), name="workout-listcreate"),
     #path('user-list/', views.userList, name="user-list"),
     
     #path('workout-list/', views.workoutList, name="workout-list"),
