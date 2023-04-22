@@ -69,6 +69,7 @@ class UserManager(BaseUserManager):
         user = self.model(username=username, **extra_fields)
         user.set_password(password)
         user.save()
+        
         return user
 
     def create_superuser(self, username, password, **extra_fields):
@@ -82,37 +83,46 @@ class UserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser = True')
 
         return self.create_user(username, password, **extra_fields)
-    
+    def get_by_id(self, id):
+        return self.get(id=id)
+
+    def get_or_create(self, **kwargs):
+        kwargs.setdefault('id', uuid.uuid4())
+        return super().get_or_create(**kwargs)
 class Group(models.Model):
     # Relations
     
 
     # Data Fields
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=200, null=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
+    name = models.CharField(max_length=200, null=False, unique=True)
     description = models.CharField(max_length=200, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     member_count = models.FloatField(default=1, null=True)
     
+    
     def __str__(self): # Create string return type for admin panel to see Group by name
         return self.name
+    class Meta: # Names in admin Interface
+        verbose_name = 'Group'
+        verbose_name_plural = 'Groups'
 
 class CustomUser(AbstractUser): 
     """
     Define custom user model by inheriting from AbstractUser provided from Django auth module
     Contains common fields and methods found here
     """
+    #class CustomUserGroups(): Returns all to users that are in a group to avoid code in the views......
     objects = UserManager() # define your own manager class for a model
-    
     # Relations
     group_membership = models.ManyToManyField(Group, blank=True) # Profile can be a part of many groups
-    organization = models.CharField(max_length=50, null=True, blank=True)
+    #organization = models.CharField(max_length=50, null=True, blank=True)
     # Data Fields
-    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     pass
-    class Meta: #Names in admin Interface
+    class Meta: # Names in admin Interface
         verbose_name = 'User'
-        verbose_name_plural = 'Users'
+        verbose_name_plural = 'User Accounts'
 
 
 
@@ -128,15 +138,18 @@ class Workout(models.Model):
     description = models.CharField(max_length=200, null=True) # making null=true to bypass error in makemigrations
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     member_count = models.FloatField(default=1, null=True)
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False) # changed to true (Isaac)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True) # changed to true (Isaac)
     
     TYPE_CHOICES = (
         ('single_distance', 'Single Distance'),
         ('single_time', 'Single Time'),
-        ('intervals', 'Intervals'),
+        # ('intervals', 'Intervals'),
+        ('Int_distance', 'Interval Distance'),
+        ('Int_time', 'Interval Time'),
+        ('Int_var', 'Intervals variable'),
     )
-    type = models.CharField(max_length=20, choices=TYPE_CHOICES)
-    date = models.DateField(null=True)
+    rowingType = models.CharField(max_length=20, choices=TYPE_CHOICES,blank=True, null=True)
+    date = models.DateField(null=True, blank=True)
     # id = models.IntegerField(blank=True, null=False, primary_key=True)
     distance_meters = models.IntegerField(blank=True, null=True)
     time_minutes = models.IntegerField(blank=True, null=True)
@@ -156,12 +169,12 @@ class Workout(models.Model):
         ('Race_pace', 'Race pace'),
     )
     workoutType = models.CharField(max_length=20, choices=TYPE_CHOICES1, blank=True, null=True)
-    TYPE_CHOICES2 = (
-        ('Int_distance', 'Interval Distance'),
-        ('Int_time', 'Interval Time'),
-        ('Int_var', 'Intervals variable'),
-    )
-    intervalVariableType = models.CharField(max_length=20, choices=TYPE_CHOICES2, blank=True, null=True)
+    # TYPE_CHOICES2 = (
+    #     ('Int_distance', 'Interval Distance'),
+    #     ('Int_time', 'Interval Time'),
+    #     ('Int_var', 'Intervals variable'),
+    # )
+    # intervalVariableType = models.CharField(max_length=20, choices=TYPE_CHOICES2, blank=True, null=True)
     TYPE_CHOICES3 = (
         ('AM', 'AM'),
         ('PM', 'PM'),

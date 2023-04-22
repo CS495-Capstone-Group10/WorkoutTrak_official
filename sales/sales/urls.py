@@ -69,4 +69,5 @@ urlpatterns = [
     #path('style1', views.style1_view), #experimental
 #=======
     path('', include('app.urls')), # This means any url path not specified here will be checked in urls.py from app
+    path('api/', include('api.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

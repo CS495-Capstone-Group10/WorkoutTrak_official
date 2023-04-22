@@ -22,9 +22,10 @@ function App() {
   const [Rest_time_minutes, set_rest_time_minutes] = React.useState(0);
   const [rest_time_sec, set_rest_time_sec] = React.useState(0);
   const [date, set_date] = React.useState(0);
-  const [workoutType, setWorkoutType] = React.useState('single_distance');
-  const [intervalVariableType, setIntervalVariableType] = React.useState('distance');
-  const [workoutTime, setWorkoutTime] = React.useState('single_distance');
+  const [rowingType, setRowingType] = React.useState('single_distance');
+  const [workoutType, setWorkoutType] = React.useState('AT');
+  // const [intervalVariableType, setIntervalVariableType] = React.useState('Interval distance');
+  const [workoutTime, setWorkoutTime] = React.useState('AM');
   
   const handleWorkoutTypeChange = (event) => {
     setWorkoutType(event.target.value);
@@ -32,8 +33,8 @@ function App() {
   const handleWorkoutTimeChange = (event) => {
     setWorkoutTime(event.target.value);
   };
-  const HandlesetIntervalVariableType = (event) => {
-    setIntervalVariableType(event.target.value);
+  const HandlesetRowingType = (event) => {
+    setRowingType(event.target.value);
   };
 
   const success = (data) => {
@@ -100,7 +101,8 @@ function App() {
         return;
       } else {
         post_workout_api(
-          { split_length, distance_meters, date, workoutTime },
+          // { split_length, distance_meters, date, workoutTime },
+          { split_length, distance_meters, date, workoutTime, workoutType },
           () => {
             getData();
           }
@@ -123,6 +125,7 @@ function App() {
             split_length_seconds,
             date,
             workoutTime,
+            workoutType,
           },
           () => {
             getData();
@@ -145,6 +148,7 @@ function App() {
             num_intervals,
             date,
             workoutTime,
+            workoutType,
           },
           () => {
             getData();
@@ -256,8 +260,8 @@ function App() {
         <div class="form-group">
           <label for="time">Time:</label>
           <select id="time" name="time" value={workoutTime} onChange={handleWorkoutTimeChange}>
-            <option value="am">AM</option>
-            <option value="pm">PM</option>
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
           </select>
         </div>
               <label htmlFor="interval_type">Select Workout Type:</label>
@@ -300,8 +304,8 @@ function App() {
         )}
         {workoutType === 'intervals' && (
   <div>
-    <label htmlFor="interval_variable_type">Interval Type:</label>
-    <select id="interval_variable_type" name="interval_variable_type" value={intervalVariableType} onChange={HandlesetIntervalVariableType}>
+    <label htmlFor="rowingType">Interval Type:</label>
+    <select id="rowingType" name="rowingType" value={rowingType} onChange={HandlesetRowingType}>
       <option value="distance">Distance (meters)</option>
       <option value="time">Time (minutes:seconds)</option>
     </select><br/>
@@ -309,7 +313,7 @@ function App() {
     <input type="number" id="num_intervals" name="num_intervals" 
         value={num_intervals} onChange={(e)=>{set_num_intervals(e.target.value)}}
         placeholder="0"/><br />
-    {intervalVariableType === 'distance' && (
+    {rowingType === 'distance' && (
       <div>
         <label htmlFor="distanceInt">distance (meters):</label>
         <input type="number" id="distanceInt" name="distanceInt" 
@@ -317,7 +321,7 @@ function App() {
             placeholder="0"/><br />
       </div>
     )}
-    {intervalVariableType === 'time' && (
+    {rowingType === 'time' && (
       <div>
         <label htmlFor="rest_length">Workout time:</label>
         <div className="input-group mb-3">
