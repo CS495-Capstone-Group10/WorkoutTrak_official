@@ -7,7 +7,9 @@ from app.models import CustomUser, Group, Workout, Athlete
 from rest_framework.views import APIView
 from rest_framework import status, generics
 from rest_framework_simplejwt.tokens import AccessToken
-
+from django.shortcuts import HttpResponse
+import json
+from django.forms.models import model_to_dict
 # Create your views here.
 
 class UserList(generics.ListAPIView): # List Users
@@ -49,7 +51,41 @@ class AthleteEdit(generics.RetrieveUpdateAPIView):
     queryset = Athlete.objects.all()
     serializer_class = AthleteSerializer
     lookup_field='pk'
-    
+
+
+def serialize_athlete(athlete):
+    serialized = model_to_dict(athlete)
+    serialized["id"] = int(athlete.id)
+    serialized["name"] = str(athlete.name)
+    serialized["pr_length_minutes"] = str(athlete.pr_length_minutes)
+    serialized["pr_length_sec"] = int(athlete.pr_length_sec)
+    serialized["lastWorkout"] = str(athlete.lastWorkout)
+    serialized["goal_length_minutes"] = int(athlete.goal_length_minutes)
+    serialized["goal_length_sec"] = int(athlete.goal_length_sec)
+    serialized["injured"] = str(athlete.injured)
+    return serialized
+
+@api_view(['GET', ])
+def athletes(request):
+    # if request.user.is_anonymous:
+    #     return HttpResponse(json.dumps({"detail": "Not authorized"}), status=status.HTTP_401_UNAUTHORIZED)
+
+    if request.method == "GET":
+        Athlete_data = Athlete.objects.all()
+
+        Athlete_count = Athlete_data.count()
+
+        page_size = int(request.GET.get("page_size", "10"))
+        page_no = int(request.GET.get("page_no", "0"))
+        Athlete_data = list(Athlete_data[page_no * page_size:page_no * page_size + page_size])
+
+        Athlete_data = [serialize_athlete(order) for order in Athlete_data]
+        return HttpResponse(json.dumps({"count": Athlete_count, "data": Athlete_data}), status=status.HTTP_200_OK)
+
+    return HttpResponse(json.dumps({"detail": "Wrong method"}), status=status.HTTP_501_NOT_IMPLEMENTED)
+
+
+
 @api_view(['GET'])
 def apiOverview(request):
     api_urls = {
