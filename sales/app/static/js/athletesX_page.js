@@ -261,9 +261,9 @@ function App() {
           <thead className="table-light">
           <tr>
             <th>Athlete</th>
-            <th>6km PR</th>
-            <th>Last Team Workout</th>
-            <th>Goal Splits</th>
+            <th>6km PR (mm:ss)</th>
+            <th>Last Workout</th>
+            <th>Goal Split (mm:ss) </th>
             <th>Injured?</th>
           </tr>
           </thead>
@@ -273,11 +273,11 @@ function App() {
               {/* workout */}
               <td>{row.name}</td> 
               {/* date */}
-              <td>{row.pr}</td>
+              <td>{`${row.pr_length_minutes}:${row.pr_length_sec}`}</td>
               {/* athlete */}
               <td>{row.lastWorkout}</td>
               {/* average split */}
-              <td>{row.goal}</td>
+              <td>{`${row.goal_length_minutes}:${row.goal_length_sec}`}</td>
               {/* average rate */}
               <td>{row.injured}</td>
               {/* <td>{row.amount}</td> */}
