@@ -95,21 +95,21 @@ function App() {
     e.preventDefault();
     setError("");
   
-    if (workoutType === "single_distance") {
+    if (rowingType === "single_distance") {
       if (split_length * distance_meters === 0) {
         setError("Please enter split length and distance");
         return;
       } else {
         post_workout_api(
           // { split_length, distance_meters, date, workoutTime },
-          { split_length, distance_meters, date, workoutTime, workoutType },
+          { split_length, distance_meters, date, workoutTime, workoutType, rowingType},
           () => {
             getData();
           }
         );
         setShowModal(false);
       }
-    } else if (workoutType === "single_time") {
+    } else if (rowingType === "single_time") {
       if (
         (time_minutes + time_seconds) * (split_length_minutes + split_length_seconds) ===
         0
@@ -133,7 +133,7 @@ function App() {
         );
         setShowModal(false);
       }
-    } else if (workoutType === "intervals") {
+    } else if (rowingType === "intervals") {
       if (distanceInt + Int_time_minutes + Int_time_sec +Rest_time_minutes + rest_time_sec === 0) {
         setError("Please fill out all fields");
         return;
@@ -158,11 +158,11 @@ function App() {
       }
     } else {
       if (Id === null)
-        post_workout_api({ date, workoutTime, workoutType }, () => {
+        post_workout_api({ date, workoutTime, rowingType }, () => {
           getData();
         });
       else
-        put_workout_api(Id, { date, workoutTime, workoutType }, () => {
+        put_workout_api(Id, { date, workoutTime, rowingType }, () => {
           getData();
         });
       setShowModal(false);
@@ -264,13 +264,21 @@ function App() {
             <option value="PM">PM</option>
           </select>
         </div>
+        <div class="form-group">
+          <label for="setWorkoutType">Workout Type:</label>
+          <select id="setWorkoutType" name="setWorkoutType" value={setWorkoutType} onChange={handleWorkoutTypeChange}>
+            <option value="AT">AT</option>
+            <option value="SS">Steady State</option>
+            <option value="Race_pace">Race Pace</option>
+          </select>
+        </div>
               <label htmlFor="interval_type">Select Workout Type:</label>
-        <select id="interval_type" name="interval_type" value={workoutType} onChange={handleWorkoutTypeChange}>
+        <select id="interval_type" name="interval_type" value={rowingType} onChange={HandlesetRowingType}>
           <option value="single_distance">Single Distance</option>
           <option value="single_time">Single Time</option>
           <option value="intervals">Intervals</option>
         </select>
-        {workoutType === 'single_distance' && (
+        {rowingType === 'single_distance' && (
           <div>
             <label htmlFor="distance_meters">Distance (meters):</label>
             <input type="number" id="distance_meters" name="distance_meters" 
@@ -282,7 +290,7 @@ function App() {
               placeholder="0"/><br />
           </div>
         )}
-        {workoutType === 'single_time' && (
+        {rowingType === 'single_time' && (
           <div>
             <label htmlFor="time_minutes">Time (minutes):</label>
             <input type="number" id="time_minutes" name="time_minutes" 
@@ -302,7 +310,7 @@ function App() {
                 placeholder="0"/><br />
           </div>
         )}
-        {workoutType === 'intervals' && (
+        {rowingType === 'intervals' && (
   <div>
     <label htmlFor="rowingType">Interval Type:</label>
     <select id="rowingType" name="rowingType" value={rowingType} onChange={HandlesetRowingType}>
