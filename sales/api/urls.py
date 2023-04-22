@@ -10,6 +10,9 @@ urlpatterns = [
     path('group/<str:pk>/', views.GroupEdit.as_view(), name="group-edit"),
     path('workout/create/', views.WorkoutCreate.as_view(), name="workout-listcreate"),
     path('workout/<str:pk>/', views.WorkoutEdit.as_view(), name="workout-edit"),
+    
+    path('athlete/create/', views.AthleteCreate.as_view(), name="athlete-listcreate"),
+    path('athlete/<str:pk>/', views.AthleteEdit.as_view(), name="athlete-edit"),
     #path('user-list/', views.userList, name="user-list"),
     
     #path('workout-list/', views.workoutList, name="workout-list"),

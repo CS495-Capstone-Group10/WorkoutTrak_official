@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.models import Order, CustomUser, Group, Workout
+from app.models import Order, CustomUser, Group, Workout, Athlete
 
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
@@ -14,6 +14,7 @@ class GroupAdmin(admin.ModelAdmin):
     list_display = ( 'date','id')
           
 admin.site.register(Order)
+admin.site.register(Athlete)
 #admin.site.register(CustomUser)
 #admin.site.register(Profile)
 #admin.site.register(Group)
