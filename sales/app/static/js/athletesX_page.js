@@ -66,7 +66,7 @@ function App() {
 
   // fetches current page of orders from server
   const getData = ()=>{
-    get_orders_api(page, success, (text)=>{console.log("Error: ", text)});
+    get_Atheletes_api(page, success, (text)=>{console.log("Error: ", text)});
   };
 
   const newOrder = ()=>{
@@ -253,9 +253,9 @@ function App() {
                   aria-hidden="true">»</span></a></li>
             </ul>
           </nav>}
-          <a className="btn btn-light" style={{marginLeft: "auto"}}
+          {/* <a className="btn btn-light" style={{marginLeft: "auto"}}
              onClick={newOrder}
-          >New Workout</a>
+          >New Workout</a> */}
         </div>
         <table className="table table-hover caption-top">
           <thead className="table-light">
@@ -281,12 +281,12 @@ function App() {
               {/* average rate */}
               <td>{row.injured}</td>
               {/* <td>{row.amount}</td> */}
-              <td>
+              {/* <td>
                 <a className="btn btn-light" style={{marginLeft: "auto"}}
                   onClick={(e)=>{editOrder(row)}}>Edit</a>{" "}
                 <a className="btn btn-light" style={{marginLeft: "auto"}}
                   onClick={(e)=>{deleteOrder(row.id)}}>Delete</a>
-              </td>
+              </td> */}
             </tr>
           )}
           </tbody>
