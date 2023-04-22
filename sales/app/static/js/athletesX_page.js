@@ -14,6 +14,17 @@ function App() {
   const [item, setItem] = React.useState("");
   const [price, setPrice] = React.useState(0);
   const [quantity, setQuantity] = React.useState(0);
+  const [pr_length_minutes, set_pr_length_minutes] = React.useState(0);
+  const [pr_length_sec, set_pr_length_sec] = React.useState(0);
+  const [name, setname] = React.useState('athlete');
+  const [lastWorkout, setlastWorkout] = React.useState('');
+  const [goal_length_minutes, goal_pr_length_minutes] = React.useState(0);
+  const [goal_length_sec, goal_pr_length_sec] = React.useState(0);
+  const [injured, setInjured] = React.useState('AM');
+  const handleInjuredChange = (event) => {
+    (event.target.value);
+  };
+
 
   // Called when the list of orders is brought from server
   const success = (data) => {
