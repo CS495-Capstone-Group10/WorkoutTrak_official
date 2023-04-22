@@ -8,11 +8,7 @@ function App() {
   const [page, setPage] = React.useState(0);
   const [showModal, setShowModal] = React.useState(false);
   const [modalDescription, setModalDescription] = React.useState("");
-  const [itemId, setItemId] = React.useState(null);
   const [error, setError] = React.useState("");
-  const [item, setItem] = React.useState("");
-  const [price, setPrice] = React.useState(0);
-  const [quantity, setQuantity] = React.useState(0);
   const [distance_meters, set_distance_meters] = React.useState(0);
   const [split_length, set_split_length] = React.useState(0);
   const [time_minutes, set_time_minutes] = React.useState(0);
@@ -26,32 +22,28 @@ function App() {
   const [Rest_time_minutes, set_rest_time_minutes] = React.useState(0);
   const [rest_time_sec, set_rest_time_sec] = React.useState(0);
   const [date, set_date] = React.useState(0);
-  const [workoutType, setWorkoutType] = React.useState('single_distance');
-  const [intervalVariableType, setIntervalVariableType] = React.useState('distance');
-  const [workoutData, setWorkoutData] = React.useState(null);
-  const [workoutTime, setWorkoutTime] = React.useState('single_distance');
-
+  const [rowingType, setRowingType] = React.useState('single_distance');
+  const [workoutType, setWorkoutType] = React.useState('AT');
+  // const [intervalVariableType, setIntervalVariableType] = React.useState('Interval distance');
+  const [workoutTime, setWorkoutTime] = React.useState('AM');
+  
   const handleWorkoutTypeChange = (event) => {
     setWorkoutType(event.target.value);
   };
   const handleWorkoutTimeChange = (event) => {
     setWorkoutTime(event.target.value);
   };
-  const HandlesetIntervalVariableType = (event) => {
-    setIntervalVariableType(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-    setWorkoutData(data);
-    console.log(data);
+  const HandlesetRowingType = (event) => {
+    setRowingType(event.target.value);
   };
 
   const success = (data) => {
     setList(data.data);
+    console.log(data.data)
+    console.log(list)
     setCount(data.count);
+    console.log(data.count)
+    console.log(count)
     const newPages = [];
     if (data.count > 10) {
       for (let i=0; i<Math.ceil(data.count / 10); i++) {
@@ -80,7 +72,7 @@ function App() {
   };
 
   const getData = ()=>{
-    get_orders_api(page, success, (text)=>{console.log("Error: ", text)});
+    get_workout_api(page, success, (text)=>{console.log("Error: ", text)});
   };
 
   const newOrder = ()=>{
@@ -99,33 +91,84 @@ function App() {
     setTimeout(()=>{itemInput && itemInput.focus()}, 1);
   };
 
-  const saveOrder = (e)=>{
+  const saveOrder = (e) => {
     e.preventDefault();
     setError("");
-    console.log("saving new", date, workoutTime, workoutType);
-    if (workoutType=== "single_distance"){
-      if(split_length * distance_meters === 0){
+  
+    if (rowingType === "single_distance") {
+      if (split_length * distance_meters === 0) {
         setError("Please enter split length and distance");
+        return;
+      } else {
+        post_workout_api(
+          // { split_length, distance_meters, date, workoutTime },
+          { split_length, distance_meters, date, workoutTime, workoutType, rowingType},
+          () => {
+            getData();
+          }
+        );
+        setShowModal(false);
       }
-      else{
-        post_workout_api({split_length, distance_meters, date, workoutTime}, ()=>{getData();});
+    } else if (rowingType === "single_time") {
+      if (
+        (time_minutes + time_seconds) * (split_length_minutes + split_length_seconds) ===
+        0
+      ) {
+        setError("Please enter split length and time");
+        return;
+      } else {
+        post_workout_api(
+          {
+            time_minutes,
+            time_seconds,
+            split_length_minutes,
+            split_length_seconds,
+            date,
+            workoutTime,
+            workoutType,
+          },
+          () => {
+            getData();
+          }
+        );
+        setShowModal(false);
       }
-    }
-    else if ((workoutType=== "single_time")){
-      if((time_minutes+time_seconds)*(split_length_minutes+split_length_seconds)===0)
-      setError("Please enter split length and time");
-    }
-    else if((workoutType=== "intervals")){
-    }
-    else {
-      if (itemId === null)
-        post_workout_api({date, workoutTime, workoutType}, ()=>{getData();});
+    } else if (rowingType === "intervals") {
+      if (distanceInt + Int_time_minutes + Int_time_sec +Rest_time_minutes + rest_time_sec === 0) {
+        setError("Please fill out all fields");
+        return;
+      } else {
+        post_workout_api(
+          {
+            distanceInt,
+            Int_time_minutes,
+            Int_time_sec,
+            Rest_time_minutes,
+            rest_time_sec,
+            num_intervals,
+            date,
+            workoutTime,
+            workoutType,
+          },
+          () => {
+            getData();
+          }
+        );
+        setShowModal(false);
+      }
+    } else {
+      if (Id === null)
+        post_workout_api({ date, workoutTime, rowingType }, () => {
+          getData();
+        });
       else
-        put_workout_api(itemId, {date, workoutTime, workoutType}, ()=>{getData();});
+        put_workout_api(Id, { date, workoutTime, rowingType }, () => {
+          getData();
+        });
       setShowModal(false);
     }
   };
-
+  
   const deleteOrder = (orderId)=>{
     Swal.fire({
       title: 'Are you sure?',
@@ -137,18 +180,19 @@ function App() {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        delete_order_api(id, ()=>{
+        delete_workout_api(orderId, ()=>{
           Swal.fire({
               title: 'Deleted!',
               text: "Your order has been deleted!",
               icon: 'success',
-              timer: 1000,
+              timer: 1000
           });
           getData();
         });
       }
     });
   };
+  
 
   const keyDownHandler = (e)=>{
     if (e.which === 27)
@@ -158,7 +202,41 @@ function App() {
   React.useEffect(()=>{
     getData();
   }, [page]);
-
+  function WorkoutTable(props) {
+    return (
+      <table className="table table-hover caption-top">
+          <thead className="table-light">
+          <tr>
+            <th>Date</th>
+            <th>Workout Time</th>
+            <th>Workout Type</th>
+            <th>Intervals</th>
+            <th>Distance (m)</th>
+            <th>Rest Time (mm:ss)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.workouts.map((workout) => (
+            <tr key={workout.id}>
+              <td>{workout.date}</td>
+              <td>{workout.workoutTime}</td>
+              <td>{workout.workoutType}</td>
+              <td>{workout.num_intervals}</td>
+              <td>{workout.distance_meters}</td>
+              <td>{`${workout.rest_time_minutes}:${workout.rest_time_sec}`}</td>
+              <td>
+                <a className="btn btn-light" style={{marginLeft: "auto"}}
+                  onClick={()=>{editOrder(workout)}}>Edit</a>{" "}
+                <a className="btn btn-light" style={{marginLeft: "auto"}}
+                  onClick={()=>{deleteOrder(workout.id)}}>Delete</a>
+              </td>
+            </tr>
+            
+          ))}
+        </tbody>
+      </table>
+    );
+  }
 
 
 
@@ -188,17 +266,25 @@ function App() {
         <div class="form-group">
           <label for="time">Time:</label>
           <select id="time" name="time" value={workoutTime} onChange={handleWorkoutTimeChange}>
-            <option value="am">AM</option>
-            <option value="pm">PM</option>
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="setWorkoutType">Workout Type:</label>
+          <select id="setWorkoutType" name="setWorkoutType" value={setWorkoutType} onChange={handleWorkoutTypeChange}>
+            <option value="AT">AT</option>
+            <option value="SS">Steady State</option>
+            <option value="Race_pace">Race Pace</option>
           </select>
         </div>
               <label htmlFor="interval_type">Select Workout Type:</label>
-        <select id="interval_type" name="interval_type" value={workoutType} onChange={handleWorkoutTypeChange}>
+        <select id="interval_type" name="interval_type" value={rowingType} onChange={HandlesetRowingType}>
           <option value="single_distance">Single Distance</option>
           <option value="single_time">Single Time</option>
           <option value="intervals">Intervals</option>
         </select>
-        {workoutType === 'single_distance' && (
+        {rowingType === 'single_distance' && (
           <div>
             <label htmlFor="distance_meters">Distance (meters):</label>
             <input type="number" id="distance_meters" name="distance_meters" 
@@ -210,7 +296,7 @@ function App() {
               placeholder="0"/><br />
           </div>
         )}
-        {workoutType === 'single_time' && (
+        {rowingType === 'single_time' && (
           <div>
             <label htmlFor="time_minutes">Time (minutes):</label>
             <input type="number" id="time_minutes" name="time_minutes" 
@@ -230,10 +316,10 @@ function App() {
                 placeholder="0"/><br />
           </div>
         )}
-        {workoutType === 'intervals' && (
+        {rowingType === 'intervals' && (
   <div>
-    <label htmlFor="interval_variable_type">Interval Type:</label>
-    <select id="interval_variable_type" name="interval_variable_type" value={intervalVariableType} onChange={HandlesetIntervalVariableType}>
+    <label htmlFor="rowingType">Interval Type:</label>
+    <select id="rowingType" name="rowingType" value={rowingType} onChange={HandlesetRowingType}>
       <option value="distance">Distance (meters)</option>
       <option value="time">Time (minutes:seconds)</option>
     </select><br/>
@@ -241,7 +327,7 @@ function App() {
     <input type="number" id="num_intervals" name="num_intervals" 
         value={num_intervals} onChange={(e)=>{set_num_intervals(e.target.value)}}
         placeholder="0"/><br />
-    {intervalVariableType === 'distance' && (
+    {rowingType === 'distance' && (
       <div>
         <label htmlFor="distanceInt">distance (meters):</label>
         <input type="number" id="distanceInt" name="distanceInt" 
@@ -249,7 +335,7 @@ function App() {
             placeholder="0"/><br />
       </div>
     )}
-    {intervalVariableType === 'time' && (
+    {rowingType === 'time' && (
       <div>
         <label htmlFor="rest_length">Workout time:</label>
         <div className="input-group mb-3">
@@ -368,44 +454,9 @@ function App() {
              onClick={newOrder}
           >New Workout</a>
         </div>
-        <table className="table table-hover caption-top">
-          <thead className="table-light">
-          <tr>
-
-            <th>Date</th>
-            <th>Am/PM</th>
-            <th>Reps</th>
-            <th>Distance</th>
-            <th>excel Link</th>
-            <th>Whole team?</th>
-
-          </tr>
-          </thead>
-          <tbody>
-          { list.map((row)=>
-            <tr key={row.id}>
-
-              {/* workout */}
-              <td>{row.id}</td> 
-              {/* date */}
-              <td>{row.date}</td>
-              {/* athlete */}
-              <td>{row.item}</td>
-              {/* average split */}
-              <td>{row.price}</td>
-              <td>{row.item}</td>
-              <td>{row.item}</td>
-              {/* Type */}
-              <td>
-                <a className="btn btn-light" style={{marginLeft: "auto"}}
-                  onClick={(e)=>{editOrder(row)}}>Edit</a>{" "}
-                <a className="btn btn-light" style={{marginLeft: "auto"}}
-                  onClick={(e)=>{deleteOrder(row.id)}}>Delete</a>
-              </td>
-            </tr>
-          )}
-          </tbody>
-        </table>
+        <div>
+      <WorkoutTable workouts={list} />
+        </div>
       </div>
 
              <div className="main__content">
