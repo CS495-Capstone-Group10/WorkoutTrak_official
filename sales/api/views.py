@@ -38,6 +38,10 @@ class WorkoutEdit(generics.RetrieveUpdateAPIView):
     lookup_field='pk'
     
     # Athlete Views
+    
+class AthleteList(generics.ListAPIView):
+    queryset = Athlete.objects.all()
+    serializer_class = AthleteSerializer
 class AthleteCreate(generics.CreateAPIView):
     serializer_class = AthleteSerializer
 
