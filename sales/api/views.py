@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.http import JsonResponse, Http404
 from rest_framework.decorators import api_view # For function based view decorater
 from rest_framework.response import Response
-from .serializers import CustomUserSerializer, GroupSerializer, WorkoutSerializer, MyTokenObtainPairSerializer
-from app.models import CustomUser, Group, Workout
+from .serializers import CustomUserSerializer, GroupSerializer, WorkoutSerializer, AthleteSerializer
+from app.models import CustomUser, Group, Workout, Athlete
 from rest_framework.views import APIView
 from rest_framework import status, generics
 from rest_framework_simplejwt.tokens import AccessToken
@@ -36,6 +36,16 @@ class WorkoutEdit(generics.RetrieveUpdateAPIView):
     queryset = Workout.objects.all()
     serializer_class = WorkoutSerializer
     lookup_field='pk'
+    
+    # Athlete Views
+class AthleteCreate(generics.CreateAPIView):
+    serializer_class = AthleteSerializer
+
+class AthleteEdit(generics.RetrieveUpdateAPIView):
+    queryset = Athlete.objects.all()
+    serializer_class = AthleteSerializer
+    lookup_field='pk'
+    
 @api_view(['GET'])
 def apiOverview(request):
     api_urls = {
