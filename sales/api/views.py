@@ -31,7 +31,11 @@ class GroupEdit(generics.RetrieveUpdateDestroyAPIView): # List and Create Groups
 
 class WorkoutCreate(generics.CreateAPIView):
     serializer_class = WorkoutSerializer
-    
+
+class WorkoutEdit(generics.RetrieveUpdateAPIView):
+    queryset = Workout.objects.all()
+    serializer_class = WorkoutSerializer
+    lookup_field='pk'
 @api_view(['GET'])
 def apiOverview(request):
     api_urls = {

@@ -9,6 +9,7 @@ urlpatterns = [
    # path('users/', views.UserInfo.as_view()),
     path('group/<str:pk>/', views.GroupEdit.as_view(), name="group-edit"),
     path('workout/create/', views.WorkoutCreate.as_view(), name="workout-listcreate"),
+    path('workout/<str:pk>/', views.WorkoutEdit.as_view(), name="workout-edit"),
     #path('user-list/', views.userList, name="user-list"),
     
     #path('workout-list/', views.workoutList, name="workout-list"),
