@@ -14,6 +14,17 @@ function App() {
   const [item, setItem] = React.useState("");
   const [price, setPrice] = React.useState(0);
   const [quantity, setQuantity] = React.useState(0);
+  const [pr_length_minutes, set_pr_length_minutes] = React.useState(0);
+  const [pr_length_sec, set_pr_length_sec] = React.useState(0);
+  const [name, setname] = React.useState('athlete');
+  const [lastWorkout, setlastWorkout] = React.useState('');
+  const [goal_length_minutes, goal_pr_length_minutes] = React.useState(0);
+  const [goal_length_sec, goal_pr_length_sec] = React.useState(0);
+  const [injured, setInjured] = React.useState('AM');
+  const handleInjuredChange = (event) => {
+    (event.target.value);
+  };
+
 
   // Called when the list of orders is brought from server
   const success = (data) => {
@@ -55,7 +66,7 @@ function App() {
 
   // fetches current page of orders from server
   const getData = ()=>{
-    get_orders_api(page, success, (text)=>{console.log("Error: ", text)});
+    get_Atheletes_api(page, success, (text)=>{console.log("Error: ", text)});
   };
 
   const newOrder = ()=>{
@@ -242,9 +253,9 @@ function App() {
                   aria-hidden="true">»</span></a></li>
             </ul>
           </nav>}
-          <a className="btn btn-light" style={{marginLeft: "auto"}}
+          {/* <a className="btn btn-light" style={{marginLeft: "auto"}}
              onClick={newOrder}
-          >New Workout</a>
+          >New Workout</a> */}
         </div>
         <table className="table table-hover caption-top">
           <thead className="table-light">
@@ -270,12 +281,12 @@ function App() {
               {/* average rate */}
               <td>{row.injured}</td>
               {/* <td>{row.amount}</td> */}
-              <td>
+              {/* <td>
                 <a className="btn btn-light" style={{marginLeft: "auto"}}
                   onClick={(e)=>{editOrder(row)}}>Edit</a>{" "}
                 <a className="btn btn-light" style={{marginLeft: "auto"}}
                   onClick={(e)=>{deleteOrder(row.id)}}>Delete</a>
-              </td>
+              </td> */}
             </tr>
           )}
           </tbody>
