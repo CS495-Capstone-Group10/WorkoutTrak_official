@@ -1,0 +1,118 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/styleXP2.css' %}"/>
+  <title>WorkoutTrak : Profile2</title>
+</head>
+<body>
+  {% include "react_and_bootstrap.html" %}
+  <script type="text/jsx" src="/static/js/api.js"></script>
+  <script type="text/jsx" src="/static/js/profile2X_page.js"></script>
+</body>
+
+
+<body>
+  <div class="container">
+    <div class="leftbox">
+      <nav>
+        <a onclick="tabs(0)" class="tab active">
+          <i class="fa fa-user"></i>
+        </a>
+        <a onclick="tabs(1)" class="tab">
+          <i class="fa fa-credit"></i>
+        </a>
+        <a onclick="tabs(2)" class="tab">
+          <i class="fa fa-tv"></i>
+        </a>
+        <a onclick="tabs(3)" class="tab">
+          <i class="fa fa-tasks"></i>
+        </a>
+        <a onclick="tabs(4)" class="tab">
+          <i class="fa fa-cog"></i>
+        </a>
+      </nav>
+    </div>
+    <div class ="rightbox">
+      <div class="profile tabShow">
+        <h1> Personal Info </h1>
+        <h2> Full Name </h2>
+        <input type="text" class="input" value="Jane Doe">
+        <h2> Birthday </h2>
+        <input type="text" class="input" value="April 20, 1992">
+        <h2> Gender </h2>
+        <input type="text" class="input" value="Female">
+        <h2> Email </h2>
+        <input type="text" class="input" value="example@example.com">
+        <h2> Password </h2>
+        <input type="password" class="input" value="brightcode">
+        <button class="btn">Update</button>
+      </div>
+      <div class="payment tabShow">
+        <h1> Payment Info </h1>
+        <h2> Payment Method </h2>
+        <input type="text" class="input" value="MasterCard">
+        <h2> Billing Address </h2>
+        <input type="text" class="input" value="Address">
+        <h2> ZipCode </h2>
+        <input type="text" class="input" value="zipcode">
+        <h2> Billing Date </h2>
+        <input type="text" class="input" value="April 22, 2023">
+        <h2> Redeem Card </h2>
+        <input type="password" class="input" value="Enter Gift Code">
+        <button class="btn">Update</button>
+      </div>
+      <div class="subscription tabShow">
+        <h1> Subscription Info </h1>
+        <h2> Payment Date </h2>
+        <p>May 12, 2023</p>
+        <h2> Next Charges </h2>
+        <p>$80.65 <span> includes tax</span></p>
+        <h2> Plan </h2>
+        <p>Limited Plan</p>
+        <h2> Monthly </h2>
+        <p>$107.99/month</p>
+        <button class="btn">Update</button>
+      </div>
+      <div class="privacy tabShow">
+        <h1> Privacy Settings </h1>
+        <h2> Manage Email Noti. </h2>
+        <p></p>
+        <h2> Manage Privacy Settings </h2>
+        <p></p>
+        <h2> View Terms of Use </h2>
+        <p></p>
+        <h2>Personalized Ad Experience</h2>
+        <p></p>
+        <h2>Protect Account</h2>
+        <p></p>
+        <button class="btn">Update</button>
+      </div>
+      <div class="settings tabShow">
+        <h1> Account Settings </h1>
+        <h2> Sync WatchList </h2>
+        <p></p>
+        <h2> Hold Subscription </h2>
+        <p></p>
+        <h2> Cancel Subscription </h2>
+        <p></p>
+        <h2>Your Devices</h2>
+        <p></p>
+        <h2>Referrals</h2>
+        <p></p>
+        <button class="btn">Update</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+
+
+
+</html>
+
