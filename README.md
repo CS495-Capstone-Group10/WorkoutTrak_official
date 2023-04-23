@@ -4,7 +4,7 @@ A web project to allow for easy access and storing of workouts for the Alabama R
 
 # Authors
 
-Benjamin Derleth, Isaac Dickenson, Samantha Kellogg, Asit Singh
+Benjamin Derleth, Isaac Dickinson, Samantha Kellogg, Asit Singh
 
 ## Installation
 
@@ -21,12 +21,12 @@ pip install -r requirements.txt
 ```python
 
 # Initialize the database models and migrate the django apps
-pip manage.py makemigrations
-pip manage.py migrate app
-pip manage.py migrate
+python manage.py makemigrations
+python manage.py migrate app
+python manage.py migrate
 
 # Create an admin account
-pip manage.py createsuperuser 
+python manage.py createsuperuser 
 
 # Run the server (port number may need to be changed)
 python manage.py runserver 8000
