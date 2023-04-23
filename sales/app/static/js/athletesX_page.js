@@ -143,7 +143,45 @@ function App() {
 
   return (
 
-
+    <div onKeyDown={keyDownHandler}>
+      <div style={{background: "#00000060"}}
+          className={"modal " + (showModal?" show d-block":" d-none")} tabIndex="-1" role="dialog">
+        <div className="modal-dialog shadow">
+          <form method="post">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">{modalDescription}</h5>
+              <button type="button" className="btn-close" onClick={()=>{setShowModal(false)}} aria-label="Close"></button>
+            </div>
+            <div className="modal-body">
+              <label>Athlete</label>
+                <div className="form-group">
+                  <input type="text" className="form-control" name="item" id="itemInput"
+                         value={item} onChange={(e)=>{setItem(e.target.value)}}
+                         placeholder="Item name"/>
+                </div>
+              <label style={{marginTop: "1em"}}>Average Split</label>
+                <div className="form-group" >
+                  <input type="number" className="form-control" placeholder="Price"
+                         value={price} onChange={(e)=>{setPrice(e.target.value)}}
+                         name="price" />
+                </div>
+              <label style={{marginTop: "1em"}}>Average Rate</label>
+                <div className="form-group">
+                  <input type="number" className="form-control"
+                         value={quantity} onChange={(e)=>{setQuantity(e.target.value)}}
+                         placeholder="Quantity" name="quantity" />
+                </div>
+              <small className="form-text text-muted">{error}</small>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" onClick={()=>{setShowModal(false)}} data-bs-dismiss="modal">Close</button>
+              <button type="submit" className="btn btn-primary" onClick={saveOrder}>Save changes</button>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
 
 
     <div>
@@ -192,46 +230,8 @@ function App() {
                <p>Workout scheduling</p>
                <button className="main__btn"><a href="/workoutsX">Assign Workouts</a></button>
              </div>
-        <div onKeyDown={keyDownHandler}>
-      <div style={{background: "#00000060"}}
-          className={"modal " + (showModal?" show d-block":" d-none")} tabIndex="-1" role="dialog">
-        <div className="modal-dialog shadow">
-          <form method="post">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">{modalDescription}</h5>
-              <button type="button" className="btn-close" onClick={()=>{setShowModal(false)}} aria-label="Close"></button>
-            </div>
-            <div className="modal-body">
-              <label>Athlete</label>
-                <div className="form-group">
-                  <input type="text" className="form-control" name="item" id="itemInput"
-                         value={item} onChange={(e)=>{setItem(e.target.value)}}
-                         placeholder="Item name"/>
-                </div>
-              <label style={{marginTop: "1em"}}>Average Split</label>
-                <div className="form-group" >
-                  <input type="number" className="form-control" placeholder="Price"
-                         value={price} onChange={(e)=>{setPrice(e.target.value)}}
-                         name="price" />
-                </div>
-              <label style={{marginTop: "1em"}}>Average Rate</label>
-                <div className="form-group">
-                  <input type="number" className="form-control"
-                         value={quantity} onChange={(e)=>{setQuantity(e.target.value)}}
-                         placeholder="Quantity" name="quantity" />
-                </div>
-              <small className="form-text text-muted">{error}</small>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" onClick={()=>{setShowModal(false)}} data-bs-dismiss="modal">Close</button>
-              <button type="submit" className="btn btn-primary" onClick={saveOrder}>Save changes</button>
-            </div>
-          </div>
-          </form>
-        </div>
-      </div>
-      <div style={{maxWidth: "800px", margin: "auto", marginTop: "1em", marginBottom: "1em",
+        
+      <div style={{maxWidth: "800px", margin: "auto", marginTop: "1em", marginBottom: "1em", background: "white",
                     padding: "1em"}} className="shadow">
         <div style={{display: "flex", flexDirection: "row", marginBottom: "5px"}}>
           {pages.length > 0 && <nav className="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
@@ -303,9 +303,9 @@ function App() {
           <div className="services">
            
          </div> 
-  
+        </div>
          <script type="text/jsx" src="/static/js/app2.js"></script> 
-      </div>
+      
 </div>
 
 

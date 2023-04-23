@@ -133,9 +133,17 @@ def profileX_view(request):
     context = {}
     return render(request, "profileX.html", context=context)
 
+def profile2X_view(request):
+    context = {}
+    return render(request, "profile2X.html", context=context)
+
 def socialX_view(request):
     context = {}
     return render(request, "socialX.html", context=context)
+
+def social2X_view(request):
+    context = {}
+    return render(request, "social2X.html", context=context)
 
 def recordsX_view(request):
     context = {}
@@ -145,4 +153,30 @@ def createAccountX_view(request):
     context = {}
     return render(request, "createAccountX.html", context=context)
 
+def upDocX_view(request):
+    context = {}
+    return render(request, "upDocX.html", context=context)
 
+def room1X_view(request):
+    context = {}
+    return render(request, "room1X.html", context=context)
+
+def room2X_view(request):
+    context = {}
+    return render(request, "room2X.html", context=context)
+
+def room3X_view(request):
+    context = {}
+    return render(request, "room3X.html", context=context)
+
+def room4X_view(request):
+    context = {}
+    return render(request, "room4X.html", context=context)
+
+def room5X_view(request):
+    context = {}
+    return render(request, "room5X.html", context=context)
+
+def room6X_view(request):
+    context = {}
+    return render(request, "room6X.html", context=context)

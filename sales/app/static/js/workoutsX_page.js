@@ -427,8 +427,13 @@ function App() {
         
           <div className="main">
            <div className="main__container">
-           
-      <div style={{maxWidth: "800px", margin: "auto", marginTop: "1em", marginBottom: "1em",
+           <div className="main__content">
+               <h1>WorkoutTrak</h1>
+               <p>Create some workouts!</p>
+               <button className="main__btn"><a onClick={newOrder}>New Workout</a></button>
+            </div>
+          <div className="main__content">
+      <div style={{maxWidth: "800px", margin: "auto", marginTop: "1em", marginBottom: "1em", background: "white",
                     padding: "1em"}} className="shadow">
         <div style={{display: "flex", flexDirection: "row", marginBottom: "5px"}}>
           {pages.length > 0 && <nav className="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
@@ -450,20 +455,13 @@ function App() {
                   aria-hidden="true">»</span></a></li>
             </ul>
           </nav>}
-          <a className="btn btn-light" style={{marginLeft: "auto"}}
-             onClick={newOrder}
-          >New Workout</a>
         </div>
         <div>
       <WorkoutTable workouts={list} />
         </div>
       </div>
-
-             <div className="main__content">
-               <h1>WorkoutTrak</h1>
-               <p>Create some workouts!</p>
-               <button className="main__btn"><a href="/workoutsX">View Workouts</a></button>
-             </div>
+      </div>
+             
            </div>
          </div>
   
