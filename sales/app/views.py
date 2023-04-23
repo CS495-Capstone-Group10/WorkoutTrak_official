@@ -133,6 +133,10 @@ def profileX_view(request):
     context = {}
     return render(request, "profileX.html", context=context)
 
+def profile2X_view(request):
+    context = {}
+    return render(request, "profile2X.html", context=context)
+
 def socialX_view(request):
     context = {}
     return render(request, "socialX.html", context=context)
@@ -145,4 +149,7 @@ def createAccountX_view(request):
     context = {}
     return render(request, "createAccountX.html", context=context)
 
+def upDocX_view(request):
+    context = {}
+    return render(request, "upDocX.html", context=context)
 

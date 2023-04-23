@@ -650,3 +650,119 @@
         width: 100%;
     }
 }
+
+
+
+
+/* additional */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Oswald', sans-serif;
+}
+
+.profile {
+    /*background-color: #667292;*/
+    background-color: #667292;
+    background-image: linear-gradient(to top, #667292 0%, #8d9db6 100%);
+
+}
+.profile__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-self: center;
+    margin: 0 auto;
+    height: 90vh;
+    /*background-color: linear-gradient(to top, #667292 50%, #f1e3dd 50%);*/
+    background-color: #667292;
+    background-image: linear-gradient(to top, #667292 0%, #8d9db6 100%);
+    z-index: 1;
+    width: 100%;
+    max-width: 1300px;
+    padding: 0 50px;
+}
+
+
+.profile__content h1 {
+    font-size: 4rem;
+    background-color: #ff8177;
+    background-image: linear-gradient(to top, #9d9db6 0%, #f1e3dd 100%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}
+
+.profile__content h2 {
+    font-size: 2rem;
+    background-color: #ff8177;
+    background-image: linear-gradient(to top, #bccad6 0%, #f1e3dd 100%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}
+
+.profile__content p {
+    margin-top: 1rem;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #f1e3dd;
+}
+.rightbox {
+    width: 60%;
+    margin-left: 27%;
+    padding-top: 5px;
+}
+.tabShow {
+    transition: all .5s ease-in;
+    width: 80%;
+    position: absolute;
+}
+.tabShowOld h1 {
+    font-family: 'Oswald', sans-serif;
+    color: #7ed386;
+    font-size: 1.2rem;
+    margin-top: 40px;
+    margin-bottom: 35px;
+}
+.tabShowOld h2 {
+    color: #777;
+    
+    text-transform: uppercase;
+    font-size: 8px;
+    letter-spacing: 1px;
+    margin-left: 2px;
+    margin-top: 10px;
+}
+.tabShow h1 {
+    background-color: #8d9db6;
+    background-image: linear-gradient(to right, 
+    #8d9db6 0%,
+    #8d9db6 0%, 
+    #bccad6 21%,
+    #bccad6 52%,
+    #667292 78%,
+    #667292 100%
+    );
+    background-size: 100%;
+    margin-bottom: 5rem;
+    font-size: 2.5rem;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}
+.tabShow h2 {
+    position: absolute;
+    top: 350px;
+    left: 30px;
+}
+
+
+
+

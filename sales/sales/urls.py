@@ -62,6 +62,8 @@ urlpatterns = [
     path('socialX', views.socialX_view),
     path('recordsX', views.recordsX_view), 
     path('createAccountX', views.createAccountX_view),
+    path('upDocX', views.upDocX_view),
+    path('profile2X', views.profile2X_view),
     
     
     
