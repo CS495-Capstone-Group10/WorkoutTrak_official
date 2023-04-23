@@ -7,13 +7,29 @@ const e = React.createElement;
 
 
 function MyComponent() {
-
-    
+  
+  const [text, setText] = React.useState("");  
+  const [firstName, setFirstName] = React.useState("");
+  const handleFirstNameChange = (event) => {
+    setFirstName(event.target.value);
+  };
+  const handleInputChange = (event) => {
+    setText(event.target.value);
+  };
   const logout = async (e)=>{
     await localStorage.setItem("salesToken",null);
     window.location = "/login";
   };
 
+  
+
+  
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('Text input:', text);
+  };
+  
 
     return (
       <div>
@@ -56,16 +72,28 @@ function MyComponent() {
    
         
           <div className="main">
-           <div className="main__container">
-             <div className="main__content">
-               <h1>Profile</h1>
-               <p>Modify profile!</p>
-               <button className="main__btn"><a href="/profile2X">View Profile</a></button>
-             </div>
-             <div className="main__img--container">
-               <img src="static/images/pic2.svg" alt="pic" id="main__img" />
-             </div>
-           </div>
+          <div className="main__container">
+            <div className="profile__container">
+              <div className="rightbox">
+               <div className="tabShow">
+                <form onSubmit={handleSubmit}>
+                 <h1> Personal Info</h1>
+                 <h2> First Name </h2>
+                 <input type="text" className="input" value="John"> </input>
+                 <h2> Last Name </h2>
+                 <input type="text" className="input" value="Smith"></input>
+                 <h2> Gender </h2>
+                 <input type="text" className="input" value="Male"></input>
+                 <h2> Email </h2>
+                 <input type="text" className="input" value="email@email.com"></input>
+                 <h2> Occupation </h2>
+                 <input type="text" className="input" value="Athlete"></input>
+                 <button type="submit">Save</button>
+                 </form>
+               </div>
+               </div>
+            </div>
+            </div>
          </div>
   
          

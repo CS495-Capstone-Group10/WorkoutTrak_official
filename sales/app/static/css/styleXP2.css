@@ -100,6 +100,27 @@ span {
     cursor: pointer;
     margin-top: 15px;
 }
-.tabShow {
+/*.tabShow {
     display: none;
+}*/
+
+.fa-user{
+    color: #f1e3dd;
+    
+}
+.fa-credit{
+    color: #f1e3dd;
+    
+}
+.fa-tasks{
+    color: #f1e3dd;
+    
+}
+.fa-tv{
+    color: #f1e3dd;
+    
+}
+.fa-cog{
+    color: #f1e3dd;
+    
 }
