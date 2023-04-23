@@ -157,3 +157,6 @@ def upDocX_view(request):
     context = {}
     return render(request, "upDocX.html", context=context)
 
+def room1X_view(request):
+    context = {}
+    return render(request, "room1X.html", context=context)

@@ -65,6 +65,7 @@ urlpatterns = [
     path('createAccountX', views.createAccountX_view),
     path('upDocX', views.upDocX_view),
     path('profile2X', views.profile2X_view),
+    path('room1X', views.room1X_view),
     
     
     

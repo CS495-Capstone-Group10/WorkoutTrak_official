@@ -54,20 +54,28 @@ function MyComponent() {
         </nav> 
   
    
+        <div className="main">
+          <div className="main__container">
+            <div className="main__content">
+              <h1>Rooms</h1>
+              <p>Join a group</p>
+            </div>
+            <div className="main__content">
+              <button className="main__btn"><a href="/room1X">Room1</a></button>
+              <button className="main__btn"><a href="/room2X">Room2</a></button>
+              <button className="main__btn"><a href="/room3X">Room3</a></button>
+              <button className="main__btn"><a href="/room4X">Room5</a></button>
+              <button className="main__btn"><a href="/room5X">Room6</a></button>
+            </div>
+          </div>
+
+        </div>
+
+
          
           <div className="services">
           <h1>-</h1>
-           <div className="services__container">
-            
-             <div className="services__card1">
-               <h2>Form a Group</h2>
-               <button className="main__btn"><a href="/socialX">Create Group</a></button>
-             </div>
-             <div className="services__card1">
-               <h2>Join a Group</h2>
-               <button className="main__btn"><a href="/socialX">Join Group</a></button>
-             </div>
-           </div>
+           
          </div> 
   
          <script type="text/jsx" src="/static/js/app2.js"></script> 
