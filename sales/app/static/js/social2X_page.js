@@ -20,7 +20,7 @@ function MyComponent() {
         <nav className="navbar">
           <div className="navbar__container">
             <a href="/homeX" id="navbar__logo">
-              <i className="fas fa-gem"></i>WorkoutTrak : Social
+              <i className="fas fa-gem"></i>WorkoutTrak : Room Menu
             </a>
             <div className="navbar__toggle" id="mobile-menu">
               <span className="bar"></span>
@@ -57,7 +57,7 @@ function MyComponent() {
         <div className="main">
           <div className="main__container">
             <div className="main__content">
-              <h1>Rooms</h1>
+              <h1>Room Menu</h1>
               <p>Join a group</p>
             </div>
             <div className="main__content">
