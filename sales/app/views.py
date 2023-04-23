@@ -141,6 +141,10 @@ def socialX_view(request):
     context = {}
     return render(request, "socialX.html", context=context)
 
+def social2X_view(request):
+    context = {}
+    return render(request, "social2X.html", context=context)
+
 def recordsX_view(request):
     context = {}
     return render(request, "recordsX.html", context=context)

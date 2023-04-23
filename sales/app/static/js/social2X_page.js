@@ -20,7 +20,7 @@ function MyComponent() {
         <nav className="navbar">
           <div className="navbar__container">
             <a href="/homeX" id="navbar__logo">
-              <i className="fas fa-gem"></i>WorkoutTrak : Profile
+              <i className="fas fa-gem"></i>WorkoutTrak : Social
             </a>
             <div className="navbar__toggle" id="mobile-menu">
               <span className="bar"></span>
@@ -54,24 +54,20 @@ function MyComponent() {
         </nav> 
   
    
-        
-          <div className="main">
-           <div className="main__container">
-             <div className="main__content">
-               <h1>Profile</h1>
-               <p>Modify profile!</p>
-               <button className="main__btn"><a href="/profile2X">View Profile</a></button>
+         
+          <div className="services">
+          <h1>-</h1>
+           <div className="services__container">
+            
+             <div className="services__card1">
+               <h2>Form a Group</h2>
+               <button className="main__btn"><a href="/socialX">Create Group</a></button>
              </div>
-             <div className="main__img--container">
-               <img src="static/images/pic2.svg" alt="pic" id="main__img" />
+             <div className="services__card1">
+               <h2>Join a Group</h2>
+               <button className="main__btn"><a href="/socialX">Join Group</a></button>
              </div>
            </div>
-         </div>
-  
-         
-        
-          <div className="services">
-           
          </div> 
   
          <script type="text/jsx" src="/static/js/app2.js"></script> 
