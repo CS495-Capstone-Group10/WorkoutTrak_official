@@ -266,7 +266,7 @@ function MyComponent() {
               value={date} onChange={(e)=>{set_date(e.target.value)}}
               placeholder="0"/><br />
         </div>
-        <div class="form-group">
+        <div>
           <label htmlFor="bestTime">Best Time (hr:mn):</label>
           <input type="text" id="bestTime" name="bestTime" 
               value={bestTime} onChange={(e)=>{set_bestTime(e.target.value)}}

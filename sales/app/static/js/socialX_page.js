@@ -60,12 +60,12 @@ function MyComponent() {
            <div className="services__container">
             
              <div className="services__card1">
-               <h2>Form a Group</h2>
-               <button className="main__btn"><a href="/social2X">Create Group</a></button>
+               <h2>Solo Workouts</h2>
+               <button className="main__btn"><a href="/workoutsX">Workouts</a></button>
              </div>
              <div className="services__card1">
-               <h2>Join a Group</h2>
-               <button className="main__btn"><a href="/social2X">Join Group</a></button>
+               <h2>Group Workouts</h2>
+               <button className="main__btn"><a href="/social2X">Room Menu</a></button>
              </div>
            </div>
          </div> 

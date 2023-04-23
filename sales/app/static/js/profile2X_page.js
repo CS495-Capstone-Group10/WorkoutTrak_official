@@ -108,6 +108,9 @@ function MyComponent() {
                   <button type="submit">Save</button>
                 </form>
             </div>
+            <div className="main__img--container">
+               <img src="static/images/pic2.svg" alt="pic" id="main__img" />
+             </div>
           </div>
         
       </div>
