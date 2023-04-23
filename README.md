@@ -23,7 +23,7 @@ pip install -r requirements.txt
 # Initialize the database models and migrate the django apps
 pip manage.py makemigrations
 pip manage.py migrate app
-python manage.py migrate
+pip manage.py migrate
 
 # Create an admin account
 pip manage.py createsuperuser 
