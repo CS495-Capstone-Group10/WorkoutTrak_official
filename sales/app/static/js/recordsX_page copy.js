@@ -289,8 +289,8 @@ function MyComponent() {
                <h1>Statistics</h1>
                <button className="main__btn"><a href="/recordsX">Modify Records</a></button>
              </div>
-             <div className="main__content">
-               
+             <div className="main__img--container">
+               <img src="static/images/DataATemp1.png" alt="pic" id="main__img" />
              </div>
              <div className = "main__content">
              <h1>History</h1>
