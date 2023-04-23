@@ -89,10 +89,10 @@ function MyComponent() {
 
 
 
-      <div className="main">
-        <div className="main__container">
-          
-            
+      <div className="profile">
+        
+          <div className="profile__container">
+            <div className="profile__content">
                 <form onSubmit={handleSubmit}>
                   <h1> Personal Info</h1>
                   <h2> First Name </h2>
@@ -107,9 +107,9 @@ function MyComponent() {
                   <input type="text" className="input" value={occupation} onChange={handleOccupationChange}></input>
                   <button type="submit">Save</button>
                 </form>
-              
-          
-        </div>
+            </div>
+          </div>
+        
       </div>
 
 

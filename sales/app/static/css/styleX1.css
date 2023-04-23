@@ -662,15 +662,56 @@
     font-family: 'Oswald', sans-serif;
 }
 
+.profile {
+    /*background-color: #667292;*/
+    background-color: #667292;
+    background-image: linear-gradient(to top, #667292 0%, #8d9db6 100%);
+
+}
 .profile__container {
-    background: #fff;
-    width: 540px;
-    height: 640px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-self: center;
     margin: 0 auto;
-    position: relative;
-    margin-top: 10%;
-    box-shadow: 2px 5px 20px 
-    rgba(119,119,119,.5);
+    height: 90vh;
+    /*background-color: linear-gradient(to top, #667292 50%, #f1e3dd 50%);*/
+    background-color: #667292;
+    background-image: linear-gradient(to top, #667292 0%, #8d9db6 100%);
+    z-index: 1;
+    width: 100%;
+    max-width: 1300px;
+    padding: 0 50px;
+}
+
+
+.profile__content h1 {
+    font-size: 4rem;
+    background-color: #ff8177;
+    background-image: linear-gradient(to top, #9d9db6 0%, #f1e3dd 100%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}
+
+.profile__content h2 {
+    font-size: 2rem;
+    background-color: #ff8177;
+    background-image: linear-gradient(to top, #bccad6 0%, #f1e3dd 100%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}
+
+.profile__content p {
+    margin-top: 1rem;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #f1e3dd;
 }
 .rightbox {
     width: 60%;
@@ -683,7 +724,7 @@
     position: absolute;
 }
 .tabShowOld h1 {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Oswald', sans-serif;
     color: #7ed386;
     font-size: 1.2rem;
     margin-top: 40px;
@@ -724,29 +765,4 @@
 
 
 
-.input, p {
-    border: 0;
-    border-bottom: 1px solid #3fb6a8;
-    width: 80%;
-    
-    font-size: .7em;
-    padding: 7px 0;
-    color: #bccad6;
-    outline: none;
-}
-span {
-    font-size: .7em;
-    color: #777;
-}
-.btn {
-    
-    text-transform: uppercase;
-    font-size: 15px;
-    border: 0;
-    color: #fff;
-    background: #7ed386;
-    padding: 7px 15px;
-    box-shadow: 0px 2px 4px 0px rgba(0,0,0,.2);
-    cursor: pointer;
-    margin-top: 15px;
-}
+
