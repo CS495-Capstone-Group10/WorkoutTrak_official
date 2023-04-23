@@ -15,7 +15,6 @@ function MyComponent() {
   const [modalDescription, setModalDescription] = React.useState("");
   const [error, setError] = React.useState("");
   const [distance_meters, set_distance_meters] = React.useState(0);
-  const [bestTime, set_bestTime] = React.useState(0);
   const [split_length, set_split_length] = React.useState(0);
   const [time_minutes, set_time_minutes] = React.useState(0);
   const [time_seconds, set_time_seconds] = React.useState(0);
@@ -108,7 +107,7 @@ function MyComponent() {
       } else {
         post_workout_api(
           // { split_length, distance_meters, date, workoutTime },
-          { split_length, distance_meters, date, workoutTime, workoutType, rowingType, bestTime},
+          { split_length, distance_meters, date, workoutTime, workoutType, rowingType},
           () => {
             getData();
           }
@@ -132,7 +131,6 @@ function MyComponent() {
             date,
             workoutTime,
             workoutType,
-            bestTime,
           },
           () => {
             getData();
@@ -156,7 +154,6 @@ function MyComponent() {
             date,
             workoutTime,
             workoutType,
-            bestTime,
           },
           () => {
             getData();
@@ -166,11 +163,11 @@ function MyComponent() {
       }
     } else {
       if (Id === null)
-        post_workout_api({ date, workoutTime, rowingType, bestTime }, () => {
+        post_workout_api({ date, workoutTime, rowingType }, () => {
           getData();
         });
       else
-        put_workout_api(Id, { date, workoutTime, rowingType, bestTime }, () => {
+        put_workout_api(Id, { date, workoutTime, rowingType }, () => {
           getData();
         });
       setShowModal(false);
@@ -216,7 +213,7 @@ function MyComponent() {
           <thead className="table-light">
           <tr>
             <th>Date</th>
-            <th>Best Time (hr:mn)</th>
+            <th>Workout Time</th>
             <th>Workout Type</th>
             <th>Intervals</th>
             <th>Distance (m)</th>
@@ -227,7 +224,7 @@ function MyComponent() {
           {props.workouts.map((workout) => (
             <tr key={workout.id}>
               <td>{workout.date}</td>
-              <td>{workout.bestTime}</td>
+              <td>{workout.workoutTime}</td>
               <td>{workout.workoutType}</td>
               <td>{workout.num_intervals}</td>
               <td>{workout.distance_meters}</td>
@@ -266,11 +263,12 @@ function MyComponent() {
               value={date} onChange={(e)=>{set_date(e.target.value)}}
               placeholder="0"/><br />
         </div>
-        <div>
-          <label htmlFor="bestTime">Best Time (hr:mn):</label>
-          <input type="text" id="bestTime" name="bestTime" 
-              value={bestTime} onChange={(e)=>{set_bestTime(e.target.value)}}
-                         placeholder="00:00"/><br />
+        <div class="form-group">
+          <label for="time">Time:</label>
+          <select id="time" name="time" value={workoutTime} onChange={handleWorkoutTimeChange}>
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
         </div>
         <div class="form-group">
           <label for="setWorkoutType">Workout Type:</label>
@@ -430,7 +428,7 @@ function MyComponent() {
                <button className="main__btn"><a onClick={newOrder}>Modify Records</a></button>
              </div>
              <div className="main__content">
-             <div style={{maxWidth: "800px", margin: "auto", marginTop: "1em", marginBottom: "1em", background: "white",
+             <div style={{maxWidth: "800px", margin: "auto", marginTop: "1em", marginBottom: "1em",
                     padding: "1em"}} className="shadow">
         <div style={{display: "flex", flexDirection: "row", marginBottom: "5px"}}>
           {pages.length > 0 && <nav className="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
@@ -469,7 +467,11 @@ function MyComponent() {
 
              </div>
              <div className = "main__content">
-             
+             <h1>History</h1>
+             <button className="main__btn"><a href="/recordsX">View History</a></button>
+             </div>
+             <div className="main__img--container">
+               <img src="static/images/DataATemp2.png" alt="pic" id="main__img" />
              </div>
            </div>
          </div>
@@ -477,13 +479,7 @@ function MyComponent() {
          
         
           <div className="services">
-  
            <div className="services__container">
-             <div className="services__card">
-             <h2>Workout History</h2>
-             <button className="main__btn"><a href="/workoutsX">View History</a></button>
-  
-             </div>
            </div>
          </div> 
   

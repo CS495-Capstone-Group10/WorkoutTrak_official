@@ -20,7 +20,7 @@ function MyComponent() {
         <nav className="navbar">
           <div className="navbar__container">
             <a href="/homeX" id="navbar__logo">
-              <i className="fas fa-gem"></i>WorkoutTrak : Profile
+              <i className="fas fa-gem"></i>WorkoutTrak : Room Menu
             </a>
             <div className="navbar__toggle" id="mobile-menu">
               <span className="bar"></span>
@@ -54,23 +54,28 @@ function MyComponent() {
         </nav> 
   
    
-        
-          <div className="main">
-           <div className="main__container">
-             <div className="main__content">
-               <h1>Profile</h1>
-               <p>Modify profile!</p>
-               <button className="main__btn"><a href="/profile2X">View Profile</a></button>
-             </div>
-             <div className="main__img--container">
-               <img src="static/images/pic2.svg" alt="pic" id="main__img" />
-             </div>
-           </div>
-         </div>
-  
+        <div className="main">
+          <div className="main__container">
+            <div className="main__content">
+              <h1>Room Menu</h1>
+              <p>Join a group!</p>
+            </div>
+            <div className="main__content">
+              <h1>Workout Categories</h1>
+              <button className="main__btn"><a href="/room1X">Room1</a></button>
+              <button className="main__btn"><a href="/room2X">Room2</a></button>
+              <button className="main__btn"><a href="/room3X">Room3</a></button>
+              <button className="main__btn"><a href="/room4X">Room5</a></button>
+              <button className="main__btn"><a href="/room5X">Room6</a></button>
+            </div>
+          </div>
+
+        </div>
+
+
          
-        
           <div className="services">
+          <h1>-</h1>
            
          </div> 
   

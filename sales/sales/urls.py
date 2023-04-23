@@ -60,9 +60,17 @@ urlpatterns = [
     path('athletesX', views.athletesX_view),
     path('profileX', views.profileX_view),
     path('socialX', views.socialX_view),
+    path('social2X', views.social2X_view),
     path('recordsX', views.recordsX_view), 
     path('createAccountX', views.createAccountX_view),
-    
+    path('upDocX', views.upDocX_view),
+    path('profile2X', views.profile2X_view),
+    path('room1X', views.room1X_view),
+    path('room2X', views.room2X_view),
+    path('room3X', views.room3X_view),
+    path('room4X', views.room4X_view),
+    path('room5X', views.room5X_view),
+    path('room6X', views.room6X_view),
     
     
     #path('style.css', style.css),

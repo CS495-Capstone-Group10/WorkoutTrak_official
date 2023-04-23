@@ -109,7 +109,7 @@ function MyComponent() {
              <p>Create an Account</p>
              <button className="main__btn"><a href="/createAccountX">Sign Up</a></button>
            </div>
-           <div style={{width: "400px", margin: "auto", marginTop: "200px",
+           <div style={{width: "400px", margin: "auto", marginTop: "200px", background: "#8d9db6",
         boxShadow: "5px 5px 20px #cccccccc",
         padding: "1em"
                 }}>

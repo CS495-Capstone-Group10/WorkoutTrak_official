@@ -1,8 +1,9 @@
 // newer file
 
-
-import React, { useState } from 'react';
-import axios from 'axios';
+'use strict';
+const e = React.createElement;
+//import React, { useState } from 'react';
+//import axios from 'axios';
 
 
 function UploadDocument() {
@@ -11,17 +12,21 @@ function UploadDocument() {
     const [description, setDescription] = useState('');
     const [file, setFile] = userState(null);
 
+    // const logout = async (e)=>{
+    //     await localStorage.setItem("salesToken",null);
+    //     window.location = "/login";
+    //   };
 
-    const handleFileChange = (event) => {
-        setFile(event.target.files[0]);
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0]);
     };
 
-    const handleTitleChange = (event) => {
-        setTitle(event.target.value);
+    const handleTitleChange = (e) => {
+        setTitle(e.target.value);
     };
 
-    const handleDescriptionChange = (event) => {
-        setDescription(event.target.value);
+    const handleDescriptionChange = (e) => {
+        setDescription(e.target.value);
     };
 
 
@@ -35,8 +40,8 @@ function UploadDocument() {
         formData.append('file', file);
 
         // sends data to django view in upDocuments.py
-        await axios.post('/api/upload_document/', formData);
-    }
+        //await axios.post('/api/upload_document/', formData); //************************************ */
+    };
 
     return ( 
         // website upload page details 
@@ -68,6 +73,7 @@ ReactDOM.render(
     e(UploadDocument),
     domContainer
 );
+
 
 // unsure whether to keep
 //export default UploadDocument;
