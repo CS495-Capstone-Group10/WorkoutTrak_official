@@ -33,25 +33,25 @@ function MyComponent() {
   const [workoutTime, setWorkoutTime] = React.useState('AM');
   
 
-  const [firstName, setFirstName] = React.useState(localStorage.getItem('firstName') || '');
-  const [lastName, setLastName] = React.useState(localStorage.getItem('lastName') || '');
-  const [gender, setGender] = React.useState(localStorage.getItem('gender') || '');
+  const [firstName, setFirstName] = React.useState(localStorage.getItem('firstName6') || '');
+  const [lastName, setLastName] = React.useState(localStorage.getItem('lastName6') || '');
+  const [gender, setGender] = React.useState(localStorage.getItem('gender6') || '');
   const [email, setEmail] = React.useState(localStorage.getItem('email') || '');
   const [occupation, setOccupation] = React.useState(localStorage.getItem('occupation') || '');
 
   const handleFirstNameChange = (event) => {
     setFirstName(event.target.value);
-    localStorage.setItem('firstName', event.target.value);
+    localStorage.setItem('firstName6', event.target.value);
   };
 
   const handleLastNameChange = (event) => {
     setLastName(event.target.value);
-    localStorage.setItem('lastName', event.target.value);
+    localStorage.setItem('lastName6', event.target.value);
   };
 
   const handleGenderChange = (event) => {
     setGender(event.target.value);
-    localStorage.setItem('gender', event.target.value);
+    localStorage.setItem('gender6', event.target.value);
   };
 
   const handleEmailChange = (event) => {
@@ -471,7 +471,7 @@ function MyComponent() {
           <div className="main__container">
             <div className="main__content">
                 <form onSubmit={handleSubmit}>
-                  <h1> Room 1 </h1>
+                  <h1> Room 6 </h1>
                   <p> Group Owner: </p>
                   <input type="text" className="input" value={firstName} onChange={handleFirstNameChange}></input>
                   <p> Organization: </p>

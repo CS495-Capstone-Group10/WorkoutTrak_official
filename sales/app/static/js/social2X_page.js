@@ -58,9 +58,10 @@ function MyComponent() {
           <div className="main__container">
             <div className="main__content">
               <h1>Room Menu</h1>
-              <p>Join a group</p>
+              <p>Join a group!</p>
             </div>
             <div className="main__content">
+              <h1>Workout Categories</h1>
               <button className="main__btn"><a href="/room1X">Room1</a></button>
               <button className="main__btn"><a href="/room2X">Room2</a></button>
               <button className="main__btn"><a href="/room3X">Room3</a></button>

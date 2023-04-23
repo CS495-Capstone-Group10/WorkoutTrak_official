@@ -33,25 +33,25 @@ function MyComponent() {
   const [workoutTime, setWorkoutTime] = React.useState('AM');
   
 
-  const [firstName, setFirstName] = React.useState(localStorage.getItem('firstName') || '');
-  const [lastName, setLastName] = React.useState(localStorage.getItem('lastName') || '');
-  const [gender, setGender] = React.useState(localStorage.getItem('gender') || '');
+  const [firstName, setFirstName] = React.useState(localStorage.getItem('firstName4') || '');
+  const [lastName, setLastName] = React.useState(localStorage.getItem('lastName4') || '');
+  const [gender, setGender] = React.useState(localStorage.getItem('gender4') || '');
   const [email, setEmail] = React.useState(localStorage.getItem('email') || '');
   const [occupation, setOccupation] = React.useState(localStorage.getItem('occupation') || '');
 
   const handleFirstNameChange = (event) => {
     setFirstName(event.target.value);
-    localStorage.setItem('firstName', event.target.value);
+    localStorage.setItem('firstName4', event.target.value);
   };
 
   const handleLastNameChange = (event) => {
     setLastName(event.target.value);
-    localStorage.setItem('lastName', event.target.value);
+    localStorage.setItem('lastName4', event.target.value);
   };
 
   const handleGenderChange = (event) => {
     setGender(event.target.value);
-    localStorage.setItem('gender', event.target.value);
+    localStorage.setItem('gender4', event.target.value);
   };
 
   const handleEmailChange = (event) => {
@@ -433,7 +433,7 @@ function MyComponent() {
         <nav className="navbar">
           <div className="navbar__container">
             <a href="/homeX" id="navbar__logo">
-              <i className="fas fa-gem"></i>WorkoutTrak : Room 2
+              <i className="fas fa-gem"></i>WorkoutTrak : Room 4
             </a>
             <div className="navbar__toggle" id="mobile-menu">
               <span className="bar"></span>
@@ -471,7 +471,7 @@ function MyComponent() {
           <div className="main__container">
             <div className="main__content">
                 <form onSubmit={handleSubmit}>
-                  <h1> Room 1 </h1>
+                  <h1> Room 4 </h1>
                   <p> Group Owner: </p>
                   <input type="text" className="input" value={firstName} onChange={handleFirstNameChange}></input>
                   <p> Organization: </p>

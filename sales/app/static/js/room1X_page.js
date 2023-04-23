@@ -33,25 +33,25 @@ function MyComponent() {
   const [workoutTime, setWorkoutTime] = React.useState('AM');
   
 
-  const [firstName, setFirstName] = React.useState(localStorage.getItem('firstName') || '');
-  const [lastName, setLastName] = React.useState(localStorage.getItem('lastName') || '');
-  const [gender, setGender] = React.useState(localStorage.getItem('gender') || '');
+  const [firstName, setFirstName] = React.useState(localStorage.getItem('firstName1') || '');
+  const [lastName, setLastName] = React.useState(localStorage.getItem('lastName1') || '');
+  const [gender, setGender] = React.useState(localStorage.getItem('gender1') || '');
   const [email, setEmail] = React.useState(localStorage.getItem('email') || '');
   const [occupation, setOccupation] = React.useState(localStorage.getItem('occupation') || '');
 
   const handleFirstNameChange = (event) => {
     setFirstName(event.target.value);
-    localStorage.setItem('firstName', event.target.value);
+    localStorage.setItem('firstName1', event.target.value);
   };
 
   const handleLastNameChange = (event) => {
     setLastName(event.target.value);
-    localStorage.setItem('lastName', event.target.value);
+    localStorage.setItem('lastName1', event.target.value);
   };
 
   const handleGenderChange = (event) => {
     setGender(event.target.value);
-    localStorage.setItem('gender', event.target.value);
+    localStorage.setItem('gender1', event.target.value);
   };
 
   const handleEmailChange = (event) => {
