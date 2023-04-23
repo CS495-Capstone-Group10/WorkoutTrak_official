@@ -15,6 +15,7 @@ function MyComponent() {
   const [modalDescription, setModalDescription] = React.useState("");
   const [error, setError] = React.useState("");
   const [distance_meters, set_distance_meters] = React.useState(0);
+  const [bestTime, set_bestTime] = React.useState(0);
   const [split_length, set_split_length] = React.useState(0);
   const [time_minutes, set_time_minutes] = React.useState(0);
   const [time_seconds, set_time_seconds] = React.useState(0);
@@ -107,7 +108,7 @@ function MyComponent() {
       } else {
         post_workout_api(
           // { split_length, distance_meters, date, workoutTime },
-          { split_length, distance_meters, date, workoutTime, workoutType, rowingType},
+          { split_length, distance_meters, date, workoutTime, workoutType, rowingType, bestTime},
           () => {
             getData();
           }
@@ -131,6 +132,7 @@ function MyComponent() {
             date,
             workoutTime,
             workoutType,
+            bestTime,
           },
           () => {
             getData();
@@ -154,6 +156,7 @@ function MyComponent() {
             date,
             workoutTime,
             workoutType,
+            bestTime,
           },
           () => {
             getData();
@@ -163,11 +166,11 @@ function MyComponent() {
       }
     } else {
       if (Id === null)
-        post_workout_api({ date, workoutTime, rowingType }, () => {
+        post_workout_api({ date, workoutTime, rowingType, bestTime }, () => {
           getData();
         });
       else
-        put_workout_api(Id, { date, workoutTime, rowingType }, () => {
+        put_workout_api(Id, { date, workoutTime, rowingType, bestTime }, () => {
           getData();
         });
       setShowModal(false);
@@ -213,7 +216,7 @@ function MyComponent() {
           <thead className="table-light">
           <tr>
             <th>Date</th>
-            <th>Workout Time</th>
+            <th>Best Time (hr:mn)</th>
             <th>Workout Type</th>
             <th>Intervals</th>
             <th>Distance (m)</th>
@@ -224,7 +227,7 @@ function MyComponent() {
           {props.workouts.map((workout) => (
             <tr key={workout.id}>
               <td>{workout.date}</td>
-              <td>{workout.workoutTime}</td>
+              <td>{workout.bestTime}</td>
               <td>{workout.workoutType}</td>
               <td>{workout.num_intervals}</td>
               <td>{workout.distance_meters}</td>
@@ -244,6 +247,141 @@ function MyComponent() {
   }
 
     return (
+
+        <div onKeyDown={keyDownHandler}>
+      <div style={{background: "#00000060"}}
+          className={"modal " + (showModal?" show d-block":" d-none")} tabIndex="-1" role="dialog">
+        <div className="modal-dialog shadow">
+          <form method="post">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">{modalDescription}</h5>
+              <button type="button" className="btn-close" onClick={()=>{setShowModal(false)}} aria-label="Close"></button>
+            </div>
+            <div className="modal-body">
+            <div>
+            <div class="form-group">
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="date" required
+              value={date} onChange={(e)=>{set_date(e.target.value)}}
+              placeholder="0"/><br />
+        </div>
+        <div class="form-group">
+          <label htmlFor="bestTime">Best Time (hr:mn):</label>
+          <input type="text" id="bestTime" name="bestTime" 
+              value={bestTime} onChange={(e)=>{set_bestTime(e.target.value)}}
+                         placeholder="00:00"/><br />
+        </div>
+        <div class="form-group">
+          <label for="setWorkoutType">Workout Type:</label>
+          <select id="setWorkoutType" name="setWorkoutType" value={setWorkoutType} onChange={handleWorkoutTypeChange}>
+            <option value="AT">AT</option>
+            <option value="SS">Steady State</option>
+            <option value="Race_pace">Race Pace</option>
+          </select>
+        </div>
+              <label htmlFor="interval_type">Select Workout Type:</label>
+        <select id="interval_type" name="interval_type" value={rowingType} onChange={HandlesetRowingType}>
+          <option value="single_distance">Single Distance</option>
+          <option value="single_time">Single Time</option>
+          <option value="intervals">Intervals</option>
+        </select>
+        {rowingType === 'single_distance' && (
+          <div>
+            <label htmlFor="distance_meters">Distance (meters):</label>
+            <input type="number" id="distance_meters" name="distance_meters" 
+              value={distance_meters} onChange={(e)=>{set_distance_meters(e.target.value)}}
+                         placeholder="0"/><br />
+            <label htmlFor="split_length">Split Length(meter):</label>
+            <input type="number" id="split_length" name="split_length" 
+              value={split_length} onChange={(e)=>{set_split_length(e.target.value)}}
+              placeholder="0"/><br />
+          </div>
+        )}
+        {rowingType === 'single_time' && (
+          <div>
+            <label htmlFor="time_minutes">Time (minutes):</label>
+            <input type="number" id="time_minutes" name="time_minutes" 
+                value={time_minutes} onChange={(e)=>{set_time_minutes(e.target.value)}}
+                placeholder="0"/>
+            <label htmlFor="time_seconds">Time (seconds):</label>
+            <input type="number" id="time_seconds" name="time_seconds" 
+              value={time_seconds} onChange={(e)=>{set_time_seconds(e.target.value)}}
+              placeholder="0"/><br />
+            <label htmlFor="split_length_minutes">Split Length (minutes):</label>
+            <input type="number" id="split_length_minutes" name="split_length_minutes" 
+                value={split_length_minutes} onChange={(e)=>{set_split_length_minutes(e.target.value)}}
+                placeholder="0"/>
+            <label htmlFor="split_length_seconds">Split Length (seconds):</label>
+            <input type="number" id="split_length_seconds" name="split_length_seconds" 
+                value={split_length_seconds} onChange={(e)=>{set_split_length_seconds(e.target.value)}}
+                placeholder="0"/><br />
+          </div>
+        )}
+        {rowingType === 'intervals' && (
+  <div>
+    <label htmlFor="rowingType">Interval Type:</label>
+    <select id="rowingType" name="rowingType" value={rowingType} onChange={HandlesetRowingType}>
+      <option value="distance">Distance (meters)</option>
+      <option value="time">Time (minutes:seconds)</option>
+    </select><br/>
+    <label htmlFor="num_intervals">Number of Intervals:</label><br/>
+    <input type="number" id="num_intervals" name="num_intervals" 
+        value={num_intervals} onChange={(e)=>{set_num_intervals(e.target.value)}}
+        placeholder="0"/><br />
+    {rowingType === 'distance' && (
+      <div>
+        <label htmlFor="distanceInt">distance (meters):</label>
+        <input type="number" id="distanceInt" name="distanceInt" 
+            value={distanceInt} onChange={(e)=>{setdistanceInt(e.target.value)}}
+            placeholder="0"/><br />
+      </div>
+    )}
+    {rowingType === 'time' && (
+      <div>
+        <label htmlFor="rest_length">Workout time:</label>
+        <div className="input-group mb-3">
+        <label htmlFor="time_minutes">Time (minutes):</label>
+            <input type="number" id="time_minutes" name="time_minutes" 
+            value={Int_time_minutes} onChange={(e)=>{set_int_time_minutes(e.target.value)}}
+            placeholder="0"/><br />
+            <label htmlFor="time_seconds">Time (seconds):</label>
+            <input type="number" id="split_length_seconds" name="split_length_seconds" 
+            value={Int_time_sec} onChange={(e)=>{set_int_time_sec(e.target.value)}}
+            placeholder="0"/><br />
+        </div>
+      </div>
+    )}
+    <label htmlFor="rest_length">Rest Time:</label>
+    <div className="input-group mb-3">
+            <label htmlFor="time_minutes">Time (minutes):</label>
+            <input type="number" id="time_minutes" name="time_minutes" 
+              value={Rest_time_minutes} onChange={(e)=>{set_rest_time_minutes(e.target.value)}}
+              placeholder="0"/><br />
+            <label htmlFor="time_seconds">Time (seconds):</label>
+            <input type="number" id="split_length_seconds" name="split_length_seconds"
+            value={rest_time_sec} onChange={(e)=>{set_rest_time_sec(e.target.value)}}
+            placeholder="0"/><br />
+
+    </div>
+                </div>
+                )}
+    </div>
+                            
+              <small className="form-text text-muted">{error}</small>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" onClick={()=>{setShowModal(false)}} data-bs-dismiss="modal">Close</button>
+              <button type="submit" className="btn btn-primary" onClick={saveOrder}>Save changes</button>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+
+
+
+
       <div>
         <nav className="navbar">
           <div className="navbar__container">
@@ -285,19 +423,53 @@ function MyComponent() {
         
           <div className="main">
            <div className="main__container">
+
+
              <div className="main__content">
                <h1>Statistics</h1>
-               <button className="main__btn"><a href="/recordsX">Modify Records</a></button>
+               <button className="main__btn"><a onClick={newOrder}>Modify Records</a></button>
              </div>
              <div className="main__content">
-               
+             <div style={{maxWidth: "800px", margin: "auto", marginTop: "1em", marginBottom: "1em", background: "white",
+                    padding: "1em"}} className="shadow">
+        <div style={{display: "flex", flexDirection: "row", marginBottom: "5px"}}>
+          {pages.length > 0 && <nav className="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+            <ul className="pagination">
+              <li className={"page-item " + (page === 0?"disabled":"")} onClick={(e)=>{
+                    e.preventDefault();
+                    setPage(Math.max(page-1,0));
+              }}><a className="page-link" href="#" aria-label="Previous"><span
+                  aria-hidden="true">«</span></a></li>
+              {pages.map((el)=><li key={"page" + el.page} onClick={(e)=>{
+                  setPage(el.page);
+                }} className={"page-item "+(page===el.page?"active":"")}>
+                <a className="page-link" href="#">
+                  {el.name}
+                </a></li>)}
+              <li className={"page-item " + (page === pages.length-1?"disabled":"")} onClick={(e)=>{
+                    setPage(Math.min(page+1,pages.length-1));
+              }}><a className="page-link" href="#" aria-label="Next"><span
+                  aria-hidden="true">»</span></a></li>
+            </ul>
+          </nav>}
+        </div>
+        <div>
+      <WorkoutTable workouts={list} />
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
              </div>
              <div className = "main__content">
-             <h1>History</h1>
-             <button className="main__btn"><a href="/recordsX">View History</a></button>
-             </div>
-             <div className="main__img--container">
-               <img src="static/images/DataATemp2.png" alt="pic" id="main__img" />
+             
              </div>
            </div>
          </div>
@@ -305,11 +477,18 @@ function MyComponent() {
          
         
           <div className="services">
+  
            <div className="services__container">
+             <div className="services__card">
+             <h2>Workout History</h2>
+             <button className="main__btn"><a href="/workoutsX">View History</a></button>
+  
+             </div>
            </div>
          </div> 
   
          <script type="text/jsx" src="/static/js/app2.js"></script> 
+        </div>
       </div>
     );
   }

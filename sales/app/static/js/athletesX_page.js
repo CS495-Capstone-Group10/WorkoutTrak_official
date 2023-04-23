@@ -303,9 +303,9 @@ function App() {
           <div className="services">
            
          </div> 
-  
+        </div>
          <script type="text/jsx" src="/static/js/app2.js"></script> 
-      </div>
+      
 </div>
 
 
